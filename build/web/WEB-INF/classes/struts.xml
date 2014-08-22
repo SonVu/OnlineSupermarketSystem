@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+        "http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<struts>
+    <package name="default" namespace="/" extends="struts-default">
+        <action name="store" class="com.aptech.action.StoreAction">
+            <result name="success">/store.jsp</result>
+        </action>
+        <action name="search" class="com.aptech.action.StoreAction" method="search">
+            <result name="success">/result.jsp</result>
+        </action>
+        <action name="paging" class="com.aptech.action.StoreAction" method="pagingProduct">
+            <result name="success">/store.jsp</result>
+        </action>
+        <action name="header" class="com.aptech.action.StoreAction" method="header">
+            <result name="success">/template/header.jsp</result>
+        </action>
+        <action name="product" class="com.aptech.action.ProductAction">
+            <result name="success">/product.jsp</result>
+        </action>
+        <action name="category" class="com.aptech.action.CategoryAction">
+            <result name="success">/category.jsp</result>
+        </action>
+        <action name="buy" class="com.aptech.action.CartAction">
+            <result name="success" type="redirect">cart</result> 
+        </action>
+        <action name="cart" class="com.aptech.action.ViewCartAction">
+            <result name="success">/view-cart.jsp</result> 
+        </action>
+    </package>
+</struts>
+
