@@ -70,14 +70,19 @@ public class ProductModel {
         return recentProduct;
     }
 
-    public List<Product> pagination(int pageNumber) {
+    public List<Product> pagination(int pageNumber, int perPage, int categoryId) {
         Session session = HibernateUtil.getSessionFactory().openSession();
         session.beginTransaction();
         List<Product> pagingProduct = null;
+        Query query = null;
         try {
-            Query query = session.createQuery("from Product");
-            query = query.setFirstResult(3 * (pageNumber - 1));
-            query.setMaxResults(3);
+            if (categoryId == -1) {
+                query = session.createQuery("from Product");
+            } else {
+                query = session.createQuery("from Product as p where p.category.id=?").setInteger(0, categoryId);
+            }
+            query = query.setFirstResult(pageNumber);
+            query.setMaxResults(perPage);
             pagingProduct = query.list();
             session.getTransaction().commit();
         } catch (HibernateException e) {
@@ -88,5 +93,28 @@ public class ProductModel {
             session.close();
         }
         return pagingProduct;
+    }
+
+    public Integer totalRecords(int categoryId) {
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        session.beginTransaction();
+        List<Product> pagingProduct = null;
+        Query query = null;
+        try {
+            if (categoryId == -1) {
+                query = session.createQuery("from Product");
+            } else {
+                query = session.createQuery("from Product as p where p.category.id=?").setInteger(0, categoryId);
+            }
+            pagingProduct = query.list();
+            session.getTransaction().commit();
+        } catch (HibernateException e) {
+            e.printStackTrace();
+            session.getTransaction().rollback();
+        } finally {
+            session.flush();
+            session.close();
+        }
+        return pagingProduct.size();
     }
 }

@@ -6,14 +6,11 @@
 
 <struts>
     <package name="default" namespace="/" extends="struts-default">
-        <action name="store" class="com.aptech.action.StoreAction">
+        <action name="store" class="com.aptech.action.StoreAction" method="pagingProduct">
             <result name="success">/store.jsp</result>
         </action>
         <action name="search" class="com.aptech.action.StoreAction" method="search">
             <result name="success">/result.jsp</result>
-        </action>
-        <action name="paging" class="com.aptech.action.StoreAction" method="pagingProduct">
-            <result name="success">/store.jsp</result>
         </action>
         <action name="header" class="com.aptech.action.StoreAction" method="header">
             <result name="success">/template/header.jsp</result>
@@ -21,7 +18,7 @@
         <action name="product" class="com.aptech.action.ProductAction">
             <result name="success">/product.jsp</result>
         </action>
-        <action name="category" class="com.aptech.action.CategoryAction">
+        <action name="category" class="com.aptech.action.CategoryAction" method="categoryPaging">
             <result name="success">/category.jsp</result>
         </action>
         <action name="buy" class="com.aptech.action.CartAction">

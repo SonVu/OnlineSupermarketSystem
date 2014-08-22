@@ -1,3 +1,6 @@
+CREATE DATABASE onlinesupermarketsystem;
+USE onlinesupermarketsystem;
+
 CREATE TABLE `onlinesupermarketsystem`.`product` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(50) NOT NULL,
@@ -23,7 +26,7 @@ ENGINE = InnoDB;
 CREATE TABLE `onlinesupermarketsystem`.`product_image` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `url` VARCHAR(1000),
-  `category_id` INT NULL,
+  `product_id` INT NULL,
   PRIMARY KEY (`id`))
 ENGINE = InnoDB;
 
@@ -63,3 +66,17 @@ CREATE TABLE `onlinesupermarketsystem`.`user_role` (
   `name` VARCHAR(50) NOT NULL,
   PRIMARY KEY (`id`))
 ENGINE = InnoDB;
+
+INSERT INTO `onlinesupermarketsystem`.`category` (`name`, `description`, `parent_id`, `status`) VALUES ('Smartphone', 'Smartphone', '0', '1');
+INSERT INTO `onlinesupermarketsystem`.`category` (`name`, `description`, `parent_id`, `status`) VALUES ('Tablets', 'Tablets', '0', '1');
+INSERT INTO `onlinesupermarketsystem`.`category` (`name`, `description`, `parent_id`, `status`) VALUES ('Accessories', 'Tech accessories', '0', '1');
+INSERT INTO `onlinesupermarketsystem`.`category` (`name`, `description`, `parent_id`, `status`) VALUES ('Laptop', 'Laptop', '0', '1');
+INSERT INTO `onlinesupermarketsystem`.`category` (`name`, `description`, `parent_id`, `status`) VALUES ('PC', 'PC', '0', '1');
+INSERT INTO `onlinesupermarketsystem`.`category` (`name`, `description`, `parent_id`, `status`) VALUES ('HTC', 'HTC Smartphone', '1', '1');
+INSERT INTO `onlinesupermarketsystem`.`category` (`name`, `description`, `parent_id`, `status`) VALUES ('Apple', 'Apple Smartphone', '1', '1');
+INSERT INTO `onlinesupermarketsystem`.`category` (`name`, `description`, `parent_id`, `status`) VALUES ('LG', 'LG Smartphone', '1', '1');
+INSERT INTO `onlinesupermarketsystem`.`category` (`name`, `description`, `parent_id`, `status`) VALUES ('Samsung', 'Samsung phone', '1', '1');
+
+
+INSERT INTO `onlinesupermarketsystem`.`product` (`name`, `brand`, `price`, `stock`, `discount`, `description`, `status`, `category_id`) VALUES ('HTC One X', 'HTC', '10000000', '1', '0', 'Newest HTC Smartphone', '1', '20');
+INSERT INTO `onlinesupermarketsystem`.`product` (`name`, `brand`, `price`, `stock`, `discount`, `description`, `status`, `category_id`) VALUES ('Iphone 5', 'Apple', '14000000', '1', '0', 'Newest Apple Smartphone', '1', '21');

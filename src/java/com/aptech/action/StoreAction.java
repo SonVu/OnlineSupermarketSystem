@@ -26,6 +26,7 @@ public class StoreAction extends ActionSupport {
     private List<Category> listCategory;
     private List<Product> listProduct;
     private String searchString;
+    private Integer maxPage;
 
     public StoreAction() {
         productModel = new ProductModel();
@@ -40,19 +41,23 @@ public class StoreAction extends ActionSupport {
     }
 
     public String pagingProduct() throws Exception {
-        int pageNumber = 1;
+        Integer pageIndex = 0;
+        Integer totalNumberOfRecords = 0;
+        Integer numberOfRecordsPerPage = 4;
         HttpServletRequest request = (HttpServletRequest) ActionContext.getContext().get(ServletActionContext.HTTP_REQUEST);
-        Integer page = Integer.parseInt(request.getParameter("page"));
+
         if (request.getParameter("page") != null) {
-            ActionContext.getContext().getSession().put("page", page);
+            pageIndex = Integer.parseInt(request.getParameter("page"));
         } else {
-            ActionContext.getContext().getSession().put("page", 1);
+            pageIndex = 1;
         }
-        String nextPage = (pageNumber + 1) + "";
-        ActionContext.getContext().getSession().put("pageList", listProduct = productModel.pagination(pageNumber));
-        String myUrl = "pagingEmp.jsp?page=" + nextPage;
-        System.out.println(myUrl);
-        listProduct = productModel.pagination(pageNumber);
+        totalNumberOfRecords = productModel.totalRecords(-1);
+        int startIndex = (pageIndex * numberOfRecordsPerPage) - numberOfRecordsPerPage;
+        maxPage = totalNumberOfRecords / numberOfRecordsPerPage;
+        if (totalNumberOfRecords % 2 != 0) {
+            maxPage += 1;
+        }
+        recentProduct = productModel.pagination(startIndex, numberOfRecordsPerPage, -1);
         return SUCCESS;
     }
 
@@ -64,9 +69,6 @@ public class StoreAction extends ActionSupport {
     public String search() throws Exception {
         System.out.println(searchString);
         listProduct = productModel.search(searchString);
-        if (listProduct != null) {
-            System.out.println(listProduct.size());
-        }
         return SUCCESS;
     }
 
@@ -102,4 +104,11 @@ public class StoreAction extends ActionSupport {
         this.listProduct = listProduct;
     }
 
+    public Integer getMaxPage() {
+        return maxPage;
+    }
+
+    public void setMaxPage(Integer maxPage) {
+        this.maxPage = maxPage;
+    }
 }

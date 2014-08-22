@@ -1,5 +1,6 @@
 <%--<%@include file="template/header.jsp" %>--%>
 <%@ taglib prefix="s" uri="/struts-tags"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <s:action name="header" executeResult="true">
 </s:action>
 <!-- Items -->
@@ -148,55 +149,55 @@
                 <div class="clearfix"></div>
 
                 <div class="row">
-                    <s:iterator value="category.product" var="product">
-                        <div class="col-md-4 col-sm-6">
-                            <!-- Each item should be enclosed in "item" class -->
+                    <div class="col-md-12">
+                        <h3 class="title">Popular Deals</h3>
+                    </div>
+                    <s:iterator value="listProduct" var="product">
+                        <div class="col-md-3 col-sm-4">
                             <div class="item">
-                                <!-- Item image -->
                                 <div class="item-image">
                                     <s:url action="product" var="urlTag">
-                                        <s:param name="id"><s:property value="#product.id" /></s:param>
+                                        <s:param name="id"><s:property value="id" /></s:param>
                                     </s:url>
-                                    <s:a href="%{urlTag}"><img src="img/photos/3.png" alt="<s:property value="#product.name"/>" /></s:a>
-                                </div>
-                                <!-- Item details -->
-                                <div class="item-details">
-                                    <!-- Name -->
-                                    <!-- Use the span tag with the class "ico" and icon link (hot, sale, deal, new) -->
-                                    <h5><a href="single-item.html"><s:property value="#product.name" /></a><span class="ico"><img src="img/hot.png" alt="" /></span></h5>
-                                    <div class="clearfix"></div>
-                                    <!-- Para. Note more than 2 lines. -->
-                                    <hr />
-                                    <!-- Price -->
-                                    <div class="item-price pull-left">$<s:property value="getText('{0,number,#,##0}',{#product. price})"/></div>
-                                    <!-- Add to cart -->
+                                    <s:a href="%{urlTag}"><img src="img/photos/3.png" alt="<s:property value="name"/>" /></s:a>
+                                    </div>
+                                    <div class="item-details">
+                                        <h5><a href="single-item.html"><s:property value="name"/></a></h5>
+                                    <div class="item-price pull-left">$<s:property value="getText('{0,number,#,##0}',{price})"/></div>
                                     <s:url action="buy" var="buyTag">
                                         <s:param name="id"><s:property value="#product.id" /></s:param>
                                     </s:url>
                                     <div class="button pull-right"><s:a href="%{buyTag}">Add to Cart</s:a></div>
-                                    <div class="clearfix"></div>
+                                        <div class="clearfix"></div>
+                                    </div>
                                 </div>
-                            </div>
-                        </div>
+                            </div>  
                     </s:iterator>
-                    <div class="col-md-9 col-sm-9">
-                        <!-- Pagination -->
-                        <div class="paging">
-                            <span class='current'>1</span>
-                            <a href='#'>2</a>
-                            <span class="dots">&hellip;</span>
-                            <a href='#'>6</a>
-                            <a href="#">Next</a>
-                        </div>
-                    </div>           
+                    <div class="paging">
+                        <c:forEach var="i" begin="1" end="${maxPage}">
+                            <s:url action="category" var="urlTag">
+                                <s:param name="id">${param.id}</s:param>
+                                <s:param name="page">${i}</s:param>
+                            </s:url>
 
+                            <c:choose>
+                                <c:when test="${param.page == i}"><s:a href="%{urlTag}" cssClass="current">${i}</s:a></c:when>
+                                <c:when test="${param.page == null}">
+                                    <c:choose>
+                                        <c:when test="${i == 1}">
+                                            <s:a href="%{urlTag}" cssClass="current">${i}</s:a>
+                                        </c:when>
+                                        <c:otherwise>
+                                            <s:a href="%{urlTag}">${i}</s:a>
+                                        </c:otherwise>
+                                    </c:choose>
+                                </c:when>
+                                <c:otherwise><s:a href="%{urlTag}">${i}</s:a></c:otherwise>
+                            </c:choose>
+                        </c:forEach>
+                    </div>
                 </div>
-
-
             </div>                                                                    
-
-
-
         </div>
     </div>
 </div>
