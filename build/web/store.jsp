@@ -146,7 +146,7 @@
             <div class="col-md-12">
                 <h3 class="title">Popular Deals</h3>
             </div>
-            <s:iterator value="recentProduct" var="product">
+            <s:iterator value="listProduct" var="product">
                 <div class="col-md-3 col-sm-4">
                     <div class="item">
                         <div class="item-image">
@@ -167,28 +167,28 @@
                         </div>
                     </div>  
             </s:iterator>
-            <div class="paging">
-                <c:forEach var="i" begin="1" end="${maxPage}">
-                    <s:url action="store" var="urlTag">
-                        <s:param name="page">${i}</s:param>
-                    </s:url>
+            <!--            <div class="paging">
+            <c:forEach var="i" begin="1" end="${maxPage}">
+                <s:url action="store" var="urlTag">
+                    <s:param name="page">${i}</s:param>
+                </s:url>
 
-                    <c:choose>
-                        <c:when test="${param.page == i}"><s:a href="%{urlTag}" cssClass="current">${i}</s:a></c:when>
-                        <c:when test="${param.page == null}">
-                            <c:choose>
-                                <c:when test="${i == 1}">
-                                    <s:a href="%{urlTag}" cssClass="current">${i}</s:a>
-                                </c:when>
-                                <c:otherwise>
-                                    <s:a href="%{urlTag}">${i}</s:a>
-                                </c:otherwise>
-                            </c:choose>
-                        </c:when>
-                        <c:otherwise><s:a href="%{urlTag}">${i}</s:a></c:otherwise>
-                    </c:choose>
-                </c:forEach>
-            </div>
+                <c:choose>
+                    <c:when test="${param.page == i}"><s:a href="%{urlTag}" cssClass="current">${i}</s:a></c:when>
+                    <c:when test="${param.page == null}">
+                        <c:choose>
+                            <c:when test="${i == 1}">
+                                <s:a href="%{urlTag}" cssClass="current">${i}</s:a>
+                            </c:when>
+                            <c:otherwise>
+                                <s:a href="%{urlTag}">${i}</s:a>
+                            </c:otherwise>
+                        </c:choose>
+                    </c:when>
+                    <c:otherwise><s:a href="%{urlTag}">${i}</s:a></c:otherwise>
+                </c:choose>
+            </c:forEach>
+        </div>-->
         </div>
     </div>
 </div>

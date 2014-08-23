@@ -10,7 +10,6 @@ import com.aptech.model.*;
 import static com.opensymphony.xwork2.Action.SUCCESS;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
-import java.util.*;
 import javax.servlet.http.HttpServletRequest;
 import org.apache.struts2.ServletActionContext;
 
@@ -23,7 +22,7 @@ public class CartAction extends ActionSupport {
     private ProductModel model;
 
     public CartAction() {
-         model = new ProductModel();
+        model = new ProductModel();
     }
 
     @Override

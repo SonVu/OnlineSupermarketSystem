@@ -77,6 +77,5 @@ INSERT INTO `onlinesupermarketsystem`.`category` (`name`, `description`, `parent
 INSERT INTO `onlinesupermarketsystem`.`category` (`name`, `description`, `parent_id`, `status`) VALUES ('LG', 'LG Smartphone', '1', '1');
 INSERT INTO `onlinesupermarketsystem`.`category` (`name`, `description`, `parent_id`, `status`) VALUES ('Samsung', 'Samsung phone', '1', '1');
 
-
 INSERT INTO `onlinesupermarketsystem`.`product` (`name`, `brand`, `price`, `stock`, `discount`, `description`, `status`, `category_id`) VALUES ('HTC One X', 'HTC', '10000000', '1', '0', 'Newest HTC Smartphone', '1', '20');
 INSERT INTO `onlinesupermarketsystem`.`product` (`name`, `brand`, `price`, `stock`, `discount`, `description`, `status`, `category_id`) VALUES ('Iphone 5', 'Apple', '14000000', '1', '0', 'Newest Apple Smartphone', '1', '21');

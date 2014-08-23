@@ -19,14 +19,15 @@ import org.apache.struts2.ServletActionContext;
  */
 public class StoreAction extends ActionSupport {
 
+//<editor-fold defaultstate="collapsed" desc="variable">
     private ProductModel productModel;
     private CategoryModel categoryModel;
     private static final long serialVersionUID = 9149826260758390091L;
-    private List<Product> recentProduct;
     private List<Category> listCategory;
     private List<Product> listProduct;
     private String searchString;
     private Integer maxPage;
+//</editor-fold>
 
     public StoreAction() {
         productModel = new ProductModel();
@@ -35,7 +36,7 @@ public class StoreAction extends ActionSupport {
 
     @Override
     public String execute() throws Exception {
-        recentProduct = productModel.recentProduct();
+        listProduct = productModel.recentProduct();
         listCategory = categoryModel.listCategory();
         return SUCCESS;
     }
@@ -43,7 +44,7 @@ public class StoreAction extends ActionSupport {
     public String pagingProduct() throws Exception {
         Integer pageIndex = 0;
         Integer totalNumberOfRecords = 0;
-        Integer numberOfRecordsPerPage = 4;
+        Integer numberOfRecordsPerPage = 8;
         HttpServletRequest request = (HttpServletRequest) ActionContext.getContext().get(ServletActionContext.HTTP_REQUEST);
 
         if (request.getParameter("page") != null) {
@@ -57,7 +58,7 @@ public class StoreAction extends ActionSupport {
         if (totalNumberOfRecords % 2 != 0) {
             maxPage += 1;
         }
-        recentProduct = productModel.pagination(startIndex, numberOfRecordsPerPage, -1);
+        listProduct = productModel.pagination(startIndex, numberOfRecordsPerPage, -1);
         return SUCCESS;
     }
 
@@ -66,19 +67,16 @@ public class StoreAction extends ActionSupport {
         return SUCCESS;
     }
 
-    public String search() throws Exception {
-        System.out.println(searchString);
-        listProduct = productModel.search(searchString);
+    public String sidebar() throws Exception {
+        listCategory = categoryModel.listCategory();
         return SUCCESS;
     }
 
-    public List<Product> getRecentProduct() {
-        return recentProduct;
+    public String search() throws Exception {
+        listProduct = productModel.search(searchString);
+        return SUCCESS;
     }
-
-    public void setRecentProduct(List<Product> recentProduct) {
-        this.recentProduct = recentProduct;
-    }
+// <editor-fold defaultstate="collapsed" desc="Getter setter">
 
     public List<Category> getListCategory() {
         return listCategory;
@@ -111,4 +109,6 @@ public class StoreAction extends ActionSupport {
     public void setMaxPage(Integer maxPage) {
         this.maxPage = maxPage;
     }
+
+// </editor-fold>
 }

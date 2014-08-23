@@ -6,12 +6,9 @@
 package com.aptech.model;
 
 import com.aptech.obj.*;
-import java.util.ArrayList;
 import java.util.List;
-import javax.persistence.Query;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
-import org.hibernate.SessionFactory;
 
 /**
  *

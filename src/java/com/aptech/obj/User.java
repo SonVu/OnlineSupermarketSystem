@@ -1,8 +1,7 @@
 package com.aptech.obj;
 
+import com.aptech.helper.MD5Hash;
 import java.io.Serializable;
-import java.sql.Date;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -34,30 +33,37 @@ public class User implements Serializable {
     public static long getSerialVersionUID() {
         return serialVersionUID;
     }
+
     @Column(name = "username")
     public String getUsername() {
         return username;
     }
+
     @Column(name = "password")
     public String getPassword() {
         return password;
     }
+
     @Column(name = "fullname")
     public String getFullname() {
         return fullname;
     }
+
     @Column(name = "address")
     public String getAddress() {
         return address;
     }
+
     @Column(name = "phone")
     public String getPhone() {
         return phone;
     }
+
     @Column(name = "email")
     public String getEmail() {
         return email;
     }
+
     @Column(name = "role_id")
     public Integer getRole_id() {
         return role_id;
@@ -95,5 +101,4 @@ public class User implements Serializable {
         this.role_id = role_id;
     }
 
-    
 }

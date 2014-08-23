@@ -1,8 +1,6 @@
 package com.aptech.obj;
 
 import java.io.Serializable;
-import java.sql.Date;
-
 import javax.persistence.*;
 
 @Entity

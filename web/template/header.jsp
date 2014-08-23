@@ -8,43 +8,38 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <meta charset="utf-8">
         <!-- Title and other stuffs -->
-        <title>MacKart</title>
+        <title>Items - MacKart</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta name="description" content="">
         <meta name="keywords" content="">
         <meta name="author" content="">
-
         <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,600' rel='stylesheet' type='text/css'>
-
         <!-- Stylesheets -->
         <link href="style/bootstrap.css" rel="stylesheet">
         <!-- Pretty Photo -->
         <link href="style/prettyPhoto.css" rel="stylesheet">
+        <!-- Sidebar nav -->
+        <link href="style/sidebar-nav.css" rel="stylesheet">
         <!-- Flex slider -->
         <link href="style/flexslider.css" rel="stylesheet">
         <!-- Font awesome icon -->
-        <link rel="stylesheet" href="style/font-awesome.css">
+        <link rel="stylesheet" href="style/font-awesome.css"> 
         <!-- Main stylesheet -->
         <link href="style/style.css" rel="stylesheet">
         <!-- Stylesheet for Color -->
         <link href="style/red.css" rel="stylesheet">
-
-
         <!-- HTML5 Support for IE -->
         <!--[if lt IE 9]>
         <script src="js/html5shim.js"></script>
         <![endif]-->
-
         <!-- Favicon -->
         <link rel="shortcut icon" href="img/favicon/favicon.png">
     </head>
-
     <body>
-       <!-- Header starts -->
+        <!-- Header starts -->
         <header>
             <div class="container">
                 <div class="row">
-
                     <div class="col-md-4">
                         <!-- Logo. Use class "color" to add color to the text. -->
                         <div class="logo">
@@ -52,9 +47,7 @@
                             <p class="meta">online shopping is fun!!!</p>
                         </div>
                     </div>
-
                     <div class="col-md-5 col-md-offset-3">
-
                         <!-- Search form -->
                         <s:form action="search" cssClass="form-inline" theme="simple">
                             <div class="form-group">
@@ -64,20 +57,13 @@
                         </s:form>
                         <div class="hlinks">
                             <span>
-
                                 <!-- item details with price -->
                                 <a href="#cart" role="button" data-toggle="modal">3 Item(s) in your <i class="icon-shopping-cart"></i></a> -<span class="bold">$25</span>
-
                             </span>
-
-
                             <!-- Login and Register link -->
                             <span class="lr"><a href="#login" role="button" data-toggle="modal">Login</a> or <a href="#register" role="button" data-toggle="modal">Register</a></span>
-
                         </div>
-
                     </div>
-
                 </div>
             </div>
         </header>
@@ -92,7 +78,6 @@
                         <h4>Shopping Cart</h4>
                     </div>
                     <div class="modal-body">
-
                         <table class="table table-striped tcart">
                             <thead>
                                 <tr>
@@ -124,7 +109,6 @@
                                 </tr>
                             </tbody>
                         </table>
-
                     </div>
                     <div class="modal-footer">
                         <s:a href="%{urlTag}" cssClass="btn">Continue Shopping</s:a>
@@ -133,9 +117,7 @@
                     </div>
                 </div>
             </div>
-
             <!-- Cart modal ends -->
-
             <!-- Login Modal starts -->
             <div id="login" class="modal fade">
                 <div class="modal-dialog">
@@ -145,9 +127,7 @@
                             <h4>Login</h4>
                         </div>
                         <div class="modal-body">
-
                             <div class="form">
-
                                 <form class="form-horizontal">
                                     <div class="form-group">
                                         <label class="control-label col-md-3" for="username">Username</label>
@@ -170,7 +150,6 @@
                                             </div>
                                         </div>
                                     </div>
-
                                     <div class="form-group">
                                         <div class="col-md-9 col-md-offset-3">
                                             <button type="submit" class="btn btn-default">Login</button>
@@ -179,7 +158,6 @@
                                     </div>
                                 </form>
                             </div>
-
                         </div>
                         <div class="modal-footer">
                             <p>Dont have account? <a href="register.html">Register</a> here.</p>
@@ -187,11 +165,8 @@
                     </div>
                 </div>
             </div>
-
             <!-- Login modal ends -->
-
             <!-- Register Modal starts -->
-
             <div id="register" class="modal fade">
                 <div class="modal-dialog">
                     <div class="modal-content">
@@ -248,7 +223,6 @@
                                             </div>
                                         </div>
                                     </div>
-
                                     <div class="form-group">
                                         <div class="col-md-9 col-md-offset-3">
                                             <button type="submit" class="btn btn-default">Register</button>
@@ -264,12 +238,9 @@
                     </div>
                 </div>
             </div>
-
             <!-- Register modal ends -->
-
             <!-- Navigation -->
             <div class="navbar bs-docs-nav" role="banner">
-
                 <div class="container">
                     <div class="navbar-header">
                         <button class="navbar-toggle" type="button" data-toggle="collapse" data-target=".bs-navbar-collapse">
@@ -278,15 +249,14 @@
                             <span class="icon-bar"></span>
                             <span class="icon-bar"></span>
                         </button>
-
                     </div>
                     <nav class="collapse navbar-collapse bs-navbar-collapse" role="navigation">
                         <ul class="nav navbar-nav">
                         <s:url action="store" var="urlTag">
                         </s:url>
                         <li><s:a href="%{urlTag}"><i class="icon-home"></i></s:a></li>
-                        <s:iterator value="listCategory" var="parent">
-                            <s:if test="%{parent_id == 0}">
+                            <s:iterator value="listCategory" var="parent">
+                                <s:if test="%{parent_id == 0}">
                                 <li class="dropdown">
                                     <a href="#" class="dropdown-toggle" data-toggle="dropdown"><s:property value="#parent.name" /><b class="caret"></b></a>
                                     <ul class="dropdown-menu">
@@ -296,8 +266,8 @@
                                                     <s:param name="id"><s:property value="#child.id" /></s:param>
                                                 </s:url>
                                                 <li><s:a href="%{urlTag}"><s:property value="#child.name" /></s:a></li>
-                                            </s:if>
-                                        </s:iterator>
+                                                </s:if>
+                                            </s:iterator>
                                     </ul>
                                 </li>
                             </s:if>
@@ -306,6 +276,3 @@
                 </nav>
             </div>
         </div>
-
-
-

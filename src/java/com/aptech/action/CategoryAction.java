@@ -44,7 +44,7 @@ public class CategoryAction extends ActionSupport {
     public String categoryPaging() throws Exception {
         Integer pageIndex = 0;
         Integer totalNumberOfRecords = 0;
-        Integer numberOfRecordsPerPage = 4;
+        Integer numberOfRecordsPerPage = 9;
         Integer categoryId = 0;
         HttpServletRequest request = (HttpServletRequest) ActionContext.getContext().get(ServletActionContext.HTTP_REQUEST);
         categoryId = Integer.parseInt(request.getParameter("id"));

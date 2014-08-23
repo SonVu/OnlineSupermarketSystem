@@ -8,7 +8,6 @@ package com.aptech.action;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import com.aptech.obj.*;
-import static com.opensymphony.xwork2.Action.ERROR;
 import static com.opensymphony.xwork2.Action.SUCCESS;
 import java.util.Map;
 
@@ -20,7 +19,7 @@ public class ViewCartAction extends ActionSupport {
 
     private Map<Product, Integer> products;
     private Double total;
-    
+
     @Override
     public String execute() throws Exception {
         Cart cart = (Cart) ActionContext.getContext().getSession().get("cart");

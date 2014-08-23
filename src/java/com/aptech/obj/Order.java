@@ -2,7 +2,6 @@ package com.aptech.obj;
 
 import java.io.Serializable;
 import java.sql.Date;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -31,18 +30,22 @@ public class Order implements Serializable {
     public static long getSerialVersionUID() {
         return serialVersionUID;
     }
+
     @Column(name = "user_id")
     public Integer getUser_id() {
         return user_id;
     }
+
     @Column(name = "code")
     public String getCode() {
         return code;
     }
+
     @Column(name = "created")
     public Date getCreated() {
         return created;
     }
+
     @Column(name = "status")
     public Integer getStatus() {
         return status;
@@ -68,5 +71,4 @@ public class Order implements Serializable {
         this.status = status;
     }
 
-    
 }
