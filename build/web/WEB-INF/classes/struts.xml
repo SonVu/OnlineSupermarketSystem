@@ -7,10 +7,10 @@
 <struts>
     <package name="default" namespace="/" extends="struts-default">
         <action name="store" class="com.aptech.action.StoreAction" method="pagingProduct">
-            <result name="success">/store.jsp</result>
+            <result name="success">/WEB-INF/front-store/store.jsp</result>
         </action>
         <action name="search" class="com.aptech.action.StoreAction" method="search">
-            <result name="success">/result.jsp</result>
+            <result name="success">/WEB-INF/front-store/result.jsp</result>
         </action>
         <action name="header" class="com.aptech.action.StoreAction" method="header">
             <result name="success">/template/header.jsp</result>
@@ -19,16 +19,16 @@
             <result name="success">/template/sidebar.jsp</result>
         </action>
         <action name="product" class="com.aptech.action.ProductAction">
-            <result name="success">/product.jsp</result>
+            <result name="success">/WEB-INF/front-store/product.jsp</result>
         </action>
         <action name="category" class="com.aptech.action.CategoryAction" method="categoryPaging">
-            <result name="success">/category.jsp</result>
+            <result name="success">/WEB-INF/front-store/category.jsp</result>
         </action>
         <action name="buy" class="com.aptech.action.CartAction">
             <result name="success" type="redirect">cart</result> 
         </action>
         <action name="cart" class="com.aptech.action.ViewCartAction">
-            <result name="success">/view-cart.jsp</result> 
+            <result name="success">/WEB-INF/front-store/view-cart.jsp</result> 
         </action>
         
         <action name="userImage"
@@ -40,19 +40,19 @@
                 </param>
             </interceptor-ref>
             <interceptor-ref name="defaultStack"></interceptor-ref>
-            <result name="success">SuccessUserImage.jsp</result>
-            <result name="input">UserImage.jsp</result>
+            <result name="success">/WEB-INF/front-store/SuccessUserImage.jsp</result>
+            <result name="input">/WEB-INF/front-store/UserImage.jsp</result>
         </action>
     </package>
  
        
     <package name="admin" namespace="/admin" extends="struts-default">
         <action name="login" class="com.aptech.action.LoginAction">
-            <result name="success">/admin/login.jsp</result>
+            <result name="success">/WEB-INF/admin/login.jsp</result>
         </action>
         <action name="signin" class="com.aptech.action.LoginAction" method="signin">
-            <result name="success">/WEB-INF/index.jsp</result>
-            <result name="error">/admin/login.jsp</result>
+            <result name="success">/WEB-INF/admin/index.jsp</result>
+            <result name="error">/WEB-INF/admin/login.jsp</result>
         </action>
     </package>
 </struts>
