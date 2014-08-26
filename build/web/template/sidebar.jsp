@@ -44,7 +44,7 @@
             <!-- Don't forget the class "onethree-left" and "onethree-right" -->
             <div class="onethree-left">
                 <!-- Image -->
-                <a href="single-item.html"><img src="img/photos/2.png" alt="" class="img-responsive"></a>
+                <a href="single-item.html"><img src="store/img/photos/2.png" alt="" class="img-responsive"></a>
             </div>
             <div class="onethree-right">
                 <!-- Title -->
@@ -59,7 +59,7 @@
 
         <div class="sitem">
             <div class="onethree-left">
-                <a href="single-item.html"><img src="img/photos/3.png" alt="" class="img-responsive"></a>
+                <a href="single-item.html"><img src="store/img/photos/3.png" alt="" class="img-responsive"></a>
             </div>
             <div class="onethree-right">
                 <a href="single-item.html">Sony One V</a>
@@ -71,7 +71,7 @@
 
         <div class="sitem">
             <div class="onethree-left">
-                <a href="single-item.html"><img src="img/photos/4.png" alt="" class="img-responsive"></a>
+                <a href="single-item.html"><img src="store/img/photos/4.png" alt="" class="img-responsive"></a>
             </div>
             <div class="onethree-right">
                 <a href="single-item.html">Nokia One V</a>
@@ -83,7 +83,7 @@
 
         <div class="sitem">
             <div class="onethree-left">
-                <a href="single-item.html"><img src="img/photos/5.png" alt="" class="img-responsive"></a>
+                <a href="single-item.html"><img src="store/img/photos/5.png" alt="" class="img-responsive"></a>
             </div>
             <div class="onethree-right">
                 <a href="single-item.html">Samsung One V</a>

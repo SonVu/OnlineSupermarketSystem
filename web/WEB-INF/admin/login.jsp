@@ -44,7 +44,7 @@
                             <div class="widget-content">
                                 <div class="padd">
                                     <!-- Login form -->
-                                    <s:form action="signin" cssClass="form-horizontal" theme="simple">
+                                    <s:form action="login" cssClass="form-horizontal" theme="simple">
                                         <!-- Email -->
                                         <div class="form-group">
                                             <label class="control-label col-lg-3" for="inputEmail">Email</label>

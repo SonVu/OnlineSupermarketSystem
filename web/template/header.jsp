@@ -15,25 +15,25 @@
         <meta name="author" content="">
         <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,600' rel='stylesheet' type='text/css'>
         <!-- Stylesheets -->
-        <link href="style/bootstrap.css" rel="stylesheet">
+        <link href="store/style/bootstrap.css" rel="stylesheet">
         <!-- Pretty Photo -->
-        <link href="style/prettyPhoto.css" rel="stylesheet">
+        <link href="store/style/prettyPhoto.css" rel="stylesheet">
         <!-- Sidebar nav -->
-        <link href="style/sidebar-nav.css" rel="stylesheet">
+        <link href="store/style/sidebar-nav.css" rel="stylesheet">
         <!-- Flex slider -->
-        <link href="style/flexslider.css" rel="stylesheet">
+        <link href="store/style/flexslider.css" rel="stylesheet">
         <!-- Font awesome icon -->
-        <link rel="stylesheet" href="style/font-awesome.css"> 
+        <link rel="stylesheet" href="store/style/font-awesome.css"> 
         <!-- Main stylesheet -->
-        <link href="style/style.css" rel="stylesheet">
+        <link href="store/style/style.css" rel="stylesheet">
         <!-- Stylesheet for Color -->
-        <link href="style/red.css" rel="stylesheet">
+        <link href="store/style/red.css" rel="stylesheet">
         <!-- HTML5 Support for IE -->
         <!--[if lt IE 9]>
         <script src="js/html5shim.js"></script>
         <![endif]-->
         <!-- Favicon -->
-        <link rel="shortcut icon" href="img/favicon/favicon.png">
+        <link rel="shortcut icon" href="store/img/favicon/favicon.png">
     </head>
     <body>
         <!-- Header starts -->
@@ -43,7 +43,7 @@
                     <div class="col-md-4">
                         <!-- Logo. Use class "color" to add color to the text. -->
                         <div class="logo">
-                            <h1><a href="#">Mac<span class="color bold">Kart</span></a></h1>
+                            <h1><a href="store/#">Mac<span class="color bold">Kart</span></a></h1>
                             <p class="meta">online shopping is fun!!!</p>
                         </div>
                     </div>
@@ -58,10 +58,10 @@
                         <div class="hlinks">
                             <span>
                                 <!-- item details with price -->
-                                <a href="#cart" role="button" data-toggle="modal">3 Item(s) in your <i class="icon-shopping-cart"></i></a> -<span class="bold">$25</span>
+                                <a href="store/#cart" role="button" data-toggle="modal">3 Item(s) in your <i class="icon-shopping-cart"></i></a> -<span class="bold">$25</span>
                             </span>
                             <!-- Login and Register link -->
-                            <span class="lr"><a href="#login" role="button" data-toggle="modal">Login</a> or <a href="#register" role="button" data-toggle="modal">Register</a></span>
+                            <span class="lr"><a href="store/#login" role="button" data-toggle="modal">Login</a> or <a href="store/#register" role="button" data-toggle="modal">Register</a></span>
                         </div>
                     </div>
                 </div>
@@ -88,17 +88,17 @@
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td><a href="single-item.html">HTC One</a></td>
+                                    <td><a href="store/single-item.html">HTC One</a></td>
                                     <td>2</td>
                                     <td>$250</td>
                                 </tr>
                                 <tr>
-                                    <td><a href="single-item.html">Apple iPhone</a></td>
+                                    <td><a href="store/single-item.html">Apple iPhone</a></td>
                                     <td>1</td>
                                     <td>$502</td>
                                 </tr>
                                 <tr>
-                                    <td><a href="single-item.html">Galaxy Note</a></td>
+                                    <td><a href="store/single-item.html">Galaxy Note</a></td>
                                     <td>4</td>
                                     <td>$1303</td>
                                 </tr>
@@ -111,8 +111,8 @@
                         </table>
                     </div>
                     <div class="modal-footer">
-                        <s:a href="%{urlTag}" cssClass="btn">Continue Shopping</s:a>
-                            <a href="checkout.html" class="btn btn-danger">Checkout</a>
+                        <s:a href="store/%{urlTag}" cssClass="btn">Continue Shopping</s:a>
+                            <a href="store/checkout.html" class="btn btn-danger">Checkout</a>
                         </div>
                     </div>
                 </div>
@@ -160,7 +160,7 @@
                             </div>
                         </div>
                         <div class="modal-footer">
-                            <p>Dont have account? <a href="register.html">Register</a> here.</p>
+                            <p>Dont have account? <a href="store/register.html">Register</a> here.</p>
                         </div>
                     </div>
                 </div>
@@ -233,7 +233,7 @@
                             </div>
                         </div>
                         <div class="modal-footer">
-                            <p>Already have account? <a href="login.html">Login</a> here.</p>
+                            <p>Already have account? <a href="store/login.html">Login</a> here.</p>
                         </div>
                     </div>
                 </div>
@@ -254,18 +254,18 @@
                         <ul class="nav navbar-nav">
                         <s:url action="store" var="urlTag">
                         </s:url>
-                        <li><s:a href="%{urlTag}"><i class="icon-home"></i></s:a></li>
+                        <li><s:a href="store/%{urlTag}"><i class="icon-home"></i></s:a></li>
                             <s:iterator value="listCategory" var="parent">
                                 <s:if test="%{parent_id == 0}">
                                 <li class="dropdown">
-                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><s:property value="#parent.name" /><b class="caret"></b></a>
+                                    <a href="store/#" class="dropdown-toggle" data-toggle="dropdown"><s:property value="#parent.name" /><b class="caret"></b></a>
                                     <ul class="dropdown-menu">
                                         <s:iterator var="child" value="listCategory">
                                             <s:if test="#child.parent_id == #parent.id">
                                                 <s:url action="category" var="urlTag">
                                                     <s:param name="id"><s:property value="#child.id" /></s:param>
                                                 </s:url>
-                                                <li><s:a href="%{urlTag}"><s:property value="#child.name" /></s:a></li>
+                                                <li><s:a href="store/%{urlTag}"><s:property value="#child.name" /></s:a></li>
                                                 </s:if>
                                             </s:iterator>
                                     </ul>

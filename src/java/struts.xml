@@ -45,14 +45,37 @@
         </action>
     </package>
  
-       
     <package name="admin" namespace="/admin" extends="struts-default">
-        <action name="login" class="com.aptech.action.LoginAction">
-            <result name="success">/WEB-INF/admin/login.jsp</result>
+        <interceptors>
+            <interceptor name="authentication" class="com.aptech.interceptor.AuthenticationInterceptor"></interceptor>
+            <interceptor-stack name="authStack">
+                <interceptor-ref name="authentication"></interceptor-ref>
+            </interceptor-stack>    
+        </interceptors>
+        
+        <default-interceptor-ref name="authStack"></default-interceptor-ref>
+      
+        <global-results>
+            <result name="login" type="redirect">/admin/home</result>
+        </global-results>
+
+        <action name="home">
+            <interceptor-ref name="defaultStack"></interceptor-ref>
+            <result>/WEB-INF/admin/login.jsp</result>
         </action>
-        <action name="signin" class="com.aptech.action.LoginAction" method="signin">
-            <result name="success">/WEB-INF/admin/index.jsp</result>
-            <result name="error">/WEB-INF/admin/login.jsp</result>
+
+        <action name="login" class="com.aptech.action.LoginAction">
+            <interceptor-ref name="defaultStack"></interceptor-ref>
+            <result name="success" >/WEB-INF/admin/tables.jsp</result>
+            <result name="input">/WEB-INF/admin/login.jsp</result>
+        </action>
+        
+        <action name="welcome" class="com.aptech.action.AdminAction">
+            <result name="success">/WEB-INF/admin/tables.jsp</result>
+        </action>
+        
+        <action name="header" class="com.aptech.action.AdminAction" method="header">
+            <result name="success">/template/admin_header.jsp</result>
         </action>
     </package>
 </struts>

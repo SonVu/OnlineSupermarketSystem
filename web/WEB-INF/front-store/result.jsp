@@ -69,7 +69,7 @@
                         <!-- Don't forget the class "onethree-left" and "onethree-right" -->
                         <div class="onethree-left">
                             <!-- Image -->
-                            <a href="single-item.html"><img src="img/photos/2.png" alt="" class="img-responsive" /></a>
+                            <a href="single-item.html"><img src="store/img/photos/2.png" alt="" class="img-responsive" /></a>
                         </div>
                         <div class="onethree-right">
                             <!-- Title -->
@@ -84,7 +84,7 @@
 
                     <div class="sitem">
                         <div class="onethree-left">
-                            <a href="single-item.html"><img src="img/photos/3.png" alt="" class="img-responsive" /></a>
+                            <a href="single-item.html"><img src="store/img/photos/3.png" alt="" class="img-responsive" /></a>
                         </div>
                         <div class="onethree-right">
                             <a href="single-item.html">Sony One V</a>
@@ -96,7 +96,7 @@
 
                     <div class="sitem">
                         <div class="onethree-left">
-                            <a href="single-item.html"><img src="img/photos/4.png" alt="" class="img-responsive" /></a>
+                            <a href="single-item.html"><img src="store/img/photos/4.png" alt="" class="img-responsive" /></a>
                         </div>
                         <div class="onethree-right">
                             <a href="single-item.html">Nokia One V</a>
@@ -108,7 +108,7 @@
 
                     <div class="sitem">
                         <div class="onethree-left">
-                            <a href="single-item.html"><img src="img/photos/5.png" alt="" class="img-responsive" /></a>
+                            <a href="single-item.html"><img src="store/img/photos/5.png" alt="" class="img-responsive" /></a>
                         </div>
                         <div class="onethree-right">
                             <a href="single-item.html">Samsung One V</a>
@@ -145,13 +145,13 @@
                                     <s:url action="product" var="urlTag">
                                         <s:param name="id"><s:property value="#product.id" /></s:param>
                                     </s:url>
-                                    <s:a href="%{urlTag}"><img src="img/photos/3.png" alt="<s:property value="#product.name"/>" /></s:a>
+                                    <s:a href="%{urlTag}"><img src="store/img/photos/3.png" alt="<s:property value="#product.name"/>" /></s:a>
                                     </div>
                                     <!-- Item details -->
                                     <div class="item-details">
                                         <!-- Name -->
                                         <!-- Use the span tag with the class "ico" and icon link (hot, sale, deal, new) -->
-                                        <h5><a href="single-item.html"><s:property value="#product.name" /></a><span class="ico"><img src="img/hot.png" alt="" /></span></h5>
+                                        <h5><a href="single-item.html"><s:property value="#product.name" /></a><span class="ico"><img src="store/img/hot.png" alt="" /></span></h5>
                                     <div class="clearfix"></div>
                                     <!-- Para. Note more than 2 lines. -->
                                     <hr />

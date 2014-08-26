@@ -71,7 +71,7 @@
                         <!-- Don't forget the class "onethree-left" and "onethree-right" -->
                         <div class="onethree-left">
                             <!-- Image -->
-                            <a href="single-item.html"><img src="img/photos/2.png" alt="" /></a>
+                            <a href="single-item.html"><img src="store/img/photos/2.png" alt="" /></a>
                         </div>
                         <div class="onethree-right">
                             <!-- Title -->
@@ -86,7 +86,7 @@
 
                     <div class="sitem">
                         <div class="onethree-left">
-                            <a href="single-item.html"><img src="img/photos/3.png" alt="" /></a>
+                            <a href="single-item.html"><img src="store/img/photos/3.png" alt="" /></a>
                         </div>
                         <div class="onethree-right">
                             <a href="single-item.html">Sony One V</a>
@@ -98,7 +98,7 @@
 
                     <div class="sitem">
                         <div class="onethree-left">
-                            <a href="single-item.html"><img src="img/photos/4.png" alt="" /></a>
+                            <a href="single-item.html"><img src="store/img/photos/4.png" alt="" /></a>
                         </div>
                         <div class="onethree-right">
                             <a href="single-item.html">Nokia One V</a>
@@ -110,7 +110,7 @@
 
                     <div class="sitem">
                         <div class="onethree-left">
-                            <a href="single-item.html"><img src="img/photos/5.png" alt="" /></a>
+                            <a href="single-item.html"><img src="store/img/photos/5.png" alt="" /></a>
                         </div>
                         <div class="onethree-right">
                             <a href="single-item.html">Samsung One V</a>
@@ -150,24 +150,24 @@
                                         <!-- Slide #1 -->
                                         <li>
                                             <!-- Image -->
-                                            <img src="img/photos/1-1.png" alt=""/>
+                                            <img src="store/img/photos/1-1.png" alt=""/>
                                         </li>
 
                                         <!-- Slide #2 -->
                                         <li>
-                                            <img src="img/photos/1-2.png" alt=""/>
+                                            <img src="store/img/photos/1-2.png" alt=""/>
                                         </li>
 
                                         <li>
-                                            <img src="img/photos/1-3.png" alt=""/>
+                                            <img src="store/img/photos/1-3.png" alt=""/>
                                         </li>
 
                                         <li>
-                                            <img src="img/photos/1-4.png" alt=""/>
+                                            <img src="store/img/photos/1-4.png" alt=""/>
                                         </li>
 
                                         <li>
-                                            <img src="img/photos/1-5.png" alt=""/>
+                                            <img src="store/img/photos/1-5.png" alt=""/>
                                         </li>                  
 
                                     </ul>

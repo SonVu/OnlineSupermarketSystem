@@ -14,7 +14,7 @@
                     <!-- Slide #1 -->
                     <li>
                         <!-- Image -->
-                        <img src="img/photos/slider1.jpg" alt=""/>
+                        <img src="store/img/photos/slider1.jpg" alt=""/>
                         <!-- Caption -->
                         <div class="flex-caption">
                             <!-- Title -->
@@ -29,7 +29,7 @@
 
                     <!-- Slide #2 -->
                     <li>
-                        <img src="img/photos/slider2.jpg" alt=""/>
+                        <img src="store/img/photos/slider2.jpg" alt=""/>
                         <div class="flex-caption">
                             <!-- Title -->
                             <h3>Denim Jeans - <span class="color">Just $149</span></h3>
@@ -42,7 +42,7 @@
                     </li>
 
                     <li>
-                        <img src="img/photos/slider3.jpg" alt=""/>
+                        <img src="store/img/photos/slider3.jpg" alt=""/>
                         <div class="flex-caption">
                             <!-- Title -->
                             <h3>Polo Shirts - <span class="color">Just $79</span></h3>
@@ -55,7 +55,7 @@
                     </li>
 
                     <li>
-                        <img src="img/photos/slider4.jpg" alt=""/>
+                        <img src="store/img/photos/slider4.jpg" alt=""/>
                         <div class="flex-caption">
                             <!-- Title -->
                             <h3>Raymonds Suitings - <span class="color">Just $449</span></h3>
@@ -88,7 +88,7 @@
                 <div class="pbox rcolor">
                     <div class="pcol-left">
                         <!-- Image -->
-                        <a href="items.html"><img src="img/photos/promo-1.png" alt="" /></a>
+                        <a href="items.html"><img src="store/img/photos/promo-1.png" alt="" /></a>
                     </div>
                     <div class="pcol-right">
                         <!-- Title -->
@@ -106,7 +106,7 @@
                 <!-- bcolor =  Blue color -->
                 <div class="pbox bcolor">
                     <div class="pcol-left">
-                        <a href="items.html"><img src="img/photos/promo-2.png" alt="" /></a>
+                        <a href="items.html"><img src="store/img/photos/promo-2.png" alt="" /></a>
                     </div>
                     <div class="pcol-right">
                         <p class="pmed"><a href="items.html">Blackberry</a></p>
@@ -121,7 +121,7 @@
                 <!-- gcolor =  Green Color -->
                 <div class="pbox gcolor">
                     <div class="pcol-left">
-                        <a href="items.html"><img src="img/photos/promo-3.png" alt="" /></a>
+                        <a href="items.html"><img src="store/img/photos/promo-3.png" alt="" /></a>
                     </div>
                     <div class="pcol-right">
                         <p class="pmed"><a href="items.html">Nokia Lumia</a></p>
@@ -152,7 +152,7 @@
                             <s:url action="product" var="urlTag">
                                 <s:param name="id"><s:property value="id" /></s:param>
                             </s:url>
-                            <s:a href="%{urlTag}"><img src="img/photos/3.png" alt="<s:property value="name"/>" /></s:a>
+                            <s:a href="%{urlTag}"><img src="store/img/photos/3.png" alt="<s:property value="name"/>" /></s:a>
                             </div>
                             <div class="item-details">
                                 <h5><a href="single-item.html"><s:property value="name"/></a></h5>

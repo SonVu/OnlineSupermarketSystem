@@ -19,7 +19,7 @@
                         <div class="rp-item"> 
                             <div class="rp-image">    
                                 <!-- Image -->    
-                                <a href="single-item.html"><img src="img/photos/2.png" alt=""/></a>
+                                <a href="single-item.html"><img src="store/img/photos/2.png" alt=""/></a>
                             </div>
                             <div class="rp-details">
                                 <!-- Title and para -->
@@ -34,7 +34,7 @@
                     <li>
                         <div class="rp-item"> 
                             <div class="rp-image">        
-                                <a href="single-item.html"><img src="img/photos/3.png" alt=""/></a>
+                                <a href="single-item.html"><img src="store/img/photos/3.png" alt=""/></a>
                             </div>
                             <div class="rp-details">
                                 <!-- Title and para -->
@@ -47,7 +47,7 @@
                     <li>
                         <div class="rp-item"> 
                             <div class="rp-image">        
-                                <a href="single-item.html"><img src="img/photos/4.png" alt=""/></a>
+                                <a href="single-item.html"><img src="store/img/photos/4.png" alt=""/></a>
                             </div>
                             <div class="rp-details">
                                 <!-- Title and para -->
@@ -60,7 +60,7 @@
                     <li>
                         <div class="rp-item"> 
                             <div class="rp-image">        
-                                <a href="single-item.html"><img src="img/photos/5.png" alt=""/></a>
+                                <a href="single-item.html"><img src="store/img/photos/5.png" alt=""/></a>
                             </div>
                             <div class="rp-details">
                                 <!-- Title and para -->
@@ -73,7 +73,7 @@
                     <li>
                         <div class="rp-item"> 
                             <div class="rp-image">        
-                                <a href="single-item.html"><img src="img/photos/6.png" alt=""/></a>
+                                <a href="single-item.html"><img src="store/img/photos/6.png" alt=""/></a>
                             </div>
                             <div class="rp-details">
                                 <!-- Title and para -->
@@ -86,7 +86,7 @@
                     <li>
                         <div class="rp-item"> 
                             <div class="rp-image">        
-                                <a href="single-item.html"><img src="img/photos/7.png" alt=""/></a>
+                                <a href="single-item.html"><img src="store/img/photos/7.png" alt=""/></a>
                             </div>
                             <div class="rp-details">
                                 <!-- Title and para -->
@@ -151,11 +151,11 @@
                             <i class="icon-envelope-alt"></i> &nbsp; <a href="mailto:#">someone@company.com</a>
                             <hr />
                             <div class="payment-icons">
-                                <img src="img/payment/americanexpress.gif" alt="" />
-                                <img src="img/payment/visa.gif" alt="" />
-                                <img src="img/payment/mastercard.gif" alt="" />
-                                <img src="img/payment/discover.gif" alt="" />
-                                <img src="img/payment/paypal.gif" alt="" />
+                                <img src="store/img/payment/americanexpress.gif" alt="" />
+                                <img src="store/img/payment/visa.gif" alt="" />
+                                <img src="store/img/payment/mastercard.gif" alt="" />
+                                <img src="store/img/payment/discover.gif" alt="" />
+                                <img src="store/img/payment/paypal.gif" alt="" />
                             </div>
                         </div>
                     </div>
@@ -215,15 +215,15 @@
 <span class="totop"><a href="#"><i class="icon-chevron-up"></i></a></span> 
 
 <!-- JS -->
-<script src="js/jquery.js"></script> <!-- jQuery -->
-<script src="js/bootstrap.js"></script> <!-- Bootstrap -->
-<script src="js/jquery.prettyPhoto.js"></script> <!-- Pretty Photo -->
-<script src="js/filter.js"></script> <!-- Filter for support page -->
+<script src="store/js/jquery.js"></script> <!-- jQuery -->
+<script src="store/js/bootstrap.js"></script> <!-- Bootstrap -->
+<script src="store/js/jquery.prettyPhoto.js"></script> <!-- Pretty Photo -->
+<script src="store/js/filter.js"></script> <!-- Filter for support page -->
 
-<script src="js/jquery.flexslider-min.js"></script> <!-- Flex slider -->
-<script src="js/nav.js"></script> <!-- Sidebar navigation -->
-<script src="js/jquery.carouFredSel-6.1.0-packed.js"></script> <!-- Carousel for recent posts -->
-<script src="js/custom.js"></script> <!-- Custom codes -->
+<script src="store/js/jquery.flexslider-min.js"></script> <!-- Flex slider -->
+<script src="store/js/nav.js"></script> <!-- Sidebar navigation -->
+<script src="store/js/jquery.carouFredSel-6.1.0-packed.js"></script> <!-- Carousel for recent posts -->
+<script src="store/js/custom.js"></script> <!-- Custom codes -->
 
 </body>
 </html>

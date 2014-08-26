@@ -574,7 +574,7 @@
                                                 <li class="by-me">
                                                     <!-- Use the class "pull-left" in avatar -->
                                                     <div class="avatar pull-left">
-                                                        <img src="img/user.jpg" alt=""/>
+                                                        <img src="store/img/user.jpg" alt=""/>
                                                     </div>
 
                                                     <div class="chat-content">
@@ -589,7 +589,7 @@
                                                 <li class="by-other">
                                                     <!-- Use the class "pull-right" in avatar -->
                                                     <div class="avatar pull-right">
-                                                        <img src="img/user.jpg" alt=""/>
+                                                        <img src="store/img/user.jpg" alt=""/>
                                                     </div>
 
                                                     <div class="chat-content">
@@ -602,7 +602,7 @@
 
                                                 <li class="by-me">
                                                     <div class="avatar pull-left">
-                                                        <img src="img/user.jpg" alt=""/>
+                                                        <img src="store/img/user.jpg" alt=""/>
                                                     </div>
 
                                                     <div class="chat-content">
@@ -615,7 +615,7 @@
                                                 <li class="by-other">
                                                     <!-- Use the class "pull-right" in avatar -->
                                                     <div class="avatar pull-right">
-                                                        <img src="img/user.jpg" alt=""/>
+                                                        <img src="store/img/user.jpg" alt=""/>
                                                     </div>
 
                                                     <div class="chat-content">
@@ -713,27 +713,27 @@
                                             <th>Visits</th>
                                             </tr>
                                             <tr>
-                                                <td><img src="img/icons/chrome.png" alt="" />
+                                                <td><img src="store/img/icons/chrome.png" alt="" />
                                                 <td>Google Chrome</td>
                                                 <td>3,005</td>
                                             </tr> 
                                             <tr>
-                                                <td><img src="img/icons/firefox.png" alt="" />
+                                                <td><img src="store/img/icons/firefox.png" alt="" />
                                                 <td>Mozilla Firefox</td>
                                                 <td>2,505</td>
                                             </tr> 
                                             <tr>
-                                                <td><img src="img/icons/ie.png" alt="" />
+                                                <td><img src="store/img/icons/ie.png" alt="" />
                                                 <td>Internet Explorer</td>
                                                 <td>1,405</td>
                                             </tr> 
                                             <tr>
-                                                <td><img src="img/icons/opera.png" alt="" />
+                                                <td><img src="store/img/icons/opera.png" alt="" />
                                                 <td>Opera</td>
                                                 <td>4,005</td>
                                             </tr> 
                                             <tr>
-                                                <td><img src="img/icons/safari.png" alt="" />
+                                                <td><img src="store/img/icons/safari.png" alt="" />
                                                 <td>Safari</td>
                                                 <td>505</td>
                                             </tr>                                                                    

@@ -47,7 +47,7 @@
                                     <s:url action="product" var="urlTag">
                                         <s:param name="id"><s:property value="id" /></s:param>
                                     </s:url>
-                                    <s:a href="%{urlTag}"><img src="img/photos/3.png" alt="<s:property value="name"/>" /></s:a>
+                                    <s:a href="%{urlTag}"><img src="store/img/photos/3.png" alt="<s:property value="name"/>" /></s:a>
                                     </div>
                                     <div class="item-details">
                                         <h5><a href="single-item.html"><s:property value="name"/></a></h5>

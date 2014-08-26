@@ -32,7 +32,7 @@
                                 <!-- Product  name -->
                                 <td><a href="single-item.html"><s:property value="key.name"/></a></td>
                                 <!-- Product image -->
-                                <td><a href="single-item.html"><img src="img/photos/2.png" alt="" /></a></td>
+                                <td><a href="single-item.html"><img src="store/img/photos/2.png" alt="" /></a></td>
                                 <!-- Quantity with refresh and remove button -->
                                 <td class="item-input">
                                     <div class="input-group">

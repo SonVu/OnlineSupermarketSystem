@@ -9,7 +9,9 @@ import com.aptech.helper.MD5Hash;
 import com.aptech.model.UserModel;
 import com.aptech.obj.User;
 import static com.opensymphony.xwork2.Action.SUCCESS;
+import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
+import java.util.Map;
 
 /**
  *
@@ -21,27 +23,24 @@ public class LoginAction extends ActionSupport {
     private User userBean;
 
     public LoginAction() {
+        userModel = new UserModel();
     }
 
     @Override
     public String execute() throws Exception {
-        return SUCCESS;
-    }
-
-    public String signin() throws Exception {
-        String userName = userBean.getUsername();
+        String username = userBean.getUsername();
         String password = MD5Hash.hash(userBean.getPassword());
-        User user = null;
-        try {
-            user = userModel.getUser(userName);
-            if (user == null) {
-                System.out.println("fucked");
-            }
-            System.out.println(user.getFullname());
-        } catch (Exception e) {
-            e.printStackTrace();
+        User user = userModel.getUser(1);
+        System.out.println(user.getFullname());
+        System.out.println(user.getPassword());
+        System.out.println(password);
+        if (user.getPassword().equals(password)) {
+            Map session = ActionContext.getContext().getSession();
+            session.put("user", user);
+            return SUCCESS;
+        } else {
+            return INPUT;
         }
-        return SUCCESS;
     }
 
     public User getUserBean() {
