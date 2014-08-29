@@ -1,6 +1,7 @@
 package com.aptech.obj;
 
 import java.io.Serializable;
+import java.util.List;
 import javax.persistence.*;
 
 @Entity
@@ -39,68 +40,67 @@ public class Product implements Serializable {
     @JoinColumn(name = "category_id", referencedColumnName = "id")
     private Category category;
 
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "product", fetch = FetchType.EAGER)
+    private List<ProductImage> productImage;
+
     public Integer getId() {
         return id;
-    }
-
-    public static long getSerialVersionUID() {
-        return serialVersionUID;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public String getBrand() {
-        return brand;
-    }
-
-    public Double getPrice() {
-        return price;
-    }
-
-    public Integer getStock() {
-        return stock;
-    }
-
-    public Double getDiscount() {
-        return discount;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public Integer getStatus() {
-        return status;
     }
 
     public void setId(Integer id) {
         this.id = id;
     }
 
+    public String getName() {
+        return name;
+    }
+
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getBrand() {
+        return brand;
     }
 
     public void setBrand(String brand) {
         this.brand = brand;
     }
 
+    public Double getPrice() {
+        return price;
+    }
+
     public void setPrice(Double price) {
         this.price = price;
+    }
+
+    public Integer getStock() {
+        return stock;
     }
 
     public void setStock(Integer stock) {
         this.stock = stock;
     }
 
+    public Double getDiscount() {
+        return discount;
+    }
+
     public void setDiscount(Double discount) {
         this.discount = discount;
     }
 
+    public String getDescription() {
+        return description;
+    }
+
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public Integer getStatus() {
+        return status;
     }
 
     public void setStatus(Integer status) {
@@ -115,4 +115,13 @@ public class Product implements Serializable {
         this.category = category;
     }
 
+    public List<ProductImage> getProductImage() {
+        return productImage;
+    }
+
+    public void setProductImage(List<ProductImage> productImage) {
+        this.productImage = productImage;
+    }
+
+    
 }

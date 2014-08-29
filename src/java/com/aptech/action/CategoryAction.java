@@ -21,11 +21,10 @@ import org.apache.struts2.ServletActionContext;
 public class CategoryAction extends ActionSupport {
 
     private CategoryModel categoryModel;
-    private static final long serialVersionUID = 9149826260758390091L;
+    private ProductModel productModel;
     private List<Category> listCategory;
     private Category category;
     private List<Product> listProduct;
-    private ProductModel productModel;
     private Integer maxPage;
 
     public CategoryAction() {
@@ -65,6 +64,45 @@ public class CategoryAction extends ActionSupport {
         return SUCCESS;
     }
 
+    public String index() throws Exception {
+        listCategory = categoryModel.listCategory();
+        return SUCCESS;
+    }
+
+    public String insert() throws Exception {
+        category = new Category();
+        category.setId(0);
+        listCategory = categoryModel.listCategory();
+        return SUCCESS;
+    }
+
+    public String delete() throws Exception {
+        Integer categoryId = 0;
+        HttpServletRequest request = (HttpServletRequest) ActionContext.getContext().get(ServletActionContext.HTTP_REQUEST);
+        categoryId = Integer.parseInt(request.getParameter("id"));
+        categoryModel.delete(categoryId);
+        return SUCCESS;
+    }
+
+    public String edit() throws Exception {
+        HttpServletRequest request = (HttpServletRequest) ActionContext.getContext().get(ServletActionContext.HTTP_REQUEST);
+        int categoryId = Integer.parseInt(request.getParameter("id"));
+        category = categoryModel.getCategory(categoryId);
+        listCategory = categoryModel.listCategory();
+        return SUCCESS;
+    }
+
+    public String save() throws Exception {
+        try {
+            categoryModel.save(category);
+            System.out.println("saved");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return SUCCESS;
+    }
+
+    //<editor-fold defaultstate="collapsed" desc="getter setter">
     public List<Category> getListCategory() {
         return listCategory;
     }
@@ -96,5 +134,6 @@ public class CategoryAction extends ActionSupport {
     public void setMaxPage(Integer maxPage) {
         this.maxPage = maxPage;
     }
+//</editor-fold>
 
 }

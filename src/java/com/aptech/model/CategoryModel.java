@@ -49,4 +49,40 @@ public class CategoryModel {
         }
         return category;
     }
+
+    public void delete(Integer categoryId) {
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        session.beginTransaction();
+        Category category = new Category();
+        category.setId(categoryId);
+        try {
+            session.delete(category);
+            session.getTransaction().commit();
+        } catch (Exception e) {
+            e.printStackTrace();
+            session.getTransaction().rollback();
+        } finally {
+            session.flush();
+            session.close();
+        }
+    }
+
+    public void save(Category category) {
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        session.beginTransaction();
+        try {
+            if (category.getId() != 0) {
+                session.update(category);
+            } else {
+                session.save(category);
+            }
+            session.getTransaction().commit();
+        } catch (Exception e) {
+            e.printStackTrace();
+            session.getTransaction().rollback();
+        } finally {
+            session.flush();
+            session.close();
+        }
+    }
 }

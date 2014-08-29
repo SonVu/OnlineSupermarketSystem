@@ -76,4 +76,5 @@ public class Category implements Serializable {
     public void setProduct(List<Product> product) {
         this.product = product;
     }
+
 }

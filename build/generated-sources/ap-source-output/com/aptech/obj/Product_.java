@@ -1,6 +1,7 @@
 package com.aptech.obj;
 
 import javax.annotation.Generated;
+import javax.persistence.metamodel.ListAttribute;
 import javax.persistence.metamodel.SingularAttribute;
 import javax.persistence.metamodel.StaticMetamodel;
 
@@ -8,6 +9,7 @@ import javax.persistence.metamodel.StaticMetamodel;
 @StaticMetamodel(Product.class)
 public abstract class Product_ {
 
+	public static volatile ListAttribute<Product, ProductImage> productImage;
 	public static volatile SingularAttribute<Product, Double> price;
 	public static volatile SingularAttribute<Product, String> name;
 	public static volatile SingularAttribute<Product, Double> discount;

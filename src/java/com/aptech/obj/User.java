@@ -1,12 +1,7 @@
 package com.aptech.obj;
 
-import com.aptech.helper.MD5Hash;
 import java.io.Serializable;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "user")
@@ -14,18 +9,33 @@ public class User implements Serializable {
 
     private static final long serialVersionUID = -8767337896773261247L;
 
-    private Integer id;
-    private String username;
-    private String password;
-    private String fullname;
-    private String address;
-    private String phone;
-    private String email;
-    private Integer role_id;
-
     @Id
     @GeneratedValue
     @Column(name = "id")
+    private Integer id;
+
+    @Column(name = "username")
+    private String username;
+
+    @Column(name = "password")
+    private String password;
+
+    @Column(name = "fullname")
+    private String fullname;
+
+    @Column(name = "address")
+    private String address;
+
+    @Column(name = "phone")
+    private String phone;
+
+    @Column(name = "email")
+    private String email;
+
+    @ManyToOne(optional = false)
+    @JoinColumn(name = "role_id", referencedColumnName = "id")
+    private UserRole role;
+
     public Integer getId() {
         return id;
     }
@@ -34,39 +44,32 @@ public class User implements Serializable {
         return serialVersionUID;
     }
 
-    @Column(name = "username")
     public String getUsername() {
         return username;
     }
 
-    @Column(name = "password")
     public String getPassword() {
         return password;
     }
 
-    @Column(name = "fullname")
     public String getFullname() {
         return fullname;
     }
 
-    @Column(name = "address")
     public String getAddress() {
         return address;
     }
 
-    @Column(name = "phone")
     public String getPhone() {
         return phone;
     }
 
-    @Column(name = "email")
     public String getEmail() {
         return email;
     }
 
-    @Column(name = "role_id")
-    public Integer getRole_id() {
-        return role_id;
+    public UserRole getRole() {
+        return role;
     }
 
     public void setId(Integer id) {
@@ -97,8 +100,8 @@ public class User implements Serializable {
         this.email = email;
     }
 
-    public void setRole_id(Integer role_id) {
-        this.role_id = role_id;
+    public void setRole(UserRole role) {
+        this.role = role;
     }
 
 }

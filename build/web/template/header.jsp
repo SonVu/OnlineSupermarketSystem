@@ -254,18 +254,18 @@
                         <ul class="nav navbar-nav">
                         <s:url action="store" var="urlTag">
                         </s:url>
-                        <li><s:a href="store/%{urlTag}"><i class="icon-home"></i></s:a></li>
+                        <li><s:a href="%{urlTag}"><i class="icon-home"></i></s:a></li>
                             <s:iterator value="listCategory" var="parent">
                                 <s:if test="%{parent_id == 0}">
                                 <li class="dropdown">
-                                    <a href="store/#" class="dropdown-toggle" data-toggle="dropdown"><s:property value="#parent.name" /><b class="caret"></b></a>
+                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><s:property value="#parent.name" /><b class="caret"></b></a>
                                     <ul class="dropdown-menu">
                                         <s:iterator var="child" value="listCategory">
                                             <s:if test="#child.parent_id == #parent.id">
                                                 <s:url action="category" var="urlTag">
                                                     <s:param name="id"><s:property value="#child.id" /></s:param>
                                                 </s:url>
-                                                <li><s:a href="store/%{urlTag}"><s:property value="#child.name" /></s:a></li>
+                                                <li><s:a href="%{urlTag}"><s:property value="#child.name" /></s:a></li>
                                                 </s:if>
                                             </s:iterator>
                                     </ul>

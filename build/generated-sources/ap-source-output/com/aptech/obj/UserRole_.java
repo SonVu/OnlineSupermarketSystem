@@ -1,6 +1,7 @@
 package com.aptech.obj;
 
 import javax.annotation.Generated;
+import javax.persistence.metamodel.ListAttribute;
 import javax.persistence.metamodel.SingularAttribute;
 import javax.persistence.metamodel.StaticMetamodel;
 
@@ -10,6 +11,7 @@ public abstract class UserRole_ {
 
 	public static volatile SingularAttribute<UserRole, String> name;
 	public static volatile SingularAttribute<UserRole, Integer> id;
+	public static volatile ListAttribute<UserRole, User> user;
 
 }
 

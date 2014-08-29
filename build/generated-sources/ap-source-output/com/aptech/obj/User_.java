@@ -10,8 +10,8 @@ public abstract class User_ {
 
 	public static volatile SingularAttribute<User, String> password;
 	public static volatile SingularAttribute<User, String> address;
+	public static volatile SingularAttribute<User, UserRole> role;
 	public static volatile SingularAttribute<User, String> phone;
-	public static volatile SingularAttribute<User, Integer> role_id;
 	public static volatile SingularAttribute<User, Integer> id;
 	public static volatile SingularAttribute<User, String> fullname;
 	public static volatile SingularAttribute<User, String> email;

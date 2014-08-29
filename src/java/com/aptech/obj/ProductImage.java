@@ -1,53 +1,46 @@
 package com.aptech.obj;
 
 import java.io.Serializable;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "product_image")
 public class ProductImage implements Serializable {
 
-    private static final long serialVersionUID = -8767337896773261247L;
-
-    private Integer id;
-    private String url;
-    private Integer product_id;
-
     @Id
     @GeneratedValue
     @Column(name = "id")
-    public Integer getId() {
-        return id;
-    }
-
-    public static long getSerialVersionUID() {
-        return serialVersionUID;
-    }
+    private Integer id;
 
     @Column(name = "url")
-    public String getUrl() {
-        return url;
-    }
+    private String url;
 
-    @Column(name = "product_id")
-    public Integer getProduct_id() {
-        return product_id;
+    @ManyToOne(optional = false)
+    @JoinColumn(name = "product_id", referencedColumnName = "id")
+    private Product product;
+
+    public Integer getId() {
+        return id;
     }
 
     public void setId(Integer id) {
         this.id = id;
     }
 
+    public String getUrl() {
+        return url;
+    }
+
     public void setUrl(String url) {
         this.url = url;
     }
 
-    public void setProduct_id(Integer product_id) {
-        this.product_id = product_id;
+    public Product getProduct() {
+        return product;
+    }
+
+    public void setProduct(Product product) {
+        this.product = product;
     }
 
 }
