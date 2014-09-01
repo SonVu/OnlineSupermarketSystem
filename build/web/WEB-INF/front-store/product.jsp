@@ -148,28 +148,12 @@
                                         <!-- Each slide should be enclosed inside li tag. -->
 
                                         <!-- Slide #1 -->
-                                        <li>
-                                            <!-- Image -->
-                                            <img src="store/img/photos/1-1.png" alt=""/>
-                                        </li>
-
-                                        <!-- Slide #2 -->
-                                        <li>
-                                            <img src="store/img/photos/1-2.png" alt=""/>
-                                        </li>
-
-                                        <li>
-                                            <img src="store/img/photos/1-3.png" alt=""/>
-                                        </li>
-
-                                        <li>
-                                            <img src="store/img/photos/1-4.png" alt=""/>
-                                        </li>
-
-                                        <li>
-                                            <img src="store/img/photos/1-5.png" alt=""/>
-                                        </li>                  
-
+                                        <s:iterator value="product.productImage" var="image">
+                                            <li>
+                                                <!-- Image -->
+                                                <img src="${image.url}" alt=""/>
+                                            </li>
+                                        </s:iterator>
                                     </ul>
                                 </div>
                             </div>

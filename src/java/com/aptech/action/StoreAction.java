@@ -27,6 +27,9 @@ public class StoreAction extends ActionSupport {
     private List<Product> listProduct;
     private String searchString;
     private Integer maxPage;
+
+    private Map<Product, Integer> products;
+    private Double total;
 //</editor-fold>
 
     public StoreAction() {
@@ -76,8 +79,35 @@ public class StoreAction extends ActionSupport {
         listProduct = productModel.search(searchString);
         return SUCCESS;
     }
-// <editor-fold defaultstate="collapsed" desc="Getter setter">
 
+    public String buy() throws Exception {
+        HttpServletRequest request = (HttpServletRequest) ActionContext.getContext().get(ServletActionContext.HTTP_REQUEST);
+        Integer id = Integer.parseInt(request.getParameter("id"));
+
+        ArrayList<OrderDetail> cart = (ArrayList<OrderDetail>) ActionContext.getContext().getSession().get("cart");
+        if (cart == null) {
+            cart = new ArrayList<OrderDetail>();
+        }
+
+        Product p = productModel.getProduct(id);
+        cart.add(new OrderDetail(p, p.getPrice(), 1.0, p.getDiscount()));
+
+        ActionContext.getContext().getSession().put("cart", cart);
+        return SUCCESS;
+    }
+
+    public String cart() throws Exception {
+        ArrayList<OrderDetail> cart = (ArrayList<OrderDetail>) ActionContext.getContext().getSession().get("cart");
+        if (cart != null) {
+            total = 0.0;
+            for (OrderDetail orderDetail : cart) {
+                total = total + orderDetail.getQuantity();
+            }
+        }
+        return SUCCESS;
+    }
+
+    // <editor-fold defaultstate="collapsed" desc="Getter setter">
     public List<Category> getListCategory() {
         return listCategory;
     }
@@ -110,5 +140,12 @@ public class StoreAction extends ActionSupport {
         this.maxPage = maxPage;
     }
 
+    public Map<Product, Integer> getProducts() {
+        return products;
+    }
+
+    public Double getTotal() {
+        return total;
+    }
 // </editor-fold>
 }

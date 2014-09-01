@@ -39,24 +39,11 @@
         <action name="category" class="com.aptech.action.CategoryAction" method="categoryPaging">
             <result name="success">/WEB-INF/front-store/category.jsp</result>
         </action>
-        <action name="buy" class="com.aptech.action.CartAction">
+        <action name="buy" class="com.aptech.action.StoreAction" method="buy">
             <result name="success" type="redirect">cart</result> 
         </action>
-        <action name="cart" class="com.aptech.action.ViewCartAction">
+        <action name="cart" class="com.aptech.action.StoreAction" method="cart">
             <result name="success">/WEB-INF/front-store/view-cart.jsp</result> 
-        </action>
-        
-        <action name="userImage"
-                class="com.aptech.action.FileUploadAction">
-            <interceptor-ref name="fileUpload">
-                <param name="maximumSize">2097152</param>
-                <param name="allowedTypes">
-                    image/png,image/gif,image/jpeg,image/pjpeg
-                </param>
-            </interceptor-ref>
-            <interceptor-ref name="defaultStack"></interceptor-ref>
-            <result name="success">/WEB-INF/front-store/SuccessUserImage.jsp</result>
-            <result name="input">/WEB-INF/front-store/UserImage.jsp</result>
         </action>
     </package>
  
@@ -114,6 +101,13 @@
         </action>
         
         <action name="insert" class="com.aptech.action.ProductAction" method="insert">
+            <interceptor-ref name="fileUpload">
+                <param name="maximumSize">2097152</param>
+                <param name="allowedTypes">
+                    image/png,image/gif,image/jpeg,image/pjpeg
+                </param>
+            </interceptor-ref>
+            <interceptor-ref name="authStack"></interceptor-ref>
             <result name="success">/WEB-INF/admin/product/forms.jsp</result>
         </action>
         

@@ -3,6 +3,7 @@ package com.aptech.obj;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.*;
+import org.hibernate.annotations.Fetch;
 
 @Entity
 @Table(name = "user_role")

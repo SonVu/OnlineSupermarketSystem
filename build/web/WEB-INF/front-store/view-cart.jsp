@@ -9,7 +9,7 @@
             <div class="col-md-12">
 
                 <!-- Title with number of items in shopping kart -->
-                <h3 class="title"><i class="icon-shopping-cart"></i> Items in your cart [<span class="color">5</span>]</h3>
+                <h3 class="title"><i class="icon-shopping-cart"></i> Items in your cart [<span class="color"><s:property value="#session.cart.size" /></span>]</h3>
                 <br />
 
                 <!-- Table -->

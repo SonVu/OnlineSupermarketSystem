@@ -3,6 +3,8 @@ package com.aptech.obj;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.*;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 
 @Entity
 @Table(name = "product")
@@ -40,7 +42,8 @@ public class Product implements Serializable {
     @JoinColumn(name = "category_id", referencedColumnName = "id")
     private Category category;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "product", fetch = FetchType.EAGER)
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "product")
+    @LazyCollection(LazyCollectionOption.FALSE)
     private List<ProductImage> productImage;
 
     public Integer getId() {
@@ -122,6 +125,4 @@ public class Product implements Serializable {
     public void setProductImage(List<ProductImage> productImage) {
         this.productImage = productImage;
     }
-
-    
 }

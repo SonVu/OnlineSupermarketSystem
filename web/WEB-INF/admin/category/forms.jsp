@@ -51,7 +51,7 @@
                                             <div class="col-sm-10">
                                                 <s:select cssClass="form-control"
                                                           name="category.status"
-                                                          list="#{'1':'Active', '2':'Inactive'}" />
+                                                          list="#@java.util.LinkedHashMap@{'1' : 'Active', '2' : 'Inactive'}"/>
                                             </div>
                                         </div>
                                         <hr />

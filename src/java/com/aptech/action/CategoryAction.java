@@ -60,7 +60,6 @@ public class CategoryAction extends ActionSupport {
             maxPage += 1;
         }
         listProduct = productModel.pagination(startIndex, numberOfRecordsPerPage, categoryId);
-        System.out.println(listProduct.size());
         return SUCCESS;
     }
 

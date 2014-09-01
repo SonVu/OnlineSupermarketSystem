@@ -10,21 +10,32 @@ import com.aptech.obj.*;
 import static com.opensymphony.xwork2.Action.SUCCESS;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
+import java.io.File;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
+import org.apache.commons.io.FileUtils;
 import org.apache.struts2.ServletActionContext;
+import org.apache.struts2.interceptor.ServletRequestAware;
 
 /**
  *
  * @author SonVu
  */
-public class ProductAction extends ActionSupport {
+public class ProductAction extends ActionSupport implements ServletRequestAware {
 
     private ProductModel productModel;
     private CategoryModel categoryModel;
     private Product product;
     private List<Product> listProduct;
     private List<Category> listCategory;
+
+    private File userImage;
+    private String userImageContentType;
+    private String userImageFileName;
+    private HttpServletRequest servletRequest;
 
     public ProductAction() {
         productModel = new ProductModel();
@@ -37,14 +48,6 @@ public class ProductAction extends ActionSupport {
         Integer id = Integer.parseInt(request.getParameter("id"));
         product = productModel.getProduct(id);
         return SUCCESS;
-    }
-
-    public Product getProduct() {
-        return product;
-    }
-
-    public void setProduct(Product product) {
-        this.product = product;
     }
 
     public String index() throws Exception {
@@ -76,7 +79,26 @@ public class ProductAction extends ActionSupport {
     }
 
     public String save() throws Exception {
+        String timeStamp = new SimpleDateFormat("HHmmss").format(Calendar.getInstance().getTime());
         try {
+            try {
+
+                String filePath = servletRequest.getSession().getServletContext().getRealPath(
+                        "/store/product/" + timeStamp);
+                System.out.println("Server path:" + filePath);
+                File fileToCreate = new File(filePath, this.userImageFileName);
+                FileUtils.copyFile(this.userImage, fileToCreate);
+            } catch (Exception e) {
+                e.printStackTrace();
+                addActionError(e.getMessage());
+            }
+            ProductImage image = new ProductImage();
+            image.setUrl("store/product/" + timeStamp + "/" + this.userImageFileName);
+            image.setProduct(product);
+            List<ProductImage> listImage = new ArrayList<ProductImage>();
+            listImage.add(image);
+            product.setProductImage(listImage);
+
             productModel.save(product);
         } catch (Exception e) {
             e.printStackTrace();
@@ -84,6 +106,7 @@ public class ProductAction extends ActionSupport {
         return SUCCESS;
     }
 
+    //<editor-fold defaultstate="collapsed" desc="getter-setter">
     public List<Product> getListProduct() {
         return listProduct;
     }
@@ -99,5 +122,44 @@ public class ProductAction extends ActionSupport {
     public void setListCategory(List<Category> listCategory) {
         this.listCategory = listCategory;
     }
+
+    public Product getProduct() {
+        return product;
+    }
+
+    public void setProduct(Product product) {
+        this.product = product;
+    }
+
+    public File getUserImage() {
+        return userImage;
+    }
+
+    public void setUserImage(File userImage) {
+        this.userImage = userImage;
+    }
+
+    public String getUserImageContentType() {
+        return userImageContentType;
+    }
+
+    public void setUserImageContentType(String userImageContentType) {
+        this.userImageContentType = userImageContentType;
+    }
+
+    public String getUserImageFileName() {
+        return userImageFileName;
+    }
+
+    public void setUserImageFileName(String userImageFileName) {
+        this.userImageFileName = userImageFileName;
+    }
+
+    @Override
+    public void setServletRequest(HttpServletRequest servletRequest) {
+        this.servletRequest = servletRequest;
+
+    }
+    //</editor-fold>
 
 }

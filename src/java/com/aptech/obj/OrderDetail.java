@@ -5,78 +5,93 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "order_detail")
 public class OrderDetail implements Serializable {
 
-    private static final long serialVersionUID = -8767337896773261247L;
-
-    private Integer id;
-    private Integer order_id;
-    private Integer product_id;
-    private Double price;
-    private Double quantity;
-    private Double discount;
-
     @Id
     @GeneratedValue
     @Column(name = "id")
-    public Integer getId() {
-        return id;
-    }
+    private Integer id;
 
-    public static long getSerialVersionUID() {
-        return serialVersionUID;
-    }
+    @ManyToOne(optional = false)
+    @JoinColumn(name = "order_id", referencedColumnName = "id")
+    private Order order;
 
-    @Column(name = "order_id")
-    public Integer getOrder_id() {
-        return order_id;
-    }
-
-    @Column(name = "product_id")
-    public Integer getProduct_id() {
-        return product_id;
-    }
+    @OneToOne(optional = false)
+    @JoinColumn(name = "product_id", referencedColumnName = "id")
+    private Product p;
 
     @Column(name = "price")
-    public Double getPrice() {
-        return price;
-    }
+    private Double price;
 
     @Column(name = "quantity")
-    public Double getQuantity() {
-        return quantity;
-    }
+    private Double quantity;
 
     @Column(name = "dscount")
-    public Double getDiscount() {
-        return discount;
+    private Double discount;
+
+    public OrderDetail() {
+    }
+
+    public OrderDetail(Product p, Double price, Double quantity, Double discount) {
+        this.p = p;
+        this.price = price;
+        this.quantity = quantity;
+        this.discount = discount;
+    }
+
+    public Integer getId() {
+        return id;
     }
 
     public void setId(Integer id) {
         this.id = id;
     }
 
-    public void setOrder_id(Integer order_id) {
-        this.order_id = order_id;
+    public Order getOrder() {
+        return order;
     }
 
-    public void setProduct_id(Integer product_id) {
-        this.product_id = product_id;
+    public void setOrder(Order order) {
+        this.order = order;
+    }
+
+    public Product getProduct() {
+        return p;
+    }
+
+    public void setProduct(Product product) {
+        this.p = product;
+    }
+
+    public Double getPrice() {
+        return price;
     }
 
     public void setPrice(Double price) {
         this.price = price;
     }
 
+    public Double getQuantity() {
+        return quantity;
+    }
+
     public void setQuantity(Double quantity) {
         this.quantity = quantity;
+    }
+
+    public Double getDiscount() {
+        return discount;
     }
 
     public void setDiscount(Double discount) {
         this.discount = discount;
     }
+
 }
