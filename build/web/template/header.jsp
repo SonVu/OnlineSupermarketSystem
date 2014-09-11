@@ -8,7 +8,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <meta charset="utf-8">
         <!-- Title and other stuffs -->
-        <title>Items - MacKart</title>
+        <title>Store</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta name="description" content="">
         <meta name="keywords" content="">
@@ -58,10 +58,16 @@
                         <div class="hlinks">
                             <span>
                                 <!-- item details with price -->
-                                <a href="store/#cart" role="button" data-toggle="modal">3 Item(s) in your <i class="icon-shopping-cart"></i></a> -<span class="bold">$25</span>
-                            </span>
-                            <!-- Login and Register link -->
-                            <span class="lr"><a href="store/#login" role="button" data-toggle="modal">Login</a> or <a href="store/#register" role="button" data-toggle="modal">Register</a></span>
+                                <s:a action="cart" namespace="/"><s:property value="#session.cart.size" /> Item(s) in your <i class="icon-shopping-cart"></i></s:a>
+                                </span>
+                                <!-- Login and Register link -->
+                            <s:if test="#session.user == null">
+                                <span class="lr"><s:a action="login" namespace="/">Login</s:a> or <s:a action="register" namespace="/">Register</s:a></span>
+                            </s:if>
+                            <s:else>
+                                <span class="lr">Welcome <s:property value="#session.user.username" /></span>
+                                <span class="lr"><s:a action="logout" namespace="/">Logout</s:a></span>
+                            </s:else>
                         </div>
                     </div>
                 </div>

@@ -124,7 +124,7 @@
                             <ul class="dropdown-menu">
                                 <li><a href="#"><i class="icon-user"></i> Profile</a></li>
                                 <li><a href="#"><i class="icon-cogs"></i> Settings</a></li>
-                                <li><a href="login.html"><i class="icon-off"></i> Logout</a></li>
+                                <li><s:a action="logout" namespace="/" cssClass="icon-off">Logout</s:a></li>
                             </ul>
                         </li>
                     </ul>

@@ -8,20 +8,38 @@
     <package name="default" namespace="/" extends="struts-default">
         <interceptors>
             <interceptor name="authentication" class="com.aptech.interceptor.AuthenticationInterceptor"></interceptor>
+            <interceptor name="authorization" class="com.aptech.interceptor.AuthorizationInterceptor"></interceptor>
             <interceptor-stack name="authStack">
                 <interceptor-ref name="authentication"></interceptor-ref>
                 <interceptor-ref name="defaultStack"></interceptor-ref>
-            </interceptor-stack>    
+            </interceptor-stack>
+            <interceptor-stack name="roleStack">
+                <interceptor-ref name="authentication"></interceptor-ref>
+                <interceptor-ref name="defaultStack"></interceptor-ref>
+                <interceptor-ref name="authorization">
+                    <param name="allowedRoles">admin</param>
+                </interceptor-ref>
+            </interceptor-stack>
         </interceptors>
         
-        <default-interceptor-ref name="authStack"></default-interceptor-ref>
-      
         <global-results>
-            <result name="login" type="redirect">/admin/home</result>
+            <result name="login">/WEB-INF/admin/login.jsp</result>
+            <result name="invalidAdminAccess" type="redirect">/store.action</result>
         </global-results>
         
+        <action name="login" class="com.aptech.action.LoginAction" method="page">
+            <result name="success">/WEB-INF/admin/login.jsp</result>
+        </action>
+        
+        <action name="register" class="com.aptech.action.StoreAction" method="register">
+            <result name="success">/WEB-INF/front-store/register.jsp</result>
+        </action>
+        
+        <action name="addUser" class="com.aptech.action.StoreAction" method="addUser">
+            <result name="success" type="redirect">/store.action</result>
+        </action>
+        
         <action name="store" class="com.aptech.action.StoreAction" method="pagingProduct">
-            <interceptor-ref name="defaultStack"></interceptor-ref>
             <result name="success">/WEB-INF/front-store/store.jsp</result>
         </action>
         <action name="search" class="com.aptech.action.StoreAction" method="search">
@@ -42,25 +60,38 @@
         <action name="buy" class="com.aptech.action.StoreAction" method="buy">
             <result name="success" type="redirect">cart</result> 
         </action>
+        
         <action name="cart" class="com.aptech.action.StoreAction" method="cart">
             <result name="success">/WEB-INF/front-store/view-cart.jsp</result> 
+        </action>
+        
+        <action name="clear_cart" class="com.aptech.action.StoreAction" method="clear_cart">
+            <result name="success">/WEB-INF/front-store/view-cart.jsp</result>
+        </action>
+        
+        <action name="logout" class="com.aptech.action.StoreAction" method="logout">
+            <result name="success" type="redirect">/store.action</result>            
+        </action>
+        
+        <action name="checkout" class="com.aptech.action.StoreAction" method="checkout">
+            <interceptor-ref name="authStack"></interceptor-ref>
+            <result name="success" type="redirect">/store.action</result>
+            <result name="input">/WEB-INF/front-store/view-cart.jsp</result>
         </action>
     </package>
  
     <package name="admin" namespace="/admin" extends="default">
         
-        <action name="home">
-            <interceptor-ref name="defaultStack"></interceptor-ref>
-            <result>/WEB-INF/admin/login.jsp</result>
-        </action>
-        
+        <default-interceptor-ref name="roleStack"></default-interceptor-ref>
+       
         <action name="index" class="com.aptech.action.AdminAction">
             <result name="success">/WEB-INF/admin/index.jsp</result>
         </action>
             
         <action name="login" class="com.aptech.action.LoginAction">
             <interceptor-ref name="defaultStack"></interceptor-ref>
-            <result name="success" type="redirect">/admin/index</result>
+            <result name="store" type="redirect">/store.action</result>
+            <result name="admin" type="redirect">/admin/index</result>
             <result name="input">/WEB-INF/admin/login.jsp</result>
         </action>
         

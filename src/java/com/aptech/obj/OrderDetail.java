@@ -33,7 +33,7 @@ public class OrderDetail implements Serializable {
     @Column(name = "quantity")
     private Double quantity;
 
-    @Column(name = "dscount")
+    @Column(name = "discount")
     private Double discount;
 
     public OrderDetail() {

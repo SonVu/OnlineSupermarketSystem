@@ -30,17 +30,26 @@ public class LoginAction extends ActionSupport {
     public String execute() throws Exception {
         String username = userBean.getUsername();
         String password = MD5Hash.hash(userBean.getPassword());
-        User user = userModel.getUser(1);
-        System.out.println(user.getFullname());
-        System.out.println(user.getPassword());
-        System.out.println(password);
+        User user = userModel.getUser(username);
+        if (user == null) {
+            return INPUT;
+        }
         if (user.getPassword().equals(password)) {
             Map session = ActionContext.getContext().getSession();
             session.put("user", user);
-            return SUCCESS;
+            session.put("role", user.getRole().getName());
+            if (user.getRole().getId() == 1) {
+                return "admin";
+            } else {
+                return "store";
+            }
         } else {
             return INPUT;
         }
+    }
+
+    public String page() throws Exception {
+        return SUCCESS;
     }
 
     public User getUserBean() {

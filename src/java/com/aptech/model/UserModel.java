@@ -41,7 +41,7 @@ public class UserModel {
         session.beginTransaction();
         user = null;
         try {
-            user = (User) session.createQuery("from User where username=?").setString(0, username);
+            user = (User) session.createQuery("from User where username=?").setString(0, username).uniqueResult();
             session.getTransaction().commit();
         } catch (HibernateException e) {
             e.printStackTrace();

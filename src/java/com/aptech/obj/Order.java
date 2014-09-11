@@ -13,9 +13,11 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 
 @Entity
-@Table(name = "order")
+@Table(name = "orders")
 public class Order implements Serializable {
 
     @Id
@@ -36,7 +38,8 @@ public class Order implements Serializable {
     @Column(name = "status")
     private Integer status;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "order", fetch = FetchType.EAGER)
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "order")
+    @LazyCollection(LazyCollectionOption.FALSE)
     private List<OrderDetail> orderDetails;
 
     public Integer getId() {

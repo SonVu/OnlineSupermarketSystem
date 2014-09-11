@@ -9,7 +9,8 @@
     <!-- If the main navigation has sub navigation, then add the class "has_sub" to "li" of main navigation. -->
     <ul id="nav">
         <!-- Main menu with font awesome icon -->
-        <li><s:a action="index" namespace="/admin" cssClass="open"><i class="icon-home"></i> Dashboard</s:a>
+        <li>
+            <s:a action="index" namespace="/admin" cssClass="open"><i class="icon-home"></i> Dashboard</s:a>
             </li>
             <li class="has_sub"><a href="#"><i class="icon-list-alt"></i> Catalog  <span class="pull-right"><i class="icon-chevron-right"></i></span></a>
                 <ul>
@@ -27,14 +28,11 @@
             </li> 
             <li class="has_sub"><a href="#"><i class="icon-file-alt"></i> System  <span class="pull-right"><i class="icon-chevron-right"></i></span></a>
                 <ul>
-                    <li><a href="media.html">Settings</a></li>
-                    <li><a href="statement.html">Design</a></li>
-                    <li><s:a action="index" namespace="/admin/user">Users</s:a></li>
+                    <li><s:a action="index" namespace="/admin/banner">Banner</s:a></li>
+                <li><s:a action="index" namespace="/admin/user">Users</s:a></li>
                 <li><s:a action="index" namespace="/admin/role">User Roles</s:a></li>
-                <li><a href="error-log.html">Error Log</a></li>
-                <li><a href="calendar.html">Backup / Restore</a></li>
             </ul>
-        </li>                             
+        </li>                              
         <li class="has_sub"><a href="#"><i class="icon-file-alt"></i> Reports  <span class="pull-right"><i class="icon-chevron-right"></i></span></a>
             <ul>
                 <li><a href="media.html">Sales</a></li>

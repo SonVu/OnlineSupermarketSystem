@@ -6,7 +6,6 @@
 <div class="container flex-main">
     <div class="row">
         <div class="col-md-12">
-
             <div class="flex-image flexslider">
                 <ul class="slides">
                     <!-- Each slide should be enclosed inside li tag. -->

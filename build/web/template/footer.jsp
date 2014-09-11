@@ -104,27 +104,6 @@
 
 <!-- Recent Posts ends -->
 
-<!-- Newsletter starts -->
-
-<div class="container newsletter">
-    <div class="row">
-        <div class="col-md-12">
-            <div class="well">
-                <h5><i class="icon-envelope-alt"></i> Hot Offers - Don't Miss Anything!!!</h5>
-                <p>Nulla facilisi. Sed justo dui, scelerisque ut consectetur vel, eleifend id erat. Morbi auctor adipiscing tempor. Phasellus condimentum rutrum aliquet.</p>
-                <form class="form-inline" role="form">
-                    <div class="form-group">
-                        <input type="email" class="form-control" id="search" placeholder="Subscribe">
-                    </div>
-                    <button type="submit" class="btn btn-default">Subscribe</button>
-                </form>
-            </div>
-        </div>
-    </div>
-</div>
-
-<!-- Newsletter ends -->
-
 <!-- Footer starts -->
 <footer>
     <div class="container">

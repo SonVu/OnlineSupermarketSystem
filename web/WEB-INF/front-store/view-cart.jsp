@@ -2,16 +2,31 @@
 <s:action name="header" executeResult="true">
 </s:action>
 <!-- Cart starts -->
-
 <div class="cart">
     <div class="container">
         <div class="row">
             <div class="col-md-12">
-
                 <!-- Title with number of items in shopping kart -->
+                <s:if test="hasActionErrors()">
+                    <div class="alert alert-warning fade in" role="alert">
+                        <button type="button" class="close" data-dismiss="alert">
+                            <span aria-hidden="true">&times;</span>
+                            <span class="sr-only">Close</span>
+                        </button>
+                        <s:actionerror/>
+                    </div>
+                </s:if>
+                <s:if test="hasActionMessages()">
+                    <div class="alert alert-warning fade in" role="alert">
+                        <button type="button" class="close" data-dismiss="alert">
+                            <span aria-hidden="true">&times;</span>
+                            <span class="sr-only">Close</span>
+                        </button>
+                        <s:actionmessage />
+                    </div>
+                </s:if>
                 <h3 class="title"><i class="icon-shopping-cart"></i> Items in your cart [<span class="color"><s:property value="#session.cart.size" /></span>]</h3>
                 <br />
-
                 <!-- Table -->
                 <table class="table table-striped tcart">
                     <thead>
@@ -25,18 +40,21 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <s:iterator value="products" var="product">
+                        <s:iterator value="#session.cart" var="item">
                             <tr>
                                 <!-- Index -->
                                 <td>1</td>
                                 <!-- Product  name -->
-                                <td><a href="single-item.html"><s:property value="key.name"/></a></td>
+                                <td><a href="single-item.html"><s:property value="#item.product.name"/></a></td>
                                 <!-- Product image -->
-                                <td><a href="single-item.html"><img src="store/img/photos/2.png" alt="" /></a></td>
-                                <!-- Quantity with refresh and remove button -->
-                                <td class="item-input">
-                                    <div class="input-group">
-                                        <input class="form-control" type="text" value="<s:property value="value"/>">
+                                <s:url action="product" var="urlTag">
+                                    <s:param name="id"><s:property value="#item.product.id" /></s:param>
+                                </s:url>
+                                <td><s:a href="%{urlTag}"><img src="<s:property value="#item.product.productImage[0].url" />" alt="<s:property value="name"/>" /></s:a></td>
+                                    <!-- Quantity with refresh and remove button -->
+                                    <td class="item-input">
+                                        <div class="input-group">
+                                            <input class="form-control" type="text" value="<s:property value="#item.quantity"/>">
                                         <span class="input-group-btn">
                                             <button class="btn btn-default" type="button"><i class="icon-refresh"></i></button>
                                             <button class="btn btn-danger" type="button"><i class="icon-remove"></i></button>     
@@ -44,9 +62,9 @@
                                     </div>
                                 </td>
                                 <!-- Unit price -->
-                                <td>$150</td>
+                                <td><s:property value="getText('{0,number,#,##0}',{#item.price})"/></td>
                                 <!-- Total cost -->
-                                <td>$300</td>
+                                <td><s:property value="getText('{0,number,#,##0}',{#item.price * #item.quantity})"/></td>
                             </tr>
                         </s:iterator>
                         <tr>
@@ -55,45 +73,22 @@
                             <th></th>
                             <th></th>
                             <th>Total</th>
-                            <th><s:property value="total"/></th>
+                            <th><s:property value="getText('{0,number,#,##0}',{total})"/></th>
                         </tr>
                     </tbody>
                 </table>
-
-
-                <form class="form-inline">
-                    <!-- Discount Coupen -->
-                    <h5 class="title">Discount Coupen</h5>
-                    <div class="form-group">
-                        <input type="email" class="form-control" id="" placeholder="Discount Coupon">
-                    </div>
-
-                    <button type="submit" class="btn btn-default">Apply</button>
-                    <br />
-                    <br />
-                    <!-- Gift coupen -->
-                    <h5 class="title">Gift Coupen</h5>
-                    <div class="form-group">
-                        <input type="email" class="form-control" id="" placeholder="Gift Coupon">
-                    </div>
-
-                    <button type="submit" class="btn btn-default">Apply</button>           
-                </form>  
-
                 <!-- Button s-->
                 <div class="row">
                     <div class="col-md-4 col-md-offset-8">
                         <div class="pull-right">
-                            <a href="index.jsp" class="btn btn-default">Continue Shopping</a>
-                            <a href="checkout.html" class="btn btn-danger">CheckOut</a>
+                            <s:a action="checkout.action" namespace="/" cssClass="btn btn-primary">Checkout</s:a>
+                            <s:a action="clear_cart.action" namespace="/" cssClass="btn btn-danger">Clear</s:a>
+                            </div>
                         </div>
                     </div>
                 </div>
-
             </div>
         </div>
     </div>
-</div>
-
-<!-- Cart ends -->
+    <!-- Cart ends -->
 <%@include file="/template/footer.jsp" %>
