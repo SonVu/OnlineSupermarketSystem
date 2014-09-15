@@ -8,58 +8,8 @@
         <div class="row">
 
             <!-- Sidebar -->
-            <div class="col-md-4 col-sm-4 hidden-xs">
-
-                <h5 class="title">Categories</h5>
-                <!-- Sidebar navigation -->
-                <nav>
-                    <ul id="nav">
-                        <!-- Main menu. Use the class "has_sub" to "li" tag if it has submenu. -->
-                        <li><a href="index.jsp">Home</a></li>
-                        <li class="has_sub"><a href="#">Smartphone</a>
-                            <!-- Submenu -->
-                            <ul>
-                                <li><a href="items.html">HTC</a></li>
-                                <li><a href="items.html">Samsung</a></li>
-                                <li><a href="items.html">Apple</a></li>
-                                <li><a href="items.html">Motorola</a></li>
-                                <li><a href="items.html">Nokia</a></li>
-                            </ul>
-                        </li>
-                        <li class="has_sub"><a href="#">Tablet</a>
-                            <ul>
-                                <li><a href="items.html">Samsung</a></li>
-                                <li><a href="items.html">Apple</a></li>
-                                <li><a href="items.html">Motorola</a></li>
-                            </ul>
-                        </li>
-                        <li class="has_sub"><a href="#">Digital Camera</a>
-                            <ul>
-                                <li><a href="items.html">Nikkon</a></li>
-                                <li><a href="items.html">Samsung</a></li>
-                                <li><a href="items.html">Sony</a></li>
-                                <li><a href="items.html">Cannon</a></li>
-                            </ul>
-                        </li>
-                        <li class="has_sub"><a href="#">Computers</a>
-                            <ul>
-                                <li><a href="items.html">Dell</a></li>
-                                <li><a href="items.html">Lenovo</a></li>
-                                <li><a href="items.html">Apple</a></li>
-                                <li><a href="items.html">Samsung</a></li>
-                            </ul>
-                        </li>
-                        <li class="has_sub"><a href="#">Software</a>
-                            <ul>
-                                <li><a href="items.html">Microsoft</a></li>
-                                <li><a href="items.html">Nero</a></li>
-                                <li><a href="items.html">Apple</a></li>
-                                <li><a href="items.html">Avaira</a></li>
-                            </ul>
-                        </li>
-                    </ul>
-                </nav>
-            </div>
+            <s:action name="sidebar" executeResult="true">
+            </s:action>
 
             <!-- Main content -->
 
@@ -143,21 +93,21 @@
                     <!-- Use uniqe name for "href" in below anchor tags -->
                     <li class="active"><a href="#tab1" data-toggle="tab">Description</a></li>
                     <li><a href="#tab2" data-toggle="tab">Specs</a></li>
-                    <li><a href="#tab3" data-toggle="tab">Review (5)</a></li>
+                    <li><a href="#tab3" data-toggle="tab">Review (${product.productReview.size()})</a></li>
                 </ul>
 
                 <!-- Tab Content -->
                 <div class="tab-content">
                     <!-- Description -->
                     <div class="tab-pane active" id="tab1">
-                        <h5><s:property value="product.name" /></h5>
-                        <p><s:property value="product.description" /></p>
-                        <h6>Features</h6>
+                        <h5 class="title">Product Descriptions</h5>
+                        <div class="item-review">
+                            <p><s:property value="product.description" /></p>    
+                        </div>
                     </div>
 
                     <!-- Sepcs -->
                     <div class="tab-pane" id="tab2">
-
                         <h5 class="title">Product Specs</h5>
                         <table class="table table-striped tcart">
                             <tbody>
@@ -165,34 +115,6 @@
                                     <td><strong>Name</strong></td>
                                     <td>Apple iPhone 5G</td>
                                 </tr>
-                                <tr>
-                                    <td><strong>Brand</strong></td>
-                                    <td>Apple</td>
-                                </tr>
-                                <tr>
-                                    <td><strong>Modal</strong></td>
-                                    <td>Fifth Generation</td>
-                                </tr>
-                                <tr>
-                                    <td><strong>Memory</strong></td>
-                                    <td>2GB RAM</td>
-                                </tr>
-                                <tr>
-                                    <td><strong>Storage</strong></td>
-                                    <td>16GB, 32GB, 64GB</td>
-                                </tr>
-                                <tr>
-                                    <td><strong>Camera</strong></td>
-                                    <td>Front VGA, Read 8MP</td>
-                                </tr>
-                                <tr>
-                                    <td><strong>Processor</strong></td>
-                                    <td>Apple 1.25GHz Processor</td>
-                                </tr>
-                                <tr>
-                                    <td><strong>Battery</strong></td>
-                                    <td>30 Hours Standby</td>
-                                </tr>                                                                                                
                             </tbody>
                         </table>
 
@@ -201,63 +123,50 @@
                     <!-- Review -->
                     <div class="tab-pane" id="tab3">
                         <h5>Product Reviews</h5>
-                        <div class="item-review">
-                            <h5>Ravi Kumar - <span class="color">4/5</span></h5>
-                            <p class="rmeta">27/1/2012</p>
-                            <p>Suspendisse potenti. Morbi ac felis nec mauris imperdiet fermentum. Aenean sodales augue ac lacus hendrerit sed rhoncus erat hendrerit. Vivamus vel ultricies elit. Curabitur lacinia nulla vel tellus elementum non mollis justo aliquam.</p>
-                        </div>
-
+                        <s:iterator value="product.productReview" var="review">
+                            <div class="item-review">
+                                <h5>${review.user.fullname} <span class="color">${review.rate}/5</span></h5>
+                                <p>${review.comment}</p>
+                            </div>
+                        </s:iterator>
                         <hr />
                         <h5 class="title">Write a Review</h5>
 
                         <div class="form form-small">
-
                             <!-- Review form (not working)-->
-                            <form class="form-horizontal">                                         
-                                <!-- Name -->
-                                <div class="form-group">
-                                    <label class="control-label col-md-3" for="name2">Your Name</label>
-                                    <div class="col-md-6">
-                                        <input type="text" class="form-control" id="name2">
+                            <s:if test="#session.user != null">
+                                <s:form action="review" cssClass="form-horizontal" theme="simple">    
+                                    <s:hidden name="productReview.id" value="%{product.id}"/>
+                                    <!-- Select box -->
+                                    <div class="form-group">
+                                        <label class="col-sm-2 control-label">Rate  </label>
+                                        <div class="col-sm-10">
+                                            <s:select cssClass="form-control"
+                                                      name="productReview.rate"
+                                                      list="#@java.util.LinkedHashMap@{'1' : '1', '2' : '2', '3' : '3', '4' : '4', '5' : '5'}" />
+                                        </div>
                                     </div>
-                                </div>
-                                <!-- Select box -->
-                                <div class="form-group">
-                                    <label class="control-label col-md-3">Rating</label>
-                                    <div class="col-md-6">                               
-                                        <select class="form-control">
-                                            <option>&nbsp;</option>
-                                            <option>1</option>
-                                            <option>2</option>
-                                            <option>3</option>
-                                            <option>4</option>
-                                            <option>5</option>
-                                        </select>  
+                                    <!-- Review -->
+                                    <div class="form-group">
+                                        <label class="col-sm-2 control-label">Comment</label>
+                                        <div class="col-sm-10">
+                                            <s:textarea name="productReview.comment" cssClass="form-control" />
+                                        </div>
                                     </div>
-                                </div>
-
-                                <!-- Review -->
-                                <div class="form-group">
-                                    <label class="control-label col-md-3" for="name">Your Review</label>
-                                    <div class="col-md-6">
-                                        <textarea class="form-control"></textarea>
-                                    </div>
-                                </div>
-                                <!-- Buttons -->
-                                <div class="form-group">
                                     <!-- Buttons -->
-                                    <div class="col-md-6 col-md-offset-3">
-                                        <button type="submit" class="btn btn-default">Post</button>
-                                        <button type="reset" class="btn btn-default">Reset</button>
+                                    <div class="form-group">
+                                        <!-- Buttons -->
+                                        <div class="col-md-6 col-md-offset-3">
+                                            <s:submit cssClass="btn btn-primary" label="Post" />
+
+                                            <button type="reset" class="btn btn-danger">Reset</button>
+                                        </div>
                                     </div>
-                                </div>
-                            </form>
+                                </s:form>
+                            </s:if>
                         </div> 
-
                     </div>
-
                 </div>
-
             </div>                                                                    
         </div>
     </div>

@@ -154,7 +154,7 @@
                             <s:a href="%{urlTag}"><img src="${productImage[0].url}" alt="<s:property value="name"/>" /></s:a>
                             </div>
                             <div class="item-details">
-                                <h5><a href="single-item.html"><s:property value="name"/></a></h5>
+                                <h5><s:property value="name"/></h5>
                             <div class="item-price pull-left">$<s:property value="getText('{0,number,#,##0}',{price})"/></div>
                             <s:url action="buy" var="buyTag">
                                 <s:param name="id"><s:property value="#product.id" /></s:param>

@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-
 <!DOCTYPE struts PUBLIC
         "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
         "http://struts.apache.org/dtds/struts-2.0.dtd">
-
 <struts>
     <package name="default" namespace="/" extends="struts-default">
         <interceptors>
@@ -34,7 +32,7 @@
         <action name="register" class="com.aptech.action.StoreAction" method="register">
             <result name="success">/WEB-INF/front-store/register.jsp</result>
         </action>
-        
+               
         <action name="addUser" class="com.aptech.action.StoreAction" method="addUser">
             <result name="success" type="redirect">/store.action</result>
         </action>
@@ -54,9 +52,15 @@
         <action name="product" class="com.aptech.action.ProductAction">
             <result name="success">/WEB-INF/front-store/product.jsp</result>
         </action>
+        
+        <action name="review" class="com.aptech.action.ProductAction" method="review">
+            <result name="success" type="redirect">/product.action?id=${product.id}</result>
+        </action>
+        
         <action name="category" class="com.aptech.action.CategoryAction" method="categoryPaging">
             <result name="success">/WEB-INF/front-store/category.jsp</result>
         </action>
+        
         <action name="buy" class="com.aptech.action.StoreAction" method="buy">
             <result name="success" type="redirect">cart</result> 
         </action>
@@ -80,8 +84,31 @@
         </action>
     </package>
  
-    <package name="admin" namespace="/admin" extends="default">
+    <package name="account" namespace="/account" extends="default">
+        <default-interceptor-ref name="authStack"></default-interceptor-ref>
+       
+        <action name="profile">
+            <result name="success">/WEB-INF/front-store/account/profile.jsp</result>
+        </action>
+       
+        <action name="edit" class="com.aptech.action.UserAction" method="editProfile">
+            <result name="success">/WEB-INF/front-store/account/edit.jsp</result>
+        </action>
         
+        <action name="update" class="com.aptech.action.UserAction" method="save">
+            <result name="success" type="redirect">/account/profile</result>
+        </action>
+        
+        <action name="password" class="com.aptech.action.UserAction" method="editProfile">
+            <result name="success">/WEB-INF/front-store/account/password.jsp</result>
+        </action>
+        
+        <action name="order">
+            <result name="success">/WEB-INF/front-store/account/order.jsp</result>
+        </action>
+    </package>
+ 
+    <package name="admin" namespace="/admin" extends="default">
         <default-interceptor-ref name="roleStack"></default-interceptor-ref>
        
         <action name="index" class="com.aptech.action.AdminAction">
@@ -201,4 +228,3 @@
     
     
 </struts>
-

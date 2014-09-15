@@ -46,6 +46,9 @@ public class Product implements Serializable {
     @LazyCollection(LazyCollectionOption.FALSE)
     private List<ProductImage> productImage;
 
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "product")
+    private List<ProductReview> productReview;
+
     public Integer getId() {
         return id;
     }
@@ -125,4 +128,13 @@ public class Product implements Serializable {
     public void setProductImage(List<ProductImage> productImage) {
         this.productImage = productImage;
     }
+
+    public List<ProductReview> getProductReview() {
+        return productReview;
+    }
+
+    public void setProductReview(List<ProductReview> productReview) {
+        this.productReview = productReview;
+    }
+
 }

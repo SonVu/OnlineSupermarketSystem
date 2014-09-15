@@ -66,10 +66,19 @@ public class UserAction extends ActionSupport {
         listUserRole = userRoleModel.listUserRole();
         return SUCCESS;
     }
+    
+    public String editProfile() throws Exception {
+        int userId = ((User) ActionContext.getContext().getSession().get("user")).getId();
+        user = userModel.get(userId);
+        return SUCCESS;
+    }
+
 
     public String save() throws Exception {
         try {
             userModel.save(user);
+            ActionContext.getContext().getSession().remove("user");
+             ActionContext.getContext().getSession().put("user", userModel.get(user.getId()));
         } catch (Exception e) {
             e.printStackTrace();
         }

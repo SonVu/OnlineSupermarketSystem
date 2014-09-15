@@ -25,43 +25,60 @@ import org.apache.struts2.interceptor.ServletRequestAware;
  * @author SonVu
  */
 public class ProductAction extends ActionSupport implements ServletRequestAware {
-
+    
     private ProductModel productModel;
     private CategoryModel categoryModel;
+    private ProductReviewModel productReviewModel;
     private Product product;
     private List<Product> listProduct;
     private List<Category> listCategory;
-
+    private ProductReview productReview;
     private File userImage;
     private String userImageContentType;
     private String userImageFileName;
     private HttpServletRequest servletRequest;
-
+    
     public ProductAction() {
         productModel = new ProductModel();
         categoryModel = new CategoryModel();
+        productReviewModel = new ProductReviewModel();
     }
-
+    
     @Override
     public String execute() throws Exception {
         HttpServletRequest request = (HttpServletRequest) ActionContext.getContext().get(ServletActionContext.HTTP_REQUEST);
         Integer id = Integer.parseInt(request.getParameter("id"));
-        product = productModel.getProduct(id);
+        product = productModel.getProductWithReviewById(id);
         return SUCCESS;
     }
-
+    
+    public String review() throws Exception {
+        product = new Product();
+        product.setId(productReview.getId());
+        productReview.setProduct(product);
+        User user = (User) ActionContext.getContext().getSession().get("user");
+        productReview.setUser(user);
+        try {
+            productReview.setId(0);
+            productReviewModel.save(productReview);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return SUCCESS;
+    }
+    
     public String index() throws Exception {
         listProduct = productModel.listProduct();
         return SUCCESS;
     }
-
+    
     public String insert() throws Exception {
         product = new Product();
         product.setId(0);
         listCategory = categoryModel.listCategory();
         return SUCCESS;
     }
-
+    
     public String delete() throws Exception {
         Integer productId = 0;
         HttpServletRequest request = (HttpServletRequest) ActionContext.getContext().get(ServletActionContext.HTTP_REQUEST);
@@ -69,7 +86,7 @@ public class ProductAction extends ActionSupport implements ServletRequestAware 
         productModel.delete(productId);
         return SUCCESS;
     }
-
+    
     public String edit() throws Exception {
         HttpServletRequest request = (HttpServletRequest) ActionContext.getContext().get(ServletActionContext.HTTP_REQUEST);
         int productId = Integer.parseInt(request.getParameter("id"));
@@ -77,12 +94,12 @@ public class ProductAction extends ActionSupport implements ServletRequestAware 
         listCategory = categoryModel.listCategory();
         return SUCCESS;
     }
-
+    
     public String save() throws Exception {
         String timeStamp = new SimpleDateFormat("HHmmss").format(Calendar.getInstance().getTime());
         try {
             try {
-
+                
                 String filePath = servletRequest.getSession().getServletContext().getRealPath(
                         "/store/product/" + timeStamp);
                 System.out.println("Server path:" + filePath);
@@ -98,7 +115,7 @@ public class ProductAction extends ActionSupport implements ServletRequestAware 
             List<ProductImage> listImage = new ArrayList<ProductImage>();
             listImage.add(image);
             product.setProductImage(listImage);
-
+            
             productModel.save(product);
         } catch (Exception e) {
             e.printStackTrace();
@@ -110,56 +127,64 @@ public class ProductAction extends ActionSupport implements ServletRequestAware 
     public List<Product> getListProduct() {
         return listProduct;
     }
-
+    
     public void setListProduct(List<Product> listProduct) {
         this.listProduct = listProduct;
     }
-
+    
     public List<Category> getListCategory() {
         return listCategory;
     }
-
+    
     public void setListCategory(List<Category> listCategory) {
         this.listCategory = listCategory;
     }
-
+    
     public Product getProduct() {
         return product;
     }
-
+    
     public void setProduct(Product product) {
         this.product = product;
     }
-
+    
     public File getUserImage() {
         return userImage;
     }
-
+    
     public void setUserImage(File userImage) {
         this.userImage = userImage;
     }
-
+    
     public String getUserImageContentType() {
         return userImageContentType;
     }
-
+    
     public void setUserImageContentType(String userImageContentType) {
         this.userImageContentType = userImageContentType;
     }
-
+    
     public String getUserImageFileName() {
         return userImageFileName;
     }
-
+    
     public void setUserImageFileName(String userImageFileName) {
         this.userImageFileName = userImageFileName;
     }
-
+    
     @Override
     public void setServletRequest(HttpServletRequest servletRequest) {
         this.servletRequest = servletRequest;
-
+        
     }
-    //</editor-fold>
 
+    //</editor-fold>
+    public ProductReview getProductReview() {
+        return productReview;
+    }
+    
+    public void setProductReview(ProductReview productReview) {
+        this.productReview = productReview;
+    }
+    
 }

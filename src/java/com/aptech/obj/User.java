@@ -3,6 +3,8 @@ package com.aptech.obj;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.*;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 
 @Entity
 @Table(name = "user")
@@ -36,6 +38,9 @@ public class User implements Serializable {
     @ManyToOne(optional = false)
     @JoinColumn(name = "role_id", referencedColumnName = "id")
     private UserRole role;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
+    private List<ProductReview> productReview;
 
     public Integer getId() {
         return id;
@@ -100,4 +105,14 @@ public class User implements Serializable {
     public void setRole(UserRole role) {
         this.role = role;
     }
+
+    public List<ProductReview> getProductReview() {
+        return productReview;
+    }
+
+    public void setProductReview(List<ProductReview> productReview) {
+        this.productReview = productReview;
+    }
+    
+    
 }

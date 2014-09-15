@@ -18,6 +18,7 @@ public abstract class Product_ {
 	public static volatile SingularAttribute<Product, Integer> stock;
 	public static volatile SingularAttribute<Product, Category> category;
 	public static volatile SingularAttribute<Product, String> brand;
+	public static volatile ListAttribute<Product, ProductReview> productReview;
 	public static volatile SingularAttribute<Product, Integer> status;
 
 }

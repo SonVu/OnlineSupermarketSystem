@@ -7,6 +7,7 @@ package com.aptech.model;
 
 import com.aptech.obj.Product;
 import java.util.List;
+import org.hibernate.Hibernate;
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
@@ -16,7 +17,7 @@ import org.hibernate.Session;
  * @author SonVu
  */
 public class ProductModel {
-
+    
     public List<Product> recentProduct() {
         Session session = HibernateUtil.getSessionFactory().openSession();
         session.beginTransaction();
@@ -33,7 +34,7 @@ public class ProductModel {
         }
         return recentProduct;
     }
-
+    
     public Product getProduct(Integer id) {
         Session session = HibernateUtil.getSessionFactory().openSession();
         session.beginTransaction();
@@ -50,7 +51,7 @@ public class ProductModel {
         }
         return product;
     }
-
+    
     public List<Product> search(String searchString) {
         Session session = HibernateUtil.getSessionFactory().openSession();
         session.beginTransaction();
@@ -67,7 +68,7 @@ public class ProductModel {
         }
         return recentProduct;
     }
-
+    
     public List<Product> pagination(int pageNumber, int perPage, int productId) {
         Session session = HibernateUtil.getSessionFactory().openSession();
         session.beginTransaction();
@@ -92,7 +93,7 @@ public class ProductModel {
         }
         return pagingProduct;
     }
-
+    
     public Integer totalRecords(int productId) {
         Session session = HibernateUtil.getSessionFactory().openSession();
         session.beginTransaction();
@@ -115,7 +116,7 @@ public class ProductModel {
         }
         return pagingProduct.size();
     }
-
+    
     public List<Product> listProduct() {
         Session session = HibernateUtil.getSessionFactory().openSession();
         session.beginTransaction();
@@ -132,7 +133,7 @@ public class ProductModel {
         }
         return listProduct;
     }
-
+    
     public void delete(Integer productId) {
         Session session = HibernateUtil.getSessionFactory().openSession();
         session.beginTransaction();
@@ -149,7 +150,7 @@ public class ProductModel {
             session.close();
         }
     }
-
+    
     public Product get(int productId) {
         Session session = HibernateUtil.getSessionFactory().openSession();
         session.beginTransaction();
@@ -166,7 +167,25 @@ public class ProductModel {
         }
         return product;
     }
-
+    
+    public Product getProductWithReviewById(Integer productId) {
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        session.beginTransaction();
+        Product product = null;
+        try {
+            product = (Product) session.get(Product.class, productId);
+            Hibernate.initialize(product.getProductReview());
+            session.getTransaction().commit();
+        } catch (Exception e) {
+            e.printStackTrace();
+            session.getTransaction().rollback();
+        } finally {
+            session.flush();
+            session.close();
+        }
+        return product;
+    }
+    
     public void save(Product product) {
         Session session = HibernateUtil.getSessionFactory().openSession();
         session.beginTransaction();
