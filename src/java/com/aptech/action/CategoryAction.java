@@ -5,12 +5,14 @@
  */
 package com.aptech.action;
 
-import com.aptech.obj.*;
-import com.aptech.model.*;
+import com.aptech.model.CategoryModel;
+import com.aptech.model.ProductModel;
+import com.aptech.obj.Category;
+import com.aptech.obj.Product;
 import static com.opensymphony.xwork2.Action.SUCCESS;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
-import java.util.*;
+import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import org.apache.struts2.ServletActionContext;
 

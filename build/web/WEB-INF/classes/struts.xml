@@ -19,7 +19,7 @@
                 </interceptor-ref>
             </interceptor-stack>
         </interceptors>
-        
+
         <global-results>
             <result name="login">/WEB-INF/admin/login.jsp</result>
             <result name="invalidAdminAccess" type="redirect">/store.action</result>
@@ -41,7 +41,7 @@
             <result name="success">/WEB-INF/front-store/store.jsp</result>
         </action>
         <action name="search" class="com.aptech.action.StoreAction" method="search">
-            <result name="success">/WEB-INF/front-store/result.jsp</result>
+            <result name="success">/WEB-INF/front-store/category.jsp</result>
         </action>
         <action name="header" class="com.aptech.action.StoreAction" method="header">
             <result name="success">/template/header.jsp</result>
@@ -204,7 +204,7 @@
         </action>
     </package>
     
-    <package name="role" namespace="/admin/role" extends="admin">
+    <package name="role" namespace="/admin/role" extends="admin">             
         <action name="index" class="com.aptech.action.RoleAction" method="index">
             <result name="success">/WEB-INF/admin/role/index.jsp</result>
         </action>
@@ -223,8 +223,7 @@
         
         <action name="save" class="com.aptech.action.RoleAction" method="save">
             <result name="success" type="redirect">/admin/role/index</result>
+            <result name="input">/WEB-INF/admin/role/forms.jsp</result>
         </action>
-    </package>
-    
-    
+    </package>   
 </struts>

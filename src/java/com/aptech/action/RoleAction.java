@@ -5,71 +5,93 @@
  */
 package com.aptech.action;
 
-import com.aptech.model.*;
-import com.aptech.obj.*;
+import com.aptech.model.UserModel;
+import com.aptech.model.UserRoleDAO;
+import com.aptech.obj.User;
+import com.aptech.obj.UserRole;
 import static com.opensymphony.xwork2.Action.SUCCESS;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
+import com.opensymphony.xwork2.validator.annotations.Validation;
+import com.opensymphony.xwork2.validator.annotations.VisitorFieldValidator;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import org.apache.struts2.ServletActionContext;
+import org.apache.struts2.interceptor.validation.SkipValidation;
 
 /**
  *
  * @author SonVu
  */
+@Validation
 public class RoleAction extends ActionSupport {
 
     private UserModel userModel;
-    private UserRoleModel userRoleModel;
     private User user;
     private UserRole userRole;
     private List<User> listUser;
     private List<UserRole> listUserRole;
+    private UserRoleDAO dao;
 
     public RoleAction() {
         userModel = new UserModel();
-        userRoleModel = new UserRoleModel();
+        dao = new UserRoleDAO();
     }
 
     @Override
+    @SkipValidation
     public String execute() throws Exception {
-        HttpServletRequest request = (HttpServletRequest) ActionContext.getContext().get(ServletActionContext.HTTP_REQUEST);
-        Integer id = Integer.parseInt(request.getParameter("id"));
-        user = userModel.getUser(id);
         return SUCCESS;
     }
 
+    @SkipValidation
     public String index() throws Exception {
-        listUserRole = userRoleModel.listUserRole();
+        try {
+            listUserRole = dao.findAll();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         return SUCCESS;
     }
 
+    @SkipValidation
     public String insert() throws Exception {
         userRole = new UserRole();
         userRole.setId(0);
         return SUCCESS;
     }
 
+    @SkipValidation
     public String delete() throws Exception {
-        Integer userId = 0;
-        HttpServletRequest request = (HttpServletRequest) ActionContext.getContext().get(ServletActionContext.HTTP_REQUEST);
-        userId = Integer.parseInt(request.getParameter("id"));
-        userRoleModel.delete(userId);
+        try {
+            Integer userId = 0;
+            HttpServletRequest request = (HttpServletRequest) ActionContext.getContext().get(ServletActionContext.HTTP_REQUEST);
+            userId = Integer.parseInt(request.getParameter("id"));
+            UserRole role = new UserRole();
+            role.setId(userId);
+            dao.delete(role);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         return SUCCESS;
     }
 
+    @SkipValidation
     public String edit() throws Exception {
-        HttpServletRequest request = (HttpServletRequest) ActionContext.getContext().get(ServletActionContext.HTTP_REQUEST);
-        int userId = Integer.parseInt(request.getParameter("id"));
-        userRole = userRoleModel.get(userId);
-        listUserRole = userRoleModel.listUserRole();
+        try {
+            HttpServletRequest request = (HttpServletRequest) ActionContext.getContext().get(ServletActionContext.HTTP_REQUEST);
+            int userId = Integer.parseInt(request.getParameter("id"));
+            userRole = (UserRole) dao.find(userId);
+            listUserRole = dao.findAll();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         return SUCCESS;
     }
 
     public String save() throws Exception {
         try {
-            userRoleModel.save(userRole);
+            dao.save(userRole);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -101,6 +123,7 @@ public class RoleAction extends ActionSupport {
         this.listUserRole = listUserRole;
     }
 
+    @VisitorFieldValidator(message = "")
     public UserRole getUserRole() {
         return userRole;
     }
@@ -108,5 +131,5 @@ public class RoleAction extends ActionSupport {
     public void setUserRole(UserRole userRole) {
         this.userRole = userRole;
     }
-    //</editor-fold>   
+    //</editor-fold>
 }

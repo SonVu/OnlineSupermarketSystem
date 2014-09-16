@@ -24,6 +24,7 @@
                                 <div class="widget-content">
                                     <div class="padd">
                                         <!-- Form starts.  -->
+                                    <s:fielderror />
                                     <s:form action="save" namespace="/admin/role" cssClass="form-horizontal" theme="simple">
                                         <s:hidden name="userRole.id" />
                                         <div class="form-group">

@@ -49,51 +49,28 @@
                         <div class="col-md-6 col-sm-6">
                             <!-- Title -->
                             <h4 class="title"><s:property value="product.name" /></h4>
-                            <h5>$<s:property value="getText('{0,number,#,##0}',{product.price})"/></h5>
-                            <p>Shipping : Free</p>
-                            <p><s:property value="product.brand" /></p>
-                            <p>Modal : 5G</p>
-                            <p>Availability : In Stock</p>
-                            <!-- Dropdown menu -->
-                            <div class="form-group">                               
-                                <select class="form-control">
-                                    <option>Color</option>
-                                    <option>Black</option>
-                                    <option>White</option>
-                                    <option>Grey</option>
-                                </select>  
-                            </div>
-
+                            <h4>$<s:property value="getText('{0,number,#,##0}',{product.price})"/></h4>
+                            <p>Brand: <s:property value="product.brand" /></p>
+                            <p>Availability : <s:property value="product.stock" /></p>
                             <!-- Quantity and add to cart button -->
 
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="input-group">
-                                        <input type="text" class="form-control input-sm" value="2">
-                                        <span class="input-group-btn">
-                                            <button class="btn btn-default btn-sm" type="button">Add to Cart</button>
-                                        </span>								  
-                                    </div>
-                                </div>
+                            <s:url action="buy" var="buyTag">
+                                <s:param name="id"><s:property value="product.id" /></s:param>
+                            </s:url>
+                            <div class="button"><s:a href="%{buyTag}">Add to Cart</s:a></div>
                             </div>
-
-                            <!-- Add to wish list -->
-                            <a href="wish-list.html">+ Add to Wish List</a>
-
-
                         </div>
                     </div>
-                </div>
 
-                <br />
+                    <br />
 
-                <!-- Description, specs and review -->
+                    <!-- Description, specs and review -->
 
-                <ul class="nav nav-tabs">
-                    <!-- Use uniqe name for "href" in below anchor tags -->
-                    <li class="active"><a href="#tab1" data-toggle="tab">Description</a></li>
-                    <li><a href="#tab2" data-toggle="tab">Specs</a></li>
-                    <li><a href="#tab3" data-toggle="tab">Review (${product.productReview.size()})</a></li>
+                    <ul class="nav nav-tabs">
+                        <!-- Use uniqe name for "href" in below anchor tags -->
+                        <li class="active"><a href="#tab1" data-toggle="tab">Description</a></li>
+                        <li><a href="#tab2" data-toggle="tab">Specs</a></li>
+                        <li><a href="#tab3" data-toggle="tab">Review (${product.productReview.size()})</a></li>
                 </ul>
 
                 <!-- Tab Content -->
