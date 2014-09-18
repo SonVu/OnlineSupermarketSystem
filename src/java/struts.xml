@@ -150,6 +150,7 @@
         
         <action name="save" class="com.aptech.action.CategoryAction" method="save">
             <result name="success" type="redirect">/admin/category/index</result>
+            <result name="input">/WEB-INF/admin/category/forms.jsp</result>
         </action>
     </package>
     
@@ -165,7 +166,10 @@
                     image/png,image/gif,image/jpeg,image/pjpeg
                 </param>
             </interceptor-ref>
-            <interceptor-ref name="authStack"></interceptor-ref>
+            <interceptor-ref name="roleStack"></interceptor-ref>
+            <interceptor-ref name="store">
+                <param name="operationMode">RETRIEVE</param>
+            </interceptor-ref>
             <result name="success">/WEB-INF/admin/product/forms.jsp</result>
         </action>
         
@@ -178,7 +182,12 @@
         </action>
         
         <action name="save" class="com.aptech.action.ProductAction" method="save">
+             <interceptor-ref name="store">
+                <param name="operationMode">STORE</param>
+            </interceptor-ref>
+            <interceptor-ref name="roleStack" />
             <result name="success" type="redirect">/admin/product/index</result>
+            <result name="input" type="redirect">/admin/product/insert</result>
         </action>
     </package>
     
@@ -204,12 +213,15 @@
         </action>
     </package>
     
-    <package name="role" namespace="/admin/role" extends="admin">             
+    <package name="role" namespace="/admin/role" extends="admin">          
         <action name="index" class="com.aptech.action.RoleAction" method="index">
             <result name="success">/WEB-INF/admin/role/index.jsp</result>
         </action>
         
         <action name="insert" class="com.aptech.action.RoleAction" method="insert">
+            <interceptor-ref name="store">
+                <param name="operationMode">RETRIEVE</param>
+            </interceptor-ref>
             <result name="success">/WEB-INF/admin/role/forms.jsp</result>
         </action>
         
@@ -222,8 +234,12 @@
         </action>
         
         <action name="save" class="com.aptech.action.RoleAction" method="save">
+            <interceptor-ref name="store">
+                <param name="operationMode">STORE</param>
+            </interceptor-ref>
+            <interceptor-ref name="roleStack" />
             <result name="success" type="redirect">/admin/role/index</result>
-            <result name="input">/WEB-INF/admin/role/forms.jsp</result>
+            <result name="input" type="redirect">/admin/role/insert.action</result>
         </action>
     </package>   
 </struts>

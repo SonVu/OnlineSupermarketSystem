@@ -5,98 +5,131 @@
  */
 package com.aptech.action;
 
-import com.aptech.model.CategoryModel;
-import com.aptech.model.ProductModel;
-import com.aptech.obj.Category;
-import com.aptech.obj.Product;
-import static com.opensymphony.xwork2.Action.SUCCESS;
+import com.aptech.obj.*;
+import com.aptech.model.*;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
+import com.opensymphony.xwork2.validator.annotations.Validation;
+import com.opensymphony.xwork2.validator.annotations.VisitorFieldValidator;
+import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import org.apache.struts2.ServletActionContext;
+import org.apache.struts2.interceptor.validation.SkipValidation;
 
 /**
  *
  * @author SonVu
  */
+@Validation
 public class CategoryAction extends ActionSupport {
 
-    private CategoryModel categoryModel;
-    private ProductModel productModel;
+    private final CategoryDao categoryDao;
+    private final ProductDao productDao;
     private List<Category> listCategory;
     private Category category;
     private List<Product> listProduct;
     private Integer maxPage;
 
     public CategoryAction() {
-        categoryModel = new CategoryModel();
-        productModel = new ProductModel();
+        categoryDao = new CategoryDao();
+        productDao = new ProductDao();
+        listCategory = new ArrayList<>();
     }
 
     @Override
+    @SkipValidation
     public String execute() throws Exception {
-        HttpServletRequest request = (HttpServletRequest) ActionContext.getContext().get(ServletActionContext.HTTP_REQUEST);
-        Integer id = Integer.parseInt(request.getParameter("id"));
-        category = categoryModel.getCategory(id);
+        try {
+            HttpServletRequest request = (HttpServletRequest) ActionContext.getContext().get(ServletActionContext.HTTP_REQUEST);
+            Integer id = Integer.parseInt(request.getParameter("id"));
+            category = categoryDao.find(id);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         return SUCCESS;
     }
 
+    @SkipValidation
     public String categoryPaging() throws Exception {
-        Integer pageIndex = 0;
-        Integer totalNumberOfRecords = 0;
-        Integer numberOfRecordsPerPage = 9;
-        Integer categoryId = 0;
-        HttpServletRequest request = (HttpServletRequest) ActionContext.getContext().get(ServletActionContext.HTTP_REQUEST);
-        categoryId = Integer.parseInt(request.getParameter("id"));
-
-        if (request.getParameter("page") != null) {
-            pageIndex = Integer.parseInt(request.getParameter("page"));
-        } else {
-            pageIndex = 1;
+        try {
+            Integer page, catId;
+            Double totalNumberOfRecords = 0.0;
+            Double numberOfRecordsPerPage = 4.0;
+            HttpServletRequest request = (HttpServletRequest) ActionContext.getContext().get(ServletActionContext.HTTP_REQUEST);
+            catId = Integer.parseInt(request.getParameter("id"));
+            if (request.getParameter("page") != null) {
+                page = Integer.parseInt(request.getParameter("page"));
+            } else {
+                page = 1;
+            }
+            totalNumberOfRecords = productDao.countWithCategoryId(catId).doubleValue();
+            Double startIndex = (page * numberOfRecordsPerPage) - numberOfRecordsPerPage;
+            Double temp = Math.ceil(totalNumberOfRecords / numberOfRecordsPerPage);
+            maxPage = temp.intValue();
+            if (totalNumberOfRecords % 2 != 0) {
+                maxPage += 1;
+            }
+            listProduct = productDao.pagingWithCategoryId(startIndex.intValue(), numberOfRecordsPerPage.intValue(), catId);
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-        totalNumberOfRecords = productModel.totalRecords(categoryId);
-        int startIndex = (pageIndex * numberOfRecordsPerPage) - numberOfRecordsPerPage;
-        maxPage = totalNumberOfRecords / numberOfRecordsPerPage;
-        if (totalNumberOfRecords % 2 != 0) {
-            maxPage += 1;
-        }
-        listProduct = productModel.pagination(startIndex, numberOfRecordsPerPage, categoryId);
         return SUCCESS;
     }
 
+    @SkipValidation
     public String index() throws Exception {
-        listCategory = categoryModel.listCategory();
+        try {
+            listCategory = categoryDao.findAll();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         return SUCCESS;
     }
 
+    @SkipValidation
     public String insert() throws Exception {
-        category = new Category();
-        category.setId(0);
-        listCategory = categoryModel.listCategory();
+        try {
+            category = new Category();
+            category.setId(0);
+            listCategory = categoryDao.findAll();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         return SUCCESS;
     }
 
+    @SkipValidation
     public String delete() throws Exception {
-        Integer categoryId = 0;
-        HttpServletRequest request = (HttpServletRequest) ActionContext.getContext().get(ServletActionContext.HTTP_REQUEST);
-        categoryId = Integer.parseInt(request.getParameter("id"));
-        categoryModel.delete(categoryId);
+        try {
+            Integer categoryId = 0;
+            HttpServletRequest request = (HttpServletRequest) ActionContext.getContext().get(ServletActionContext.HTTP_REQUEST);
+            categoryId = Integer.parseInt(request.getParameter("id"));
+            Category c = new Category();
+            c.setId(categoryId);
+            categoryDao.delete(c);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         return SUCCESS;
     }
 
+    @SkipValidation
     public String edit() throws Exception {
-        HttpServletRequest request = (HttpServletRequest) ActionContext.getContext().get(ServletActionContext.HTTP_REQUEST);
-        int categoryId = Integer.parseInt(request.getParameter("id"));
-        category = categoryModel.getCategory(categoryId);
-        listCategory = categoryModel.listCategory();
+        try {
+            HttpServletRequest request = (HttpServletRequest) ActionContext.getContext().get(ServletActionContext.HTTP_REQUEST);
+            Integer categoryId = Integer.parseInt(request.getParameter("id"));
+            category = categoryDao.find(categoryId);
+            listCategory = categoryDao.findAll();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         return SUCCESS;
     }
 
     public String save() throws Exception {
         try {
-            categoryModel.save(category);
-            System.out.println("saved");
+            categoryDao.save(category);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -104,6 +137,7 @@ public class CategoryAction extends ActionSupport {
     }
 
     //<editor-fold defaultstate="collapsed" desc="getter setter">
+    @SkipValidation
     public List<Category> getListCategory() {
         return listCategory;
     }
@@ -112,6 +146,7 @@ public class CategoryAction extends ActionSupport {
         this.listCategory = listCategory;
     }
 
+    @VisitorFieldValidator(message = "")
     public Category getCategory() {
         return category;
     }

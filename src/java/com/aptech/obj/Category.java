@@ -1,11 +1,21 @@
 package com.aptech.obj;
 
+import com.opensymphony.xwork2.validator.annotations.RequiredStringValidator;
+import com.opensymphony.xwork2.validator.annotations.Validation;
 import java.io.Serializable;
 import java.util.List;
-import javax.persistence.*;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 @Entity
 @Table(name = "category")
+@Validation
 public class Category implements Serializable {
 
     private static final long serialVersionUID = -8767337896773261247L;
@@ -33,10 +43,12 @@ public class Category implements Serializable {
         return serialVersionUID;
     }
 
+    @RequiredStringValidator(message = "Please input name")
     public String getName() {
         return name;
     }
 
+    @RequiredStringValidator(message = "Please input description")
     public String getDescription() {
         return description;
     }

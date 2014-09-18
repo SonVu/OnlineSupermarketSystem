@@ -1,10 +1,20 @@
 package com.aptech.obj;
 
+import com.opensymphony.xwork2.validator.annotations.RequiredFieldValidator;
+import com.opensymphony.xwork2.validator.annotations.RequiredStringValidator;
+import com.opensymphony.xwork2.validator.annotations.Validation;
 import java.io.Serializable;
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
 @Entity
 @Table(name = "product_review")
+@Validation
 public class ProductReview implements Serializable {
 
     @Id
@@ -34,6 +44,7 @@ public class ProductReview implements Serializable {
         this.id = id;
     }
 
+    @RequiredFieldValidator(message = "Please check")
     public Integer getRate() {
         return rate;
     }
@@ -42,6 +53,7 @@ public class ProductReview implements Serializable {
         this.rate = rate;
     }
 
+    @RequiredStringValidator(message = "Please input comment")
     public String getComment() {
         return comment;
     }

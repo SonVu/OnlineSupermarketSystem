@@ -308,6 +308,22 @@ i.pinterest{
 
 /* Header */
 
+.header {
+    margin: 0px 100px;
+}
+
+.header #search-box {
+    width: 400px;
+}
+
+.header #search {
+    padding-top: 25px;
+}
+
+.hlinks {
+    padding-top: 35px;
+}
+
 header{
     color: #777;
     padding: 8px 0px 20px 0px;

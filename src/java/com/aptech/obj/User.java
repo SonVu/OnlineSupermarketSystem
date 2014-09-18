@@ -1,13 +1,23 @@
 package com.aptech.obj;
 
+import com.opensymphony.xwork2.validator.annotations.EmailValidator;
+import com.opensymphony.xwork2.validator.annotations.RequiredStringValidator;
+import com.opensymphony.xwork2.validator.annotations.Validation;
 import java.io.Serializable;
 import java.util.List;
-import javax.persistence.*;
-import org.hibernate.annotations.LazyCollection;
-import org.hibernate.annotations.LazyCollectionOption;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 @Entity
 @Table(name = "user")
+@Validation
 public class User implements Serializable {
 
     private static final long serialVersionUID = -8767337896773261247L;
@@ -50,6 +60,7 @@ public class User implements Serializable {
         this.id = id;
     }
 
+    @RequiredStringValidator(message = "Please enter login name")
     public String getUsername() {
         return username;
     }
@@ -58,6 +69,7 @@ public class User implements Serializable {
         this.username = username;
     }
 
+    @RequiredStringValidator(message = "Please enter password")
     public String getPassword() {
         return password;
     }
@@ -66,6 +78,7 @@ public class User implements Serializable {
         this.password = password;
     }
 
+    @RequiredStringValidator(message = "Please enter your name")
     public String getFullname() {
         return fullname;
     }
@@ -74,6 +87,7 @@ public class User implements Serializable {
         this.fullname = fullname;
     }
 
+    @RequiredStringValidator(message = "Please enter address")
     public String getAddress() {
         return address;
     }
@@ -82,6 +96,7 @@ public class User implements Serializable {
         this.address = address;
     }
 
+    @RequiredStringValidator(message = "Please enter phone number")
     public String getPhone() {
         return phone;
     }
@@ -90,6 +105,7 @@ public class User implements Serializable {
         this.phone = phone;
     }
 
+    @EmailValidator(message = "Please enter email address")
     public String getEmail() {
         return email;
     }
@@ -113,6 +129,5 @@ public class User implements Serializable {
     public void setProductReview(List<ProductReview> productReview) {
         this.productReview = productReview;
     }
-    
-    
+
 }

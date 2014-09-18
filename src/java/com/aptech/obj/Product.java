@@ -1,13 +1,25 @@
 package com.aptech.obj;
 
+import com.opensymphony.xwork2.validator.annotations.RequiredFieldValidator;
+import com.opensymphony.xwork2.validator.annotations.RequiredStringValidator;
+import com.opensymphony.xwork2.validator.annotations.Validation;
 import java.io.Serializable;
 import java.util.List;
-import javax.persistence.*;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
 
 @Entity
 @Table(name = "product")
+@Validation
 public class Product implements Serializable {
 
     private static final long serialVersionUID = -8767337896773261247L;
@@ -57,6 +69,7 @@ public class Product implements Serializable {
         this.id = id;
     }
 
+    @RequiredStringValidator(message = "Please input name")
     public String getName() {
         return name;
     }
@@ -65,6 +78,7 @@ public class Product implements Serializable {
         this.name = name;
     }
 
+    @RequiredStringValidator(message = "Please input brand")
     public String getBrand() {
         return brand;
     }
@@ -73,6 +87,7 @@ public class Product implements Serializable {
         this.brand = brand;
     }
 
+    @RequiredFieldValidator(message = "Please input price")
     public Double getPrice() {
         return price;
     }
@@ -81,6 +96,7 @@ public class Product implements Serializable {
         this.price = price;
     }
 
+    @RequiredFieldValidator(message = "Please input stock status")
     public Integer getStock() {
         return stock;
     }
@@ -89,6 +105,7 @@ public class Product implements Serializable {
         this.stock = stock;
     }
 
+    @RequiredFieldValidator(message = "Please input discount status")
     public Double getDiscount() {
         return discount;
     }
@@ -97,6 +114,7 @@ public class Product implements Serializable {
         this.discount = discount;
     }
 
+    @RequiredStringValidator(message = "Please input description")
     public String getDescription() {
         return description;
     }

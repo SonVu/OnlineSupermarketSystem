@@ -5,10 +5,9 @@
  */
 package com.aptech.action;
 
-import com.aptech.model.CategoryModel;
+import com.aptech.model.CategoryDao;
 import com.aptech.model.ProductDao;
-import com.aptech.model.ProductModel;
-import com.aptech.model.ProductReviewModel;
+import com.aptech.model.ProductReviewDao;
 import com.aptech.obj.Category;
 import com.aptech.obj.Product;
 import com.aptech.obj.ProductImage;
@@ -17,6 +16,8 @@ import com.aptech.obj.User;
 import static com.opensymphony.xwork2.Action.SUCCESS;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
+import com.opensymphony.xwork2.validator.annotations.Validation;
+import com.opensymphony.xwork2.validator.annotations.VisitorFieldValidator;
 import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -26,16 +27,18 @@ import javax.servlet.http.HttpServletRequest;
 import org.apache.commons.io.FileUtils;
 import org.apache.struts2.ServletActionContext;
 import org.apache.struts2.interceptor.ServletRequestAware;
+import org.apache.struts2.interceptor.validation.SkipValidation;
 
 /**
  *
  * @author SonVu
  */
+@Validation
 public class ProductAction extends ActionSupport implements ServletRequestAware {
 
-    private ProductModel productModel;
-    private CategoryModel categoryModel;
-    private ProductReviewModel productReviewModel;
+    private final ProductDao productDao;
+    private final CategoryDao categoryDao;
+    private final ProductReviewDao productReviewDao;
     private Product product;
     private List<Product> listProduct;
     private List<Category> listCategory;
@@ -48,80 +51,94 @@ public class ProductAction extends ActionSupport implements ServletRequestAware 
     private Integer maxPage;
 
     public ProductAction() {
-        productModel = new ProductModel();
-        categoryModel = new CategoryModel();
-        productReviewModel = new ProductReviewModel();
+        productDao = new ProductDao();
+        categoryDao = new CategoryDao();
+        productReviewDao = new ProductReviewDao();
         dao = new ProductDao();
+        listCategory = new ArrayList<>();
     }
 
     @Override
     public String execute() throws Exception {
-        HttpServletRequest request = (HttpServletRequest) ActionContext.getContext().get(ServletActionContext.HTTP_REQUEST);
-        Integer id = Integer.parseInt(request.getParameter("id"));
-        product = productModel.getProductWithReviewById(id);
-        return SUCCESS;
-    }
-
-    public String review() throws Exception {
-        product = new Product();
-        product.setId(productReview.getId());
-        productReview.setProduct(product);
-        User user = (User) ActionContext.getContext().getSession().get("user");
-        productReview.setUser(user);
         try {
-            productReview.setId(0);
-            productReviewModel.save(productReview);
+            HttpServletRequest request = (HttpServletRequest) ActionContext.getContext().get(ServletActionContext.HTTP_REQUEST);
+            Integer id = Integer.parseInt(request.getParameter("id"));
+            product = productDao.getProductWithReviewById(id);
         } catch (Exception e) {
             e.printStackTrace();
         }
         return SUCCESS;
     }
 
+    @SkipValidation
+    public String review() throws Exception {
+        try {
+            product = new Product();
+            product.setId(productReview.getId());
+            productReview.setProduct(product);
+            User user = (User) ActionContext.getContext().getSession().get("user");
+            productReview.setUser(user);
+            productReview.setId(0);
+            productReviewDao.save(productReview);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return SUCCESS;
+    }
+
+    @SkipValidation
     public String index() throws Exception {
         try {
             Integer page;
-            Integer totalNumberOfRecords = 0;
-            Integer numberOfRecordsPerPage = 4;
+            Double totalNumberOfRecords = 0.0;
+            Double numberOfRecordsPerPage = 4.0;
             HttpServletRequest request = (HttpServletRequest) ActionContext.getContext().get(ServletActionContext.HTTP_REQUEST);
             if (request.getParameter("page") != null) {
                 page = Integer.parseInt(request.getParameter("page"));
             } else {
                 page = 1;
             }
-            totalNumberOfRecords = dao.count();
-            Integer startIndex = (page * numberOfRecordsPerPage) - numberOfRecordsPerPage;
-            maxPage = totalNumberOfRecords / numberOfRecordsPerPage;
+            totalNumberOfRecords = dao.count().doubleValue();
+            Double startIndex = (page * numberOfRecordsPerPage) - numberOfRecordsPerPage;
+            Double temp = Math.ceil(totalNumberOfRecords / numberOfRecordsPerPage);
+            maxPage = temp.intValue();
             if (totalNumberOfRecords % 2 != 0) {
                 maxPage += 1;
             }
-            listProduct = dao.paging(startIndex, numberOfRecordsPerPage);
-            System.out.println(maxPage + "max page" + totalNumberOfRecords + "records ");
+            listProduct = dao.paging(startIndex.intValue(), numberOfRecordsPerPage.intValue());
         } catch (Exception e) {
             e.printStackTrace();
         }
         return SUCCESS;
     }
 
+    @SkipValidation
     public String insert() throws Exception {
         product = new Product();
         product.setId(0);
-        listCategory = categoryModel.listCategory();
+        listCategory = categoryDao.findAll();
         return SUCCESS;
     }
 
+    @SkipValidation
     public String delete() throws Exception {
-        Integer productId = 0;
+        try {
+            Integer productId = 0;
         HttpServletRequest request = (HttpServletRequest) ActionContext.getContext().get(ServletActionContext.HTTP_REQUEST);
         productId = Integer.parseInt(request.getParameter("id"));
-        productModel.delete(productId);
+        productDao.delete(productDao.find(productId));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         return SUCCESS;
     }
 
+    @SkipValidation
     public String edit() throws Exception {
         HttpServletRequest request = (HttpServletRequest) ActionContext.getContext().get(ServletActionContext.HTTP_REQUEST);
         int productId = Integer.parseInt(request.getParameter("id"));
-        product = productModel.get(productId);
-        listCategory = categoryModel.listCategory();
+        product = (Product) productDao.find(productId);
+        listCategory = categoryDao.findAll();
         return SUCCESS;
     }
 
@@ -146,7 +163,7 @@ public class ProductAction extends ActionSupport implements ServletRequestAware 
             listImage.add(image);
             product.setProductImage(listImage);
 
-            productModel.save(product);
+            productDao.save(product);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -170,6 +187,7 @@ public class ProductAction extends ActionSupport implements ServletRequestAware 
         this.listCategory = listCategory;
     }
 
+    @VisitorFieldValidator(message = "")
     public Product getProduct() {
         return product;
     }

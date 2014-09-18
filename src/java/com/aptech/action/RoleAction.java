@@ -5,8 +5,7 @@
  */
 package com.aptech.action;
 
-import com.aptech.model.UserModel;
-import com.aptech.model.UserRoleDAO;
+import com.aptech.model.UserRoleDao;
 import com.aptech.obj.User;
 import com.aptech.obj.UserRole;
 import static com.opensymphony.xwork2.Action.SUCCESS;
@@ -26,16 +25,14 @@ import org.apache.struts2.interceptor.validation.SkipValidation;
 @Validation
 public class RoleAction extends ActionSupport {
 
-    private UserModel userModel;
     private User user;
     private UserRole userRole;
     private List<User> listUser;
     private List<UserRole> listUserRole;
-    private UserRoleDAO dao;
+    private UserRoleDao dao;
 
     public RoleAction() {
-        userModel = new UserModel();
-        dao = new UserRoleDAO();
+        dao = new UserRoleDao();
     }
 
     @Override

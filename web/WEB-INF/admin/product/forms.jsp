@@ -34,6 +34,20 @@
                                             <div class="tab-pane fade active in" id="general">
                                                 <s:hidden name="product.id" />
                                                 <div class="form-group">
+                                                    <label for="inputEmail3" class="col-sm-2 control-label"></label>
+                                                    <div class="col-sm-10">
+                                                        <s:if test="fieldErrors.size > 0">
+                                                            <div class="alert alert-warning fade in" role="alert">
+                                                                <button type="button" class="close" data-dismiss="alert">
+                                                                    <span aria-hidden="true">&times;</span>
+                                                                    <span class="sr-only">Close</span>
+                                                                </button>
+                                                                <s:fielderror/>
+                                                            </div>
+                                                        </s:if>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
                                                     <label for="inputEmail3" class="col-sm-2 control-label">Name</label>
                                                     <div class="col-sm-10">
                                                         <s:textfield name="product.name" cssClass="form-control"/>

@@ -22,15 +22,15 @@ import org.apache.struts2.ServletActionContext;
 public class StoreAction extends ActionSupport {
 
 //<editor-fold defaultstate="collapsed" desc="variable">
-    private ProductModel productModel;
-    private CategoryModel categoryModel;
+    private ProductDao productDao;
+    private CategoryDao categoryDao;
     private static final long serialVersionUID = 9149826260758390091L;
     private List<Category> listCategory;
     private List<Product> listProduct;
     private String searchString;
     private Integer maxPage;
-    private UserModel userModel;
-    private OrderModel orderModel;
+    private UserDao userDao;
+    private OrderDao orderDao;
     
     private ArrayList<OrderDetail> cart;
     private Double total;
@@ -38,52 +38,69 @@ public class StoreAction extends ActionSupport {
 
 //</editor-fold>
     public StoreAction() {
-        productModel = new ProductModel();
-        categoryModel = new CategoryModel();
-        userModel = new UserModel();
-        orderModel = new OrderModel();
+        productDao = new ProductDao();
+        categoryDao = new CategoryDao();
+        userDao = new UserDao();
+        orderDao = new OrderDao();
     }
     
     @Override
     public String execute() throws Exception {
-        listProduct = productModel.recentProduct();
-        listCategory = categoryModel.listCategory();
+        listProduct = productDao.findRecent();
+        listCategory = categoryDao.findAll();
         return SUCCESS;
     }
     
     public String pagingProduct() throws Exception {
-        Integer pageIndex = 0;
-        Integer totalNumberOfRecords = 0;
-        Integer numberOfRecordsPerPage = 8;
-        HttpServletRequest request = (HttpServletRequest) ActionContext.getContext().get(ServletActionContext.HTTP_REQUEST);
-        
-        if (request.getParameter("page") != null) {
-            pageIndex = Integer.parseInt(request.getParameter("page"));
-        } else {
-            pageIndex = 1;
+        try {
+            Integer page, catId;
+            Double totalNumberOfRecords = 0.0;
+            Double numberOfRecordsPerPage = 4.0;
+            HttpServletRequest request = (HttpServletRequest) ActionContext.getContext().get(ServletActionContext.HTTP_REQUEST);
+            catId = Integer.parseInt(request.getParameter("id"));
+            if (request.getParameter("page") != null) {
+                page = Integer.parseInt(request.getParameter("page"));
+            } else {
+                page = 1;
+            }
+            totalNumberOfRecords = productDao.count().doubleValue();
+            Double startIndex = (page * numberOfRecordsPerPage) - numberOfRecordsPerPage;
+            Double temp = Math.ceil(totalNumberOfRecords / numberOfRecordsPerPage);
+            maxPage = temp.intValue();
+            if (totalNumberOfRecords % 2 != 0) {
+                maxPage += 1;
+            }
+            listProduct = productDao.pagingWithCategoryId(startIndex.intValue(), numberOfRecordsPerPage.intValue(), catId);
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-        totalNumberOfRecords = productModel.totalRecords(-1);
-        int startIndex = (pageIndex * numberOfRecordsPerPage) - numberOfRecordsPerPage;
-        maxPage = totalNumberOfRecords / numberOfRecordsPerPage;
-        if (totalNumberOfRecords % 2 != 0) {
-            maxPage += 1;
-        }
-        listProduct = productModel.pagination(startIndex, numberOfRecordsPerPage, -1);
         return SUCCESS;
     }
     
     public String header() throws Exception {
-        listCategory = categoryModel.listCategory();
+        try {
+            listCategory = categoryDao.findAll();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         return SUCCESS;
     }
     
     public String sidebar() throws Exception {
-        listCategory = categoryModel.listCategory();
+        try {
+            listCategory = categoryDao.findAll();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         return SUCCESS;
     }
     
     public String search() throws Exception {
-        listProduct = productModel.search(searchString);
+        try {
+            listCategory = categoryDao.findAll();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         return SUCCESS;
     }
     
@@ -96,7 +113,7 @@ public class StoreAction extends ActionSupport {
             cart = new ArrayList<OrderDetail>();
         }
         
-        Product p = productModel.getProduct(id);
+        Product p = (Product) productDao.find(id);
         
         for (int i = 0; i < cart.size(); i++) {
             OrderDetail orderDetail = cart.get(i);
@@ -152,7 +169,7 @@ public class StoreAction extends ActionSupport {
         }
         order.setOrderDetails(cart);
         try {
-            orderModel.save(order);
+            orderDao.save(order);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -171,7 +188,7 @@ public class StoreAction extends ActionSupport {
             userBean.setPassword(MD5Hash.hash(userBean.getPassword()));
             userBean.setId(0);
             userBean.setRole(role);
-            userModel.save(userBean);
+            userDao.save(userBean);
             Map session = ActionContext.getContext().getSession();
             session.put("user", userBean);
         } catch (Exception e) {

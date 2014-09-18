@@ -5,7 +5,7 @@
  */
 package com.aptech.action;
 
-import com.aptech.model.CategoryModel;
+import com.aptech.model.CategoryDao;
 import com.aptech.obj.Category;
 import com.aptech.obj.User;
 import com.opensymphony.xwork2.ActionSupport;
@@ -19,14 +19,14 @@ public class AdminAction extends ActionSupport {
 
     private User userBean;
     private List<Category> listCategory;
-    private CategoryModel categoryModel;
+    private CategoryDao categoryDao;
 
     public AdminAction() {
-        categoryModel = new CategoryModel();
+        categoryDao = new CategoryDao();
     }
 
     public String execute() throws Exception {
-        listCategory = categoryModel.listCategory();
+        listCategory = categoryDao.findAll();
         return SUCCESS;
     }
 

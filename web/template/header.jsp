@@ -38,40 +38,37 @@
     <body>
         <!-- Header starts -->
         <header>
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-3">
-                        <!-- Logo. Use class "color" to add color to the text. -->
-                        <div class="logo">
-                            <h1><a href="store/#">Mac<span class="color bold">Kart</span></a></h1>
-                            <p class="meta">online shopping is fun!!!</p>
-                        </div>
+            <div class="row header">
+                <div class="col-md-2">
+                    <!-- Logo. Use class "color" to add color to the text. -->
+                    <div class="logo">
+                        <h1><a href="store/#">Mac<span class="color bold">Kart</span></a></h1>
+                        <p class="meta">online shopping is fun!!!</p>
                     </div>
-                    <div class="col-md-4">
-                        <s:form action="search" cssClass="form-inline" theme="simple">
-                            <div class="form-group">
-                                <s:textfield name="searchString" label="" cssClass="form-control" id="search"/>
-                            </div>
-                            <s:submit label="Search" cssClass="btn btn-default btn-small"/>
-                        </s:form>
-                    </div>
-                    <div class="col-md-5">
-                        <!-- Search form -->
-                        
-                        <div class="hlinks">
-                            <span>
-                                <!-- item details with price -->
-                                <s:a action="cart" namespace="/"><s:property value="#session.cart.size" /> Item(s) in your <i class="icon-shopping-cart"></i></s:a>
-                                </span>
-                                <!-- Login and Register link -->
-                            <s:if test="#session.user == null">
-                                <span class="lr"><s:a action="login" namespace="/">Login</s:a> or <s:a action="register" namespace="/">Register</s:a></span>
-                            </s:if>
-                            <s:else>
-                                <span class="lr"><s:a action="profile" namespace="/account">Welcome <s:property value="#session.user.username" /></s:a></span>
-                                <span class="lr"><s:a action="logout" namespace="/">Logout</s:a></span>
-                            </s:else>
+                </div>
+                <div class="col-md-6">
+                    <s:form action="search" cssClass="form-inline" theme="simple">
+                        <div class="form-group">
+                            <s:textfield name="searchString" label="" cssClass="form-control" id="search-box"/>
                         </div>
+                        <s:submit label="Search" cssClass="btn btn-default btn-small"/>
+                    </s:form>
+                </div>
+                <div class="col-md-4">
+                    <!-- Search form -->
+                    <div class="hlinks pull-right">
+                        <span>
+                            <!-- item details with price -->
+                            <s:a action="cart" namespace="/"><s:property value="#session.cart.size" /> Item(s) in your <i class="icon-shopping-cart"></i></s:a>
+                            </span>
+                            <!-- Login and Register link -->
+                        <s:if test="#session.user == null">
+                            <span class="lr"><s:a action="login" namespace="/">Login</s:a> or <s:a action="register" namespace="/">Register</s:a></span>
+                        </s:if>
+                        <s:else>
+                            <span class="lr"><s:a action="profile" namespace="/account">Welcome <s:property value="#session.user.username" /></s:a></span>
+                            <span class="lr"><s:a action="logout" namespace="/">Logout</s:a></span>
+                        </s:else>
                     </div>
                 </div>
             </div>

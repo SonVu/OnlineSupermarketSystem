@@ -165,7 +165,6 @@
                         </div>
                     </div>  
             </s:iterator>
-            <!--            <div class="paging">
             <c:forEach var="i" begin="1" end="${maxPage}">
                 <s:url action="store" var="urlTag">
                     <s:param name="page">${i}</s:param>
@@ -187,7 +186,6 @@
                 </c:choose>
             </c:forEach>
         </div>-->
-        </div>
     </div>
 </div>
 <%@include file="/template/footer.jsp" %>

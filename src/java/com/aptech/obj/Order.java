@@ -1,5 +1,6 @@
 package com.aptech.obj;
 
+import com.opensymphony.xwork2.validator.annotations.Validation;
 import java.io.Serializable;
 import java.sql.Date;
 import java.util.List;
@@ -17,6 +18,7 @@ import org.hibernate.annotations.LazyCollectionOption;
 
 @Entity
 @Table(name = "orders")
+@Validation
 public class Order implements Serializable {
 
     @Id

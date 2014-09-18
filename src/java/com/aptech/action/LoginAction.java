@@ -6,7 +6,7 @@
 package com.aptech.action;
 
 import com.aptech.helper.MD5Hash;
-import com.aptech.model.UserModel;
+import com.aptech.model.UserDao;
 import com.aptech.obj.User;
 import static com.opensymphony.xwork2.Action.SUCCESS;
 import com.opensymphony.xwork2.ActionContext;
@@ -19,33 +19,38 @@ import java.util.Map;
  */
 public class LoginAction extends ActionSupport {
 
-    private UserModel userModel;
+    private UserDao userDao;
     private User userBean;
 
     public LoginAction() {
-        userModel = new UserModel();
+        userDao = new UserDao();
     }
 
     @Override
     public String execute() throws Exception {
         String username = userBean.getUsername();
         String password = MD5Hash.hash(userBean.getPassword());
-        User user = userModel.getUser(username);
-        if (user == null) {
-            return INPUT;
-        }
-        if (user.getPassword().equals(password)) {
-            Map session = ActionContext.getContext().getSession();
-            session.put("user", user);
-            session.put("role", user.getRole().getName());
-            if (user.getRole().getId() == 1) {
-                return "admin";
-            } else {
-                return "store";
+        try {
+            User user = userDao.findByUsername(username);
+            if (user == null) {
+                return INPUT;
             }
-        } else {
-            return INPUT;
+            if (user.getPassword().equals(password)) {
+                Map session = ActionContext.getContext().getSession();
+                session.put("user", user);
+                session.put("role", user.getRole().getName());
+                if (user.getRole().getId() == 1) {
+                    return "admin";
+                } else {
+                    return "store";
+                }
+            } else {
+                return INPUT;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
+        return INPUT;
     }
 
     public String page() throws Exception {

@@ -20,65 +20,88 @@ import org.apache.struts2.ServletActionContext;
  */
 public class UserAction extends ActionSupport {
 
-    private UserModel userModel;
-    private UserRoleModel userRoleModel;
+    private UserDao userDao;
+    private UserRoleDao userRoleDAO;
     private User user;
     private List<User> listUser;
     private List<UserRole> listUserRole;
 
     public UserAction() {
-        userModel = new UserModel();
-        userRoleModel = new UserRoleModel();
+        userDao = new UserDao();
+        userRoleDAO = new UserRoleDao();
     }
 
     @Override
     public String execute() throws Exception {
-        HttpServletRequest request = (HttpServletRequest) ActionContext.getContext().get(ServletActionContext.HTTP_REQUEST);
-        Integer id = Integer.parseInt(request.getParameter("id"));
-        user = userModel.getUser(id);
+        try {
+            HttpServletRequest request = (HttpServletRequest) ActionContext.getContext().get(ServletActionContext.HTTP_REQUEST);
+            Integer id = Integer.parseInt(request.getParameter("id"));
+            user = userDao.find(id);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         return SUCCESS;
     }
 
     public String index() throws Exception {
-        listUser = userModel.listUser();
+        try {
+            listUser = userDao.findAll();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         return SUCCESS;
     }
 
     public String insert() throws Exception {
-        user = new User();
-        user.setId(0);
-        listUserRole = userRoleModel.listUserRole();
+        try {
+            user = new User();
+            user.setId(0);
+            listUserRole = userRoleDAO.findAll();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         return SUCCESS;
     }
 
     public String delete() throws Exception {
-        Integer userId = 0;
-        HttpServletRequest request = (HttpServletRequest) ActionContext.getContext().get(ServletActionContext.HTTP_REQUEST);
-        userId = Integer.parseInt(request.getParameter("id"));
-        userModel.delete(userId);
+        try {
+            Integer userId = 0;
+            HttpServletRequest request = (HttpServletRequest) ActionContext.getContext().get(ServletActionContext.HTTP_REQUEST);
+            userId = Integer.parseInt(request.getParameter("id"));
+            userDao.delete(userDao.find(userId));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         return SUCCESS;
     }
 
     public String edit() throws Exception {
-        HttpServletRequest request = (HttpServletRequest) ActionContext.getContext().get(ServletActionContext.HTTP_REQUEST);
-        int userId = Integer.parseInt(request.getParameter("id"));
-        user = userModel.get(userId);
-        listUserRole = userRoleModel.listUserRole();
-        return SUCCESS;
-    }
-    
-    public String editProfile() throws Exception {
-        int userId = ((User) ActionContext.getContext().getSession().get("user")).getId();
-        user = userModel.get(userId);
+        try {
+            HttpServletRequest request = (HttpServletRequest) ActionContext.getContext().get(ServletActionContext.HTTP_REQUEST);
+            int userId = Integer.parseInt(request.getParameter("id"));
+            user = userDao.find(userId);
+            listUserRole = userRoleDAO.findAll();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         return SUCCESS;
     }
 
+    public String editProfile() throws Exception {
+        try {
+            int userId = ((User) ActionContext.getContext().getSession().get("user")).getId();
+            user = userDao.find(userId);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return SUCCESS;
+    }
 
     public String save() throws Exception {
         try {
-            userModel.save(user);
+            userDao.save(user);
             ActionContext.getContext().getSession().remove("user");
-             ActionContext.getContext().getSession().put("user", userModel.get(user.getId()));
+            ActionContext.getContext().getSession().put("user", userDao.find(user.getId()));
         } catch (Exception e) {
             e.printStackTrace();
         }

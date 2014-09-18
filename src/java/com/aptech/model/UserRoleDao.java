@@ -13,9 +13,9 @@ import java.util.List;
  *
  * @author SonVu
  */
-public class UserRoleDAO extends AbstractDao{
+public class UserRoleDao extends AbstractDao{
 
-    public UserRoleDAO() {
+    public UserRoleDao() {
         super();
     }
 
