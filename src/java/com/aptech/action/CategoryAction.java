@@ -58,6 +58,8 @@ public class CategoryAction extends ActionSupport {
             Double numberOfRecordsPerPage = 4.0;
             HttpServletRequest request = (HttpServletRequest) ActionContext.getContext().get(ServletActionContext.HTTP_REQUEST);
             catId = Integer.parseInt(request.getParameter("id"));
+            category = categoryDao.find(catId);
+            System.out.println(category.getName());
             if (request.getParameter("page") != null) {
                 page = Integer.parseInt(request.getParameter("page"));
             } else {

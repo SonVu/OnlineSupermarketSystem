@@ -1,5 +1,5 @@
 <%@ taglib prefix="s" uri="/struts-tags"%>
-<s:action name="header" executeResult="true">
+<s:action name="header" namespace="/" executeResult="true">
 </s:action>
 <!-- Edit profile -->
 
@@ -40,43 +40,6 @@
                         <a href="mailto:<s:property value="#session.user.email" />"><s:property value="#session.user.email" /></a>
                     </address>
                 </div>
-
-                <h5 class="title">My Recent Purchases</h5>
-
-                <table class="table table-striped tcart">
-                    <thead>
-                        <tr>
-                            <th>Date</th>
-                            <th>ID</th>
-                            <th>Name</th>
-                            <th>Price</th>
-                            <th>Status</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>25-08-12</td>
-                            <td>4423</td>
-                            <td>HTC One</td>
-                            <td>$530</td>
-                            <td>Completed</td>
-                        </tr>
-                        <tr>
-                            <td>15-02-12</td>
-                            <td>6643</td>
-                            <td>Sony Xperia</td>
-                            <td>$330</td>
-                            <td>Shipped</td>
-                        </tr>
-                        <tr>
-                            <td>14-08-12</td>
-                            <td>1283</td>
-                            <td>Nokia Asha</td>
-                            <td>$230</td>
-                            <td>Processing</td>
-                        </tr>
-                    </tbody>
-                </table>
             </div>
         </div>
     </div>

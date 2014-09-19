@@ -14,6 +14,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 
 @Entity
 @Table(name = "user")
@@ -51,6 +53,10 @@ public class User implements Serializable {
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
     private List<ProductReview> productReview;
+    
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
+    @LazyCollection(LazyCollectionOption.FALSE)
+    private List<Order> order;
 
     public Integer getId() {
         return id;
@@ -130,4 +136,13 @@ public class User implements Serializable {
         this.productReview = productReview;
     }
 
+    public List<Order> getOrder() {
+        return order;
+    }
+
+    public void setOrder(List<Order> order) {
+        this.order = order;
+    }
+
+    
 }

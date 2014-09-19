@@ -9,9 +9,6 @@
 
                 <!-- Some content -->
                 <h3 class="title">Register Today <span class="color">!!!</span></h3>
-                <h4 >Morbi tincidunt posuere turpis eu laoreet</h4>
-                <p>Nullam in est urna. In vitae adipiscing enim. Curabitur rhoncus condimentum lorem, non convallis dolor faucibus eget. In vitae adipiscing enim. Curabitur rhoncus condimentum lorem, non convallis dolor faucibus eget. In ut nulla est. </p>
-                <h5>Maecenas hendrerit neque id</h5>
                 <div class="lists">
                     <ul>
                         <li>Etiam adipiscing posuere justo, nec iaculis justo dictum non</li>
@@ -20,9 +17,7 @@
                         <li>Maecenas hendrerit neque id ante dictum mattis</li>
                         <li>Vivamus non neque lacus, et cursus tortor</li>
                     </ul>
-                </div>		
-                <p>Nullam in est urna. In vitae adipiscing enim. In ut nulla est. Nullam in est urna. In vitae adipiscing enim. Curabitur rhoncus condimentum lorem, non convallis dolor faucibus eget. In ut nulla est. </p>
-
+                </div>
             </div>
 
 
@@ -33,49 +28,41 @@
                     <div class="form">
 
                         <!-- Login  form (not working)-->
-                        <form class="form-horizontal">                                         
+                        <s:form action="login" namespace="/admin" cssClass="form-horizontal" theme="simple">
                             <!-- Username -->
                             <div class="form-group">
                                 <label class="control-label col-md-3" for="username2">Username</label>
                                 <div class="col-md-6">
-                                    <input type="text" class="form-control" id="username2">
+                                    <s:textfield name="userBean.username" id="inputEmail" cssClass="form-control"/>
                                 </div>
                             </div>
                             <!-- Password -->
                             <div class="form-group">
                                 <label class="control-label col-md-3" for="password2">Password</label>
                                 <div class="controls col-md-6">
-                                    <input type="password" class="form-control" id="password2">
+                                    <s:password name="userBean.password" id="inputPassword" cssClass="form-control"/>
                                 </div>
                             </div>
-                            <!-- Checkbox -->
-                            <div class="form-group">
-                                <div class="col-md-3 col-md-offset-3">
-                                    <label class="checkbox-inline">
-                                        <input type="checkbox" id="inlineCheckbox3" value="agree"> Remember Password
-                                    </label>
-                                </div>
-                            </div> 
 
                             <!-- Buttons -->
                             <div class="form-group">
                                 <!-- Buttons -->
                                 <div class="col-md-6 col-md-offset-3">
-                                    <button type="submit" class="btn btn-default">Login</button>
+                                    <s:submit cssClass="btn btn-danger" value="Login"/>
                                     <button type="reset" class="btn btn-default">Reset</button>
                                 </div>
                             </div>
-                        </form>
-                        <hr />
-                        <h5>New Account</h5>
-                        Don't have an Account? <a href="register.html">Register</a>
-                    </div> 
-                </div>
+                            </s:form>
+                            <hr />
+                            <h5>Lost password</h5>
+                            You have lost your password? <s:a action="register" namespace="/">Retrive password</s:a>
+                        </div>
+                    </div>
 
+                </div>
             </div>
         </div>
     </div>
-</div>
 
-<!-- Page content ends -->
-<%@include file="/template/footer.jsp" %>
+    <!-- Page content ends -->
+    <%@include file="/template/footer.jsp" %>

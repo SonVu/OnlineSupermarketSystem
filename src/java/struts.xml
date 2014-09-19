@@ -21,12 +21,12 @@
         </interceptors>
 
         <global-results>
-            <result name="login">/WEB-INF/admin/login.jsp</result>
+            <result name="login">/WEB-INF/front-store/login.jsp</result>
             <result name="invalidAdminAccess" type="redirect">/store.action</result>
         </global-results>
         
         <action name="login" class="com.aptech.action.LoginAction" method="page">
-            <result name="success">/WEB-INF/admin/login.jsp</result>
+            <result name="success">/WEB-INF/front-store/login.jsp</result>
         </action>
         
         <action name="register" class="com.aptech.action.StoreAction" method="register">
@@ -35,13 +35,14 @@
                
         <action name="addUser" class="com.aptech.action.StoreAction" method="addUser">
             <result name="success" type="redirect">/store.action</result>
+            <result name="input">/WEB-INF/front-store/register.jsp</result>
         </action>
         
         <action name="store" class="com.aptech.action.StoreAction" method="pagingProduct">
             <result name="success">/WEB-INF/front-store/store.jsp</result>
         </action>
         <action name="search" class="com.aptech.action.StoreAction" method="search">
-            <result name="success">/WEB-INF/front-store/category.jsp</result>
+            <result name="success">/WEB-INF/front-store/result.jsp</result>
         </action>
         <action name="header" class="com.aptech.action.StoreAction" method="header">
             <result name="success">/template/header.jsp</result>
@@ -49,6 +50,7 @@
         <action name="sidebar" class="com.aptech.action.StoreAction" method="sidebar">
             <result name="success">/template/sidebar.jsp</result>
         </action>
+        
         <action name="product" class="com.aptech.action.ProductAction">
             <result name="success">/WEB-INF/front-store/product.jsp</result>
         </action>
@@ -103,8 +105,12 @@
             <result name="success">/WEB-INF/front-store/account/password.jsp</result>
         </action>
         
-        <action name="order">
-            <result name="success">/WEB-INF/front-store/account/order.jsp</result>
+        <action name="order" class="com.aptech.action.OrderAction" method="getOrderByUser">
+            <result name="success">/WEB-INF/front-store/account/order/index.jsp</result>
+        </action>
+        
+        <action name="order-detail" class="com.aptech.action.OrderAction" method="getOrderDetailById">
+            <result name="success">/WEB-INF/front-store/account/order/detail.jsp</result>
         </action>
     </package>
  
@@ -182,7 +188,7 @@
         </action>
         
         <action name="save" class="com.aptech.action.ProductAction" method="save">
-             <interceptor-ref name="store">
+            <interceptor-ref name="store">
                 <param name="operationMode">STORE</param>
             </interceptor-ref>
             <interceptor-ref name="roleStack" />
@@ -241,5 +247,35 @@
             <result name="success" type="redirect">/admin/role/index</result>
             <result name="input" type="redirect">/admin/role/insert.action</result>
         </action>
-    </package>   
+    </package>
+       
+    <package name="order" namespace="/admin/order" extends="admin">          
+        <action name="index" class="com.aptech.action.OrderAction" method="index">
+            <interceptor-ref name="store">
+                <param name="operationMode">RETRIEVE</param>
+            </interceptor-ref>
+            <result name="success">/WEB-INF/admin/order/index.jsp</result>
+        </action>
+        
+        <action name="delete" class="com.aptech.action.RoleAction" method="delete">
+             <interceptor-ref name="store">
+                <param name="operationMode">STORE</param>
+            </interceptor-ref>
+            <result name="success" type="redirect">/admin/order/index</result>
+            <result name="input" type="redirect">/admin/order/index</result>
+        </action>
+        
+        <action name="edit" class="com.aptech.action.RoleAction" method="edit">
+            <result name="success">/WEB-INF/admin/order/forms.jsp</result>
+        </action>
+        
+        <action name="save" class="com.aptech.action.RoleAction" method="save">
+            <interceptor-ref name="store">
+                <param name="operationMode">STORE</param>
+            </interceptor-ref>
+            <interceptor-ref name="roleStack" />
+            <result name="success" type="redirect">/admin/order/index</result>
+            <result name="input" type="redirect">/admin/order/insert.action</result>
+        </action>
+    </package>
 </struts>

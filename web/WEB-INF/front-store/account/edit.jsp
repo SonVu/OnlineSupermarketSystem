@@ -1,5 +1,5 @@
 <%@ taglib prefix="s" uri="/struts-tags"%>
-<s:action name="header" executeResult="true">
+<s:action name="header" namespace="/" executeResult="true">
 </s:action>
 <!-- Edit profile -->
 <div class="items">

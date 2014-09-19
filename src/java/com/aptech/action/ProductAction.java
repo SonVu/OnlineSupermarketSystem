@@ -124,9 +124,16 @@ public class ProductAction extends ActionSupport implements ServletRequestAware 
     public String delete() throws Exception {
         try {
             Integer productId = 0;
-        HttpServletRequest request = (HttpServletRequest) ActionContext.getContext().get(ServletActionContext.HTTP_REQUEST);
-        productId = Integer.parseInt(request.getParameter("id"));
-        productDao.delete(productDao.find(productId));
+            HttpServletRequest request = (HttpServletRequest) ActionContext.getContext().get(ServletActionContext.HTTP_REQUEST);
+            productId = Integer.parseInt(request.getParameter("id"));
+            Product product = productDao.findWithOrder(productId);
+            if (product.getOrderDetail() != null) {
+                productDao.delete(product);
+            } else {
+                addFieldError("name","This product is in another order, you should not delete!");
+                return INPUT;
+            }
+
         } catch (Exception e) {
             e.printStackTrace();
         }

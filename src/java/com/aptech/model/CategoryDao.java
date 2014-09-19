@@ -7,12 +7,20 @@ package com.aptech.model;
 
 import com.aptech.obj.Category;
 import java.util.List;
+import org.hibernate.Hibernate;
+import org.hibernate.HibernateException;
+import org.hibernate.Query;
+import org.hibernate.Session;
+import org.hibernate.Transaction;
 
 /**
  *
  * @author SonVu
  */
 public class CategoryDao extends AbstractDao {
+
+    private Session session;
+    private Transaction tx;
 
     public CategoryDao() {
         super();
@@ -27,11 +35,33 @@ public class CategoryDao extends AbstractDao {
     }
 
     public List findAll() {
-        return super.findAll(Category.class); //To change body of generated methods, choose Tools | Templates.
+        List objects = null;
+        try {
+            startOperation2();
+            Query query = session.createQuery("from " + Category.class.getName());
+            objects = query.list();
+            tx.commit();
+        } catch (HibernateException e) {
+            handleException(e);
+        } finally {
+            HibernateFactory.close(session);
+        }
+        return objects;
     }
 
     public Category find(Integer id) {
-        return (Category) super.find(Category.class, id); //To change body of generated methods, choose Tools | Templates.
+        Category obj = null;
+        try {
+            startOperation2();
+            obj = (Category) session.load(Category.class, id);
+            Hibernate.initialize(obj.getProduct());
+            tx.commit();
+        } catch (HibernateException e) {
+            handleException(e);
+        } finally {
+            HibernateFactory.close(session);
+        }
+        return obj;
     }
 
     public void delete(Category obj) {
@@ -48,6 +78,11 @@ public class CategoryDao extends AbstractDao {
 
     public void saveOrUpdate(Category obj) {
         super.saveOrUpdate(obj); //To change body of generated methods, choose Tools | Templates.
+    }
+    
+    public void startOperation2() throws HibernateException {
+        session = HibernateFactory.openSession();
+        tx = session.beginTransaction();
     }
 
 }

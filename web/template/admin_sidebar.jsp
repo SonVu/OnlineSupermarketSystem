@@ -16,13 +16,11 @@
                 <ul>
                     <li><s:a action="index" namespace="/admin/category">Categories</s:a></li>
                 <li><s:a action="index" namespace="/admin/product">Products</s:a></li>
-                    <li><a href="widgets3.html">Brands</a></li>
-                    <li><a href="widgets3.html">Reviews</a></li>
                 </ul>
             </li>  
             <li class="has_sub"><a href="#"><i class="icon-file-alt"></i> Sales <span class="pull-right"><i class="icon-chevron-right"></i></span></a>
                 <ul>
-                    <li><a href="post.html">Orders</a></li>
+                    <li><s:a action="index" namespace="/admin/order">Order</s:a></li>
                     <li><a href="login.html">Customers</a></li>
                 </ul>
             </li> 

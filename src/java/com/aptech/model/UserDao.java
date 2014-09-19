@@ -7,6 +7,7 @@ package com.aptech.model;
 
 import com.aptech.obj.User;
 import java.util.List;
+import org.hibernate.Hibernate;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -55,7 +56,7 @@ public class UserDao extends AbstractDao {
     public User findByUsername(String username) {
         Object obj = null;
         try {
-            startOperation();
+            startOperation2();
             obj = session.createQuery("from User where username=?").setString(0, username).uniqueResult();
             tx.commit();
         } catch (HibernateException e) {
@@ -66,8 +67,23 @@ public class UserDao extends AbstractDao {
         return (User) obj;
     }
 
-    public void startOperation() throws HibernateException {
+    public void startOperation2() throws HibernateException {
         session = HibernateFactory.openSession();
         tx = session.beginTransaction();
+    }
+
+    public User findWithOrder(Integer id) {
+        User user = null;
+        try {
+            startOperation2();
+            user = (User) session.load(User.class, id);
+            Hibernate.initialize(user.getOrder());
+            tx.commit();
+        } catch (HibernateException e) {
+            handleException(e);
+        } finally {
+            HibernateFactory.close(session);
+        }
+        return user;
     }
 }

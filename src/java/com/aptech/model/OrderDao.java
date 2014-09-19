@@ -7,6 +7,10 @@ package com.aptech.model;
 
 import com.aptech.obj.Order;
 import java.util.List;
+import org.hibernate.Hibernate;
+import org.hibernate.HibernateException;
+import org.hibernate.Session;
+import org.hibernate.Transaction;
 
 /**
  *
@@ -14,6 +18,9 @@ import java.util.List;
  */
 public class OrderDao extends AbstractDao {
 
+    private Session session;
+    private Transaction tx;
+    
     public OrderDao() {
         super();
     }
@@ -30,8 +37,19 @@ public class OrderDao extends AbstractDao {
         return super.findAll(Order.class); //To change body of generated methods, choose Tools | Templates.
     }
 
-    public Object find(Integer id) {
-        return super.find(Order.class, id); //To change body of generated methods, choose Tools | Templates.
+    public Order find(Integer id) {
+         Order obj = null;
+        try {
+            startOperation2();
+            obj = (Order) session.load(Order.class, id);
+            Hibernate.initialize(obj.getOrderDetails());
+            tx.commit();
+        } catch (HibernateException e) {
+            handleException(e);
+        } finally {
+            HibernateFactory.close(session);
+        }
+        return obj;
     }
 
     public void delete(Object obj) {
@@ -50,4 +68,8 @@ public class OrderDao extends AbstractDao {
         super.saveOrUpdate(obj); //To change body of generated methods, choose Tools | Templates.
     }
 
+    public void startOperation2() throws HibernateException {
+        session = HibernateFactory.openSession();
+        tx = session.beginTransaction();
+    }
 }

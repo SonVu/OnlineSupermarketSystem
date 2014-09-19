@@ -24,6 +24,20 @@
                         <s:form action="addUser" namespace="/" cssClass="form-horizontal" theme="simple">
                             <!-- Name -->
                             <div class="form-group">
+                                <label for="inputEmail3" class="col-sm-2 control-label"></label>
+                                <div class="col-sm-10">
+                                    <s:if test="fieldErrors.size > 0">
+                                        <div class="alert alert-warning fade in" role="alert">
+                                            <button type="button" class="close" data-dismiss="alert">
+                                                <span aria-hidden="true">&times;</span>
+                                                <span class="sr-only">Close</span>
+                                            </button>
+                                            <s:fielderror/>
+                                        </div>
+                                    </s:if>
+                                </div>
+                            </div>
+                            <div class="form-group">
                                 <label class="control-label col-md-3" for="name1">Name</label>
                                 <div class="col-md-6">
                                     <s:textfield cssClass="form-control" name="userBean.fullname" />
@@ -67,7 +81,7 @@
                             <div class="form-actions">
                                 <!-- Buttons -->
                                 <div class="col-md-9 col-md-offset-3">
-                                    <s:submit cssClass="btn btn-primary"/>
+                                    <s:submit cssClass="btn btn-danger" value="Register"/>
                                     <button type="reset" class="btn btn-default">Reset</button>
                                 </div>
                             </div>

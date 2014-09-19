@@ -6,6 +6,7 @@
 package com.aptech.helper;
 
 import java.security.MessageDigest;
+import java.util.UUID;
 
 /**
  *
@@ -24,5 +25,10 @@ public class MD5Hash {
             sb.append(Integer.toString((byteData[i] & 0xff) + 0x100, 16).substring(1));
         }
         return sb.toString();
+    }
+
+    public static String getCode() throws Exception {
+        String uuid = UUID.randomUUID().toString();
+        return uuid.substring(0, 6).toUpperCase();
     }
 }

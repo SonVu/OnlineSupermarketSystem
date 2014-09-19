@@ -14,6 +14,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
 
@@ -58,8 +59,12 @@ public class Product implements Serializable {
     @LazyCollection(LazyCollectionOption.FALSE)
     private List<ProductImage> productImage;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "product")
+    @OneToMany(mappedBy = "product")
+    @Cascade(org.hibernate.annotations.CascadeType.DELETE)
     private List<ProductReview> productReview;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "p")
+    private List<OrderDetail> orderDetail;
 
     public Integer getId() {
         return id;
@@ -153,6 +158,14 @@ public class Product implements Serializable {
 
     public void setProductReview(List<ProductReview> productReview) {
         this.productReview = productReview;
+    }
+
+    public List<OrderDetail> getOrderDetail() {
+        return orderDetail;
+    }
+
+    public void setOrderDetail(List<OrderDetail> orderDetail) {
+        this.orderDetail = orderDetail;
     }
 
 }

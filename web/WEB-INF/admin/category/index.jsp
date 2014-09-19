@@ -44,8 +44,13 @@
                                         <s:iterator value="listCategory" var="category">
                                             <tr>
                                                 <td><s:property value="#category.id" /></td>
-                                                <td><s:property value="#category.name" /><</td>
-                                                <td><s:property value="#category.parent_id" /><</td>
+                                                <td><s:property value="#category.name" /></td>
+                                                <s:if test="#category.parent_id == 0">
+                                                    <td><span class="label label-danger">Root</span></td>
+                                                </s:if>
+                                                <s:else>
+                                                    <td><span class=""><s:property value="#category.name" /></span></td>
+                                                </s:else>
                                                 <s:if test="#category.status == 1">
                                                     <td><span class="label label-success">Active</span></td>
                                                 </s:if>

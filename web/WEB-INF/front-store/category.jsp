@@ -22,7 +22,7 @@
                 </ul>
 
                 <!-- Title -->
-                <h4 class="pull-left">Apple iPhones</h4>
+                <h4 class="pull-left"><s:property value="category.name"/></h4>
 
 
                 <!-- Sorting -->
