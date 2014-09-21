@@ -11,14 +11,14 @@
         <div class="mainbar">
             <!-- Page heading -->
             <div class="page-head">
-                <h2 class="pull-left"><i class="icon-table"></i> Role</h2>
+                <h2 class="pull-left"><i class="icon-table"></i> Users</h2>
                 <!-- Breadcrumb -->
-                <div class="bread-crumb pull-right">
+<!--                <div class="bread-crumb pull-right">
                     <p>
                     <s:a action="insert" namespace="/admin/user" cssClass="btn btn-primary btn-xs">Insert</s:a>
                         <button type="button" class="btn btn-danger btn-xs">Delete</button>
                     </p>
-                </div>
+                </div>-->
                 <div class="clearfix"></div>
             </div>
             <!-- Page heading ends -->
@@ -46,11 +46,11 @@
                                         <s:iterator value="listUser" var="user">
                                             <tr>
                                                 <td><s:property value="#user.id" /></td>
-                                                <td><s:property value="#user.username" /><</td>
-                                                <td><s:property value="#user.fullname"/><</td>
-                                                <td><s:property value="#user.address"/><</td>
-                                                <td><s:property value="#user.phone"/><</td>
-                                                <td><s:property value="#user.email"/><</td>
+                                                <td><s:property value="#user.username" /></td>
+                                                <td><s:property value="#user.fullname"/></td>
+                                                <td><s:property value="#user.address"/></td>
+                                                <td><s:property value="#user.phone"/></td>
+                                                <td><s:property value="#user.email"/></td>
                                                 <td>
                                                     <s:url action="delete" var="delete">
                                                         <s:param name="id"><s:property value="#user.id" /></s:param>
@@ -65,17 +65,6 @@
                                         </s:iterator>               
                                     </tbody>
                                 </table>
-                                <div class="widget-foot">
-                                    <ul class="pagination pull-right">
-                                        <li><a href="#">Prev</a></li>
-                                        <li><a href="#">1</a></li>
-                                        <li><a href="#">2</a></li>
-                                        <li><a href="#">3</a></li>
-                                        <li><a href="#">4</a></li>
-                                        <li><a href="#">Next</a></li>
-                                    </ul>
-                                    <div class="clearfix"></div> 
-                                </div>
                             </div>
                         </div>
                     </div>

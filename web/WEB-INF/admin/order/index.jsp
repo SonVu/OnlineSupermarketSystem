@@ -11,7 +11,7 @@
         <div class="mainbar">
             <!-- Page heading -->
             <div class="page-head">
-                <h2 class="pull-left"><i class="icon-table"></i> Category</h2>
+                <h2 class="pull-left"><i class="icon-table"></i> Orders</h2>
                 <!-- Breadcrumb -->
                 <div class="bread-crumb pull-right">
                 </div>
@@ -40,8 +40,8 @@
                                         <s:iterator value="listOrder" var="order">
                                             <tr>
                                                 <td><s:property value="#order.id" /></td>
-                                                <td><s:property value="#order.code" /><</td>
-                                                <td><s:property value="#order.created" /><</td>
+                                                <td><s:property value="#order.code" /></td>
+                                                <td><s:property value="#order.created" /></td>
                                                 <s:if test="#order.status == 1">
                                                     <td><span class="label label-success">Completed</span></td>
                                                 </s:if>
@@ -56,7 +56,7 @@
                                                         <s:param name="id"><s:property value="#order.id" /></s:param>
                                                     </s:url>
                                                     <s:a href="%{edit}" cssClass="btn btn-xs btn-warning"><i class="icon-pencil"></i></s:a>
-                                                    <s:a href="%{delete}" cssClass="btn btn-xs btn-danger"><i class="icon-remove"></i></s:a>
+                                                    <s:a onclick="return confirm('Are you sure you want to delete this record')" href="%{delete}" cssClass="btn btn-xs btn-danger"><i class="icon-remove"></i></s:a>
                                                     </td>
                                                 </tr>
                                         </s:iterator>              
@@ -64,12 +64,27 @@
                                 </table>
                                 <div class="widget-foot">
                                     <ul class="pagination pull-right">
-                                        <li><a href="#">Prev</a></li>
-                                        <li><a href="#">1</a></li>
-                                        <li><a href="#">2</a></li>
-                                        <li><a href="#">3</a></li>
-                                        <li><a href="#">4</a></li>
-                                        <li><a href="#">Next</a></li>
+                                        <c:forEach var="i" begin="1" end="${maxPage}">
+                                            <s:url action="index" namespace="/admin/order" var="urlTag">
+                                                <s:param name="id">${param.id}</s:param>
+                                                <s:param name="page">${i}</s:param>
+                                            </s:url>
+
+                                            <c:choose>
+                                                <c:when test="${param.page == i}"><li class="active"><s:a href="%{urlTag}">${i}</s:a></li></c:when>
+                                                    <c:when test="${param.page == null}">
+                                                        <c:choose>
+                                                            <c:when test="${i == 1}">
+                                                            <li class="active"><s:a href="%{urlTag}">${i}</s:a></li>
+                                                            </c:when>
+                                                            <c:otherwise>
+                                                            <li><s:a href="%{urlTag}">${i}</s:a></li>
+                                                            </c:otherwise>
+                                                        </c:choose>
+                                                    </c:when>
+                                                    <c:otherwise><li><s:a href="%{urlTag}">${i}</s:a></li></c:otherwise>
+                                                </c:choose>
+                                            </c:forEach>
                                     </ul>
                                     <div class="clearfix"></div> 
                                 </div>

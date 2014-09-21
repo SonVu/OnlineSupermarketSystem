@@ -21,22 +21,14 @@
             <li class="has_sub"><a href="#"><i class="icon-file-alt"></i> Sales <span class="pull-right"><i class="icon-chevron-right"></i></span></a>
                 <ul>
                     <li><s:a action="index" namespace="/admin/order">Order</s:a></li>
-                    <li><a href="login.html">Customers</a></li>
+                    <li><s:a action="customer" namespace="/admin/user">Customer</s:a></li>
                 </ul>
             </li> 
             <li class="has_sub"><a href="#"><i class="icon-file-alt"></i> System  <span class="pull-right"><i class="icon-chevron-right"></i></span></a>
                 <ul>
-                    <li><s:a action="index" namespace="/admin/banner">Banner</s:a></li>
                 <li><s:a action="index" namespace="/admin/user">Users</s:a></li>
                 <li><s:a action="index" namespace="/admin/role">User Roles</s:a></li>
             </ul>
         </li>                              
-        <li class="has_sub"><a href="#"><i class="icon-file-alt"></i> Reports  <span class="pull-right"><i class="icon-chevron-right"></i></span></a>
-            <ul>
-                <li><a href="media.html">Sales</a></li>
-                <li><a href="statement.html">Products</a></li>
-                <li><a href="error.html">Customers</a></li>
-            </ul>
-        </li> 
     </ul>
 </div>

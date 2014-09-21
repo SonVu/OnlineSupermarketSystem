@@ -50,8 +50,8 @@
                                                 </s:if>
                                                 <s:else>
                                                     <td><span class=""><s:property value="#category.name" /></span></td>
-                                                </s:else>
-                                                <s:if test="#category.status == 1">
+                                                    </s:else>
+                                                    <s:if test="#category.status == 1">
                                                     <td><span class="label label-success">Active</span></td>
                                                 </s:if>
                                                 <s:else>
@@ -73,12 +73,27 @@
                                 </table>
                                 <div class="widget-foot">
                                     <ul class="pagination pull-right">
-                                        <li><a href="#">Prev</a></li>
-                                        <li><a href="#">1</a></li>
-                                        <li><a href="#">2</a></li>
-                                        <li><a href="#">3</a></li>
-                                        <li><a href="#">4</a></li>
-                                        <li><a href="#">Next</a></li>
+                                        <c:forEach var="i" begin="1" end="${maxPage}">
+                                            <s:url action="index" namespace="/admin/category" var="urlTag">
+                                                <s:param name="id">${param.id}</s:param>
+                                                <s:param name="page">${i}</s:param>
+                                            </s:url>
+
+                                            <c:choose>
+                                                <c:when test="${param.page == i}"><li class="active"><s:a href="%{urlTag}">${i}</s:a></li></c:when>
+                                                    <c:when test="${param.page == null}">
+                                                        <c:choose>
+                                                            <c:when test="${i == 1}">
+                                                            <li class="active"><s:a href="%{urlTag}">${i}</s:a></li>
+                                                            </c:when>
+                                                            <c:otherwise>
+                                                            <li><s:a href="%{urlTag}">${i}</s:a></li>
+                                                            </c:otherwise>
+                                                        </c:choose>
+                                                    </c:when>
+                                                    <c:otherwise><li><s:a href="%{urlTag}">${i}</s:a></li></c:otherwise>
+                                                </c:choose>
+                                            </c:forEach>
                                     </ul>
                                     <div class="clearfix"></div> 
                                 </div>

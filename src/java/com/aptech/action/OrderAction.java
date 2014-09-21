@@ -34,7 +34,7 @@ public class OrderAction extends ActionSupport {
     private UserDao userDao;
     private OrderDao orderDao;
     private Order order;
-
+    private Integer maxPage;
     public OrderAction() {
         userDao = new UserDao();
         orderDao = new OrderDao();
@@ -59,6 +59,18 @@ public class OrderAction extends ActionSupport {
     }
 
     @SkipValidation
+    public String deleteOrderById() throws Exception {
+        try {
+            HttpServletRequest request = (HttpServletRequest) ActionContext.getContext().get(ServletActionContext.HTTP_REQUEST);
+            Integer id = Integer.parseInt(request.getParameter("id"));
+            orderDao.delete(orderDao.find(id));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return SUCCESS;
+    }
+
+    @SkipValidation
     public String getOrderDetailById() throws Exception {
         try {
             HttpServletRequest request = (HttpServletRequest) ActionContext.getContext().get(ServletActionContext.HTTP_REQUEST);
@@ -69,11 +81,27 @@ public class OrderAction extends ActionSupport {
         }
         return SUCCESS;
     }
-    
+
     @SkipValidation
     public String index() throws Exception {
         try {
-            listOrder = orderDao.findAll();
+            Integer page;
+            Double totalNumberOfRecords = 0.0;
+            Double numberOfRecordsPerPage = 4.0;
+            HttpServletRequest request = (HttpServletRequest) ActionContext.getContext().get(ServletActionContext.HTTP_REQUEST);
+            if (request.getParameter("page") != null) {
+                page = Integer.parseInt(request.getParameter("page"));
+            } else {
+                page = 1;
+            }
+            totalNumberOfRecords = orderDao.count().doubleValue();
+            Double startIndex = (page * numberOfRecordsPerPage) - numberOfRecordsPerPage;
+            Double temp = Math.ceil(totalNumberOfRecords / numberOfRecordsPerPage);
+            maxPage = temp.intValue();
+            if (totalNumberOfRecords % 2 != 0) {
+                maxPage += 1;
+            }
+            listOrder = orderDao.paging(startIndex.intValue(), numberOfRecordsPerPage.intValue());
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -99,7 +127,6 @@ public class OrderAction extends ActionSupport {
             HttpServletRequest request = (HttpServletRequest) ActionContext.getContext().get(ServletActionContext.HTTP_REQUEST);
             Integer orderId = Integer.parseInt(request.getParameter("id"));
             order = orderDao.find(orderId);
-            System.out.println(order.getCode() + "cpde");
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -109,7 +136,7 @@ public class OrderAction extends ActionSupport {
     @SkipValidation
     public String save() throws Exception {
         try {
-            orderDao.save(order);
+            orderDao.update(order);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -130,6 +157,14 @@ public class OrderAction extends ActionSupport {
 
     public void setOrder(Order order) {
         this.order = order;
+    }
+
+    public Integer getMaxPage() {
+        return maxPage;
+    }
+
+    public void setMaxPage(Integer maxPage) {
+        this.maxPage = maxPage;
     }
 
 }

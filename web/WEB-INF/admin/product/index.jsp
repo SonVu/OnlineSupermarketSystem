@@ -14,10 +14,10 @@
                 <h2 class="pull-left"><i class="icon-table"></i> Product</h2>
                 <!-- Breadcrumb -->
                 <div class="bread-crumb pull-right">
-                    <!--                    <p>
-                <s:a action="insert" namespace="/admin/product" cssClass="btn btn-primary btn-xs">Insert</s:a>
-                    <button type="button" class="btn btn-danger btn-xs">Delete</button>
-                </p>-->
+                    <p>
+                    <s:a action="insert" namespace="/admin/product" cssClass="btn btn-primary btn-xs">Insert</s:a>
+                        <button type="button" class="btn btn-danger btn-xs">Delete</button>
+                    </p>
                 </div>
                 <div class="clearfix"></div>
             </div>

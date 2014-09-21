@@ -27,6 +27,7 @@
                                     <s:form action="save" namespace="/admin/order" cssClass="form-horizontal" theme="simple">
                                         <s:hidden name="order.id" />
                                         <s:hidden name="order.user.id" />
+                                        <s:hidden name="order.created" />
                                         <div class="form-group">
                                             <label for="inputEmail3" class="col-sm-2 control-label"></label>
                                             <div class="col-sm-10">
@@ -57,7 +58,7 @@
                                             <label for="inputPassword3" class="col-sm-2 control-label">Status</label>
                                             <div class="col-sm-10">
                                                 <s:select cssClass="form-control"
-                                                          name="category.status"
+                                                          name="order.status"
                                                           list="#@java.util.LinkedHashMap@{'1' : 'Completed', '0' : 'Incomplete'}"/>
                                             </div>
                                         </div>

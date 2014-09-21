@@ -10,6 +10,7 @@ import com.aptech.obj.*;
 import static com.opensymphony.xwork2.Action.SUCCESS;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
+import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import org.apache.struts2.ServletActionContext;
@@ -46,6 +47,21 @@ public class UserAction extends ActionSupport {
     public String index() throws Exception {
         try {
             listUser = userDao.findAll();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return SUCCESS;
+    }
+
+    public String indexCustomer() throws Exception {
+        try {
+            List<User> a = userDao.findAll();
+            listUser = new ArrayList<User>();
+            for (User user1 : a) {
+                if (user1.getRole().getId().equals(2)) {
+                    listUser.add(user1);
+                }
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }

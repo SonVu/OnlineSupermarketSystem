@@ -6,7 +6,9 @@
 package com.aptech.action;
 
 import com.aptech.model.CategoryDao;
+import com.aptech.model.OrderDao;
 import com.aptech.obj.Category;
+import com.aptech.obj.Order;
 import com.aptech.obj.User;
 import com.opensymphony.xwork2.ActionSupport;
 import java.util.List;
@@ -20,9 +22,21 @@ public class AdminAction extends ActionSupport {
     private User userBean;
     private List<Category> listCategory;
     private CategoryDao categoryDao;
-
+    private List<Order> listOrder;
+    private OrderDao orderDao;
+   
     public AdminAction() {
         categoryDao = new CategoryDao();
+        orderDao = new OrderDao();
+    }
+    
+    public String getLatest() throws Exception {
+        try {
+            listOrder = orderDao.findLatest();
+        } catch (Exception e) { 
+            e.printStackTrace();
+        }
+        return SUCCESS;
     }
 
     public String execute() throws Exception {
@@ -54,4 +68,13 @@ public class AdminAction extends ActionSupport {
         this.listCategory = listCategory;
     }
 
+    public List<Order> getListOrder() {
+        return listOrder;
+    }
+
+    public void setListOrder(List<Order> listOrder) {
+        this.listOrder = listOrder;
+    }
+
+    
 }

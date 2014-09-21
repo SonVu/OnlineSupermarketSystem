@@ -82,7 +82,23 @@ public class CategoryAction extends ActionSupport {
     @SkipValidation
     public String index() throws Exception {
         try {
-            listCategory = categoryDao.findAll();
+            Integer page;
+            Double totalNumberOfRecords = 0.0;
+            Double numberOfRecordsPerPage = 4.0;
+            HttpServletRequest request = (HttpServletRequest) ActionContext.getContext().get(ServletActionContext.HTTP_REQUEST);
+            if (request.getParameter("page") != null) {
+                page = Integer.parseInt(request.getParameter("page"));
+            } else {
+                page = 1;
+            }
+            totalNumberOfRecords = categoryDao.count().doubleValue();
+            Double startIndex = (page * numberOfRecordsPerPage) - numberOfRecordsPerPage;
+            Double temp = Math.ceil(totalNumberOfRecords / numberOfRecordsPerPage);
+            maxPage = temp.intValue();
+            if (totalNumberOfRecords % 2 != 0) {
+                maxPage += 1;
+            }
+            listCategory = categoryDao.paging(startIndex.intValue(), numberOfRecordsPerPage.intValue());
         } catch (Exception e) {
             e.printStackTrace();
         }

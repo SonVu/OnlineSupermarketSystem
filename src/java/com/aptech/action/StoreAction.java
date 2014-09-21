@@ -208,6 +208,7 @@ public class StoreAction extends ActionSupport {
             order.setOrderDetails(cart);
             orderDao.save(order);
             ActionContext.getContext().getSession().remove("cart");
+            addActionMessage("Your order has been submitted");
         } catch (Exception e) {
             e.printStackTrace();
         }
